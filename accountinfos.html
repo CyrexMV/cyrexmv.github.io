@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Konto verwalten – Mecha-Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="accountinfos.css">
+</head>
+<body>
+    <div class="account-wrapper">
+        <nav class="sidebar">
+            <h2>Mein Konto</h2>
+            <ul style="flex-direction: column; margin-top: 0;">
+                <li><a href="#" class="active" data-section="general">Allgemein</a></li>
+                <li><a href="#" data-section="security">Sicherheit</a></li>
+                <!-- Hier können weitere Kategorien ergänzt werden -->
+            </ul>
+            <button onclick="window.location.href='index.html'" style="margin:2rem 2rem 0 2rem; background:#2563eb; color:#fff; border:none; border-radius:8px; padding:0.7rem 1.2rem; font-weight:600; cursor:pointer; transition:background 0.2s;">Zurück zum Portal</button>
+        </nav>
+        <main class="account-content">
+            <!-- Allgemein -->
+            <section id="section-general" class="section active">
+                <h2>Allgemeine Kontoinformationen</h2>
+                <div class="profile-pic-upload">
+                    <img id="profilePic" class="profile-pic" src="https://ui-avatars.com/api/?name=User" alt="Profilbild">
+                    <div>
+                        <label for="picUpload">Profilbild auswählen</label>
+                        <input type="file" id="picUpload" accept="image/*" style="display:none;">
+                        <button type="button" class="btn-primary" id="savePicBtn" style="margin-left:0.5rem;">Profilbild speichern</button>
+                        <div id="picMsg"></div>
+                    </div>
+                </div>
+                <form id="generalForm">
+                    <div class="input-group">
+                        <label for="email">E-Mail-Adresse</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <button type="submit" class="btn-primary">E-Mail speichern</button>
+                    <div id="generalMsg"></div>
+                </form>
+            </section>
+            <!-- Sicherheit -->
+            <section id="section-security" class="section">
+                <h2>Sicherheit</h2>
+                <form id="pwForm">
+                    <div class="input-group">
+                        <label for="oldPw">Aktuelles Passwort</label>
+                        <input type="password" id="oldPw" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="newPw">Neues Passwort</label>
+                        <input type="password" id="newPw" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="newPw2">Neues Passwort wiederholen</label>
+                        <input type="password" id="newPw2" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Passwort ändern</button>
+                    <div id="pwMsg"></div>
+                </form>
+                <div class="danger-zone">
+                    <h3>Konto löschen</h3>
+                    <p>Das Löschen deines Kontos ist unwiderruflich. Alle Daten werden entfernt.</p>
+                    <button class="btn-danger" id="deleteAccountBtn">Konto löschen</button>
+                    <div id="deleteMsg"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        // Sidebar Navigation
+        document.querySelectorAll('.sidebar a[data-section]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.sidebar a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+                document.getElementById('section-' + this.dataset.section).classList.add('active');
+            });
+        });
+
+        // Accountdaten laden/speichern
+        function getUsers() {
+            return JSON.parse(localStorage.getItem('mecha_users') || '[]');
+        }
+        function setUsers(users) {
+            localStorage.setItem('mecha_users', JSON.stringify(users));
+        }
+        function getCurrentUser() {
+            return localStorage.getItem('mecha_loggedin') || null;
+        }
+        function setCurrentUser(email) {
+            localStorage.setItem('mecha_loggedin', email);
+        }
+
+        // Profilbild laden/speichern
+        function loadProfilePic(email) {
+            const pic = localStorage.getItem('mecha_pic_' + email);
+            if (pic) {
+                document.getElementById('profilePic').src = pic;
+            } else {
+                document.getElementById('profilePic').src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(email);
+            }
+        }
+        function saveProfilePic(email, dataUrl) {
+            localStorage.setItem('mecha_pic_' + email, dataUrl);
+        }
+
+        // Initialdaten setzen
+        const emailInput = document.getElementById('email');
+        const currentUser = getCurrentUser();
+        let users = getUsers();
+        let user = users.find(u => u.email === currentUser);
+
+        if (!user) {
+            window.location.href = "login.html";
+        } else {
+            emailInput.value = user.email;
+            loadProfilePic(user.email);
+        }
+
+        // Profilbild ändern & speichern
+        let newPicDataUrl = null;
+        document.getElementById('picUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                document.getElementById('profilePic').src = evt.target.result;
+                newPicDataUrl = evt.target.result;
+                document.getElementById('picMsg').textContent = "Profilbild ausgewählt – bitte speichern!";
+                document.getElementById('picMsg').className = "success-msg";
+            };
+            reader.readAsDataURL(file);
+        });
+
+        document.querySelector('.profile-pic-upload label').onclick = function() {
+            document.getElementById('picUpload').click();
+        };
+
+        document.getElementById('savePicBtn').onclick = function() {
+            const msg = document.getElementById('picMsg');
+            msg.textContent = "";
+            msg.className = "";
+            if (!newPicDataUrl) {
+                msg.textContent = "Bitte wähle zuerst ein Bild aus.";
+                msg.className = "error-msg";
+                return;
+            }
+            saveProfilePic(user.email, newPicDataUrl);
+            msg.textContent = "Profilbild gespeichert!";
+            msg.className = "success-msg";
+            newPicDataUrl = null;
+        };
+
+        // E-Mail ändern
+        document.getElementById('generalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newEmail = emailInput.value.trim();
+            const msg = document.getElementById('generalMsg');
+            msg.textContent = "";
+            msg.className = "";
+            if (!newEmail || !/^[^@]+@[^@]+\.[^@]+$/.test(newEmail)) {
+                msg.textContent = "Bitte gib eine gültige E-Mail-Adresse ein.";
+                msg.className = "error-msg";
+                return;
+            }
+            if (users.some(u => u.email === newEmail && u.email !== user.email)) {
+                msg.textContent = "Diese E-Mail ist bereits vergeben.";
+                msg.className = "error-msg";
+                return;
+            }
+            // E-Mail ändern
+            const oldEmail = user.email;
+            user.email = newEmail;
+            setUsers(users);
+            setCurrentUser(newEmail);
+            // Profilbild übernehmen
+            const oldPic = localStorage.getItem('mecha_pic_' + oldEmail);
+            if (oldPic) {
+                localStorage.setItem('mecha_pic_' + newEmail, oldPic);
+                localStorage.removeItem('mecha_pic_' + oldEmail);
+            }
+            msg.textContent = "E-Mail erfolgreich geändert!";
+            msg.className = "success-msg";
+            loadProfilePic(newEmail);
+        });
+
+        // Passwort ändern
+        document.getElementById('pwForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const oldPw = document.getElementById('oldPw').value;
+            const newPw = document.getElementById('newPw').value;
+            const newPw2 = document.getElementById('newPw2').value;
+            const msg = document.getElementById('pwMsg');
+            msg.textContent = "";
+            msg.className = "";
+            if (oldPw !== user.password) {
+                msg.textContent = "Das aktuelle Passwort ist falsch.";
+                msg.className = "error-msg";
+                return;
+            }
+            if (newPw.length < 6) {
+                msg.textContent = "Das neue Passwort muss mindestens 6 Zeichen lang sein.";
+                msg.className = "error-msg";
+                return;
+            }
+            if (newPw !== newPw2) {
+                msg.textContent = "Die neuen Passwörter stimmen nicht überein.";
+                msg.className = "error-msg";
+                return;
+            }
+            user.password = newPw;
+            setUsers(users);
+            msg.textContent = "Passwort erfolgreich geändert!";
+            msg.className = "success-msg";
+            document.getElementById('oldPw').value = "";
+            document.getElementById('newPw').value = "";
+            document.getElementById('newPw2').value = "";
+        });
+
+        // Konto löschen
+        document.getElementById('deleteAccountBtn').addEventListener('click', function() {
+            if (!confirm("Willst du dein Konto wirklich unwiderruflich löschen?")) return;
+            users = users.filter(u => u.email !== user.email);
+            setUsers(users);
+            localStorage.removeItem('mecha_pic_' + user.email);
+            localStorage.removeItem('mecha_loggedin');
+            document.getElementById('deleteMsg').textContent = "Konto gelöscht. Du wirst abgemeldet...";
+            document.getElementById('deleteMsg').className = "success-msg";
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
