@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siemens LOGO! Grundlagen - E-Technik</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .fup-diagram {
+            border: 2px solid #ccc;
+            padding: 1rem;
+            background-color: #fdfdfd;
+            border-radius: var(--border-radius, 12px);
+            margin-top: 1rem;
+        }
+        .fup-diagram svg {
+            width: 100%;
+            height: auto;
+        }
+        .info-box {
+            background: #dbeafe;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-weight: bold;
+            color: #1e293b;
+            box-shadow: 0 2px 8px rgba(51,65,85,0.04);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Grundlagen der Siemens LOGO!</h1>
+        <p>Der perfekte Einstieg in die Welt der Automatisierung – einfach, flexibel, praxisnah.</p>
+    </header>
+
+   <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <div class="container">
+        <div class="section">
+            <div class="info-box">
+                <strong>Was ist eine LOGO!?</strong><br>
+                Die Siemens LOGO! ist ein <strong>Logikmodul</strong> bzw. eine <strong>Kleinsteuerung</strong>. Sie schließt die Lücke zwischen einfachen Relaissteuerungen (VPS) und großen SPS-Systemen. Perfekt für kleine Automatisierungsaufgaben, Gebäudetechnik und den Einstieg in die SPS-Welt!
+            </div>
+            <h2>Programmierung mit LOGO! Soft Comfort</h2>
+            <p>
+                Die Logik wird nicht mehr verdrahtet, sondern in der kostenlosen Software <strong>LOGO! Soft Comfort</strong> am PC erstellt und dann auf das Modul übertragen. Die gebräuchlichste Programmiersprache ist der <strong>Funktionsplan (FUP)</strong>.
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="content-box">
+                <h3>Beispiel 1: Direkte Ansteuerung</h3>
+                <p><strong>Aufgabe:</strong> Eine Lampe (Q1) soll leuchten, solange ein Taster (I1) gedrückt wird.</p>
+                <div class="fup-diagram">
+                    <svg viewBox="0 0 400 100">
+                        <defs>
+                            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333" /></marker>
+                        </defs>
+                        <rect x="20" y="30" width="60" height="40" fill="#fff" stroke="#333" stroke-width="2"/>
+                        <text x="50" y="55" text-anchor="middle" font-family="Arial" font-size="14">I1</text>
+                        <rect x="320" y="30" width="60" height="40" fill="#fff" stroke="#333" stroke-width="2"/>
+                        <text x="350" y="55" text-anchor="middle" font-family="Arial" font-size="14">Q1</text>
+                        <line x1="80" y1="50" x2="320" y2="50" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+                    </svg>
+                </div>
+                <p>Das Signal von <strong>I1</strong> wird direkt mit <strong>Q1</strong> verbunden. Ist I1 = 1, wird Q1 = 1.</p>
+            </div>
+
+            <div class="content-box">
+                <h3>Beispiel 2: Selbsthalteschaltung (Motorsteuerung)</h3>
+                <p><strong>Aufgabe:</strong> Ein Motor (Q1) wird mit einem Taster (I1) eingeschaltet und bleibt an. Mit einem zweiten Taster (I2) wird er wieder ausgeschaltet.</p>
+                <p><strong>Lösung:</strong> Hierfür verwendet man einen Speicherbaustein, den sogenannten <strong>RS-Flipflop</strong> (oder "Selbsthalterelais" in der LOGO!).</p>
+                <div class="fup-diagram">
+                     <svg viewBox="0 0 400 150">
+                        <defs><marker id="arrow2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333" /></marker></defs>
+                        <rect x="150" y="25" width="100" height="100" fill="#fff" stroke="#333" stroke-width="2"/>
+                        <text x="200" y="50" text-anchor="middle" font-family="Arial" font-size="12">RS</text>
+                        <text x="165" y="40" text-anchor="middle" font-family="Arial" font-size="12">S</text>
+                        <text x="165" y="115" text-anchor="middle" font-family="Arial" font-size="12">R</text>
+                        <line x1="150" y1="75" x2="250" y2="75" stroke="#ccc" stroke-width="1"/>
+                         
+                        <rect x="20" y="25" width="60" height="40" fill="#fff" stroke="#333" stroke-width="2"/>
+                        <text x="50" y="50" text-anchor="middle" font-family="Arial" font-size="14">I1</text>
+                        <line x1="80" y1="45" x2="150" y2="45" stroke="#333" stroke-width="2" marker-end="url(#arrow2)"/>
+                        <text x="10" y="20" font-size="12" font-family="Arial">EIN</text>
+
+                        <rect x="20" y="85" width="60" height="40" fill="#fff" stroke="#333" stroke-width="2"/>
+                        <text x="50" y="110" text-anchor="middle" font-family="Arial" font-size="14">I2</text>
+                        <line x1="80" y1="105" x2="150" y2="105" stroke="#333" stroke-width="2" marker-end="url(#arrow2)"/>
+                         <text x="10" y="140" font-size="12" font-family="Arial">AUS</text>
+                        
+                        <rect x="320" y="65" width="60" height="40" fill="#fff" stroke="#333" stroke-width="2"/>
+                        <text x="350" y="90" text-anchor="middle" font-family="Arial" font-size="14">Q1</text>
+                        <line x1="250" y1="85" x2="320" y2="85" stroke="#333" stroke-width="2" marker-end="url(#arrow2)"/>
+                    </svg>
+                </div>
+                <p>
+                    <strong>Ablauf:</strong><br>
+                    1. Ein kurzer Impuls von Taster <strong>I1</strong> "setzt" (Set) den RS-Baustein. Sein Ausgang wird 1 und bleibt 1, auch wenn I1 losgelassen wird. Der Motor an <strong>Q1</strong> läuft.<br>
+                    2. Ein Impuls von Taster <strong>I2</strong> "rücksetzt" (Reset) den Baustein. Sein Ausgang wird 0 und der Motor an <strong>Q1</strong> stoppt.
+                </p>
+            </div>
+            <div class="info-box">
+                <strong>Praxistipp:</strong> Die LOGO! ist ideal, um Steuerungslogik zu üben und erste Automatisierungsprojekte umzusetzen. Die grafische Programmierung macht den Einstieg besonders leicht!
+            </div>
+        </div>
+    </div>
+    <footer>
+    <p>
+        Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+        <span style="float:right;">
+             <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+            <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+        </span>
+    </p>
+</footer>
+    <script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+</body>
+</html>

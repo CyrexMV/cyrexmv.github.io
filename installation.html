@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elektroinstallation - E-Technik</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header><h1>Grundlagen der Elektroinstallation</h1></header>
+
+   <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <div class="container">
+        <div class="section">
+            <h2>Sicherheit bei elektrischen Arbeiten</h2>
+            <p>Bevor an elektrischen Anlagen gearbeitet wird, müssen zwingend die 5 Sicherheitsregeln in der richtigen Reihenfolge angewendet werden. Sie dienen dem Schutz vor lebensgefährlichen Stromunfällen.</p>
+            <div class="info-box">
+                <h3>Die 5 Sicherheitsregeln</h3>
+                <ol>
+                    <li><strong>Freischalten:</strong> Die Anlage allpolig und allseitig von spannungsführenden Teilen trennen.</li>
+                    <li><strong>Gegen Wiedereinschalten sichern:</strong> Durch Verriegeln, Schilder ("Nicht Schalten!") oder das Entfernen von Sicherungen.</li>
+                    <li><strong>Spannungsfreiheit feststellen:</strong> Mit einem zweipoligen Spannungsprüfer (z.B. Duspol) an allen aktiven Leitern messen.</li>
+                    <li><strong>Erden und kurzschließen:</strong> Verbindet die freigeschalteten Leiter mit der Erde, um vor unerwarteter Spannung (z.B. durch Fremdeinspeisung) zu schützen. (Besonders bei Hochspannung relevant).</li>
+                    <li><strong>Benachbarte, unter Spannung stehende Teile abdecken oder abschranken:</strong> Schutz vor versehentlichem Berühren angrenzender, nicht freigeschalteter Anlagenteile.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Schutzeinrichtungen und Netzformen</h2>
+
+            <div class="content-box">
+                <h3>Netzformen im Überblick</h3>
+                <p>Die Netzform beschreibt, wie die Stromquelle und die elektrischen Geräte einer Anlage geerdet sind. Die Kürzel sind international genormt:</p>
+                <ul>
+                    <li><strong>1. Buchstabe:</strong> Erdungsverhältnisse der Stromquelle (Transformator). <strong>T</strong> = direkte Erdung, <strong>I</strong> = isoliert.</li>
+                    <li><strong>2. Buchstabe:</strong> Erdungsverhältnisse der elektrischen Geräte (Körper). <strong>T</strong> = direkt geerdet (eigene Erdung), <strong>N</strong> = mit dem Sternpunkt der Quelle verbunden.</li>
+                    <li><strong>Zusatzbuchstaben:</strong> <strong>S</strong> = Schutzleiter (PE) und Neutralleiter (N) sind separat geführt. <strong>C</strong> = PE und N sind zu einem PEN-Leiter kombiniert.</li>
+                </ul>
+                <h4>Gängige Systeme:</h4>
+                <ul>
+                    <li><strong>TN-S-System:</strong> (Terre-Neutre-Séparé) Modernster Standard. 5 Leiter (L1,L2,L3,N,PE). PE und N sind im gesamten System getrennt. Höchste Sicherheit.</li>
+                    <li><strong>TN-C-System:</strong> (Terre-Neutre-Combiné) Alte "klassische Nullung". 4 Leiter, ein kombinierter PEN-Leiter. In Neuinstallationen nicht mehr zulässig.</li>
+                    <li><strong>TT-System:</strong> (Terre-Terre) Die Geräte haben eine eigene, von der Quelle unabhängige Erdung. Hier ist ein FI-Schutzschalter (RCD) zwingend erforderlich.</li>
+                    <li><strong>IT-System:</strong> (Isolé-Terre) Das Netz ist von der Erde isoliert. Wird in sicherheitskritischen Bereichen wie Krankenhäusern eingesetzt, da ein erster Fehler nicht zur Abschaltung führt.</li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h3>Wichtige Schutzschalter</h3>
+                <h4>FI-Schutzschalter (RCD)</h4>
+                <p>Der Fehlerstrom-Schutzschalter (engl. Residual Current Device) ist die wichtigste Einrichtung zum **Personenschutz**. Er misst kontinuierlich den hin- und zurückfließenden Strom. Fließt ein Teil des Stroms über einen Fehlerweg (z.B. den Körper eines Menschen) zur Erde ab, entsteht eine Differenz. Überschreitet dieser Fehlerstrom einen Grenzwert (z.B. 30mA), schaltet der FI-Schalter den Stromkreis blitzschnell ab.</p>
+                <h4>Leitungsschutzschalter (LS-Schalter)</h4>
+                <p>Der LS-Schalter (Sicherungsautomat) dient dem **Leitungs- und Geräteschutz**. Er hat zwei Auslöser: einen **thermischen** für langsame Überlastung (schützt vor Kabelbrand) und einen **magnetischen** für den Kurzschlussfall, der den Stromkreis sofort unterbricht.</p>
+            </div>
+            <div class="content-box">
+                <h3>Aderfarben nach DIN VDE</h3>
+                <p>In modernen Installationen sind die Farben der Adern (Drähte) klar genormt:</p>
+                <ul>
+                    <li><strong style="color: #008000;">Grün-Gelb:</strong> Immer und ausschließlich der **Schutzleiter (PE)**. Darf für nichts anderes verwendet werden!</li>
+                    <li><strong style="color: #0000FF;">Blau:</strong> Der **Neutralleiter (N)**. Sollte ebenfalls nur dafür genutzt werden.</li>
+                    <li><strong style="color: #A52A2A;">Braun</strong>, <strong style="color: #000000;">Schwarz</strong>, <strong style="color: #808080;">Grau:</strong> Die **Außenleiter (L1, L2, L3)**, auch Phasen genannt.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+    <p>
+        Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+        <span style="float:right;">
+             <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+            <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+        </span>
+    </p>
+</footer>
+
+    
+    <script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+</body>
+</html>

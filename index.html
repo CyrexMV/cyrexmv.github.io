@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Technik Portal für Mechatroniker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+<body>
+
+    <header>
+        <h1>Das Elektrotechnik-Portal für Mechatroniker</h1>
+        <p>Von den Grundlagen bis zur modernen Steuerungstechnik.</p>
+    </header>
+
+    <nav>
+        <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+         <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="grundlagen.html">Grundlagen</a>
+            <div class="dropdown">
+                <button class="dropbtn">Bauteile & Rechner</button>
+                <div class="dropdown-content">
+                    <a href="formeln.html">Formelsammlung</a>
+                    <a href="rechner.html">Grundlagen-Rechner</a>
+                    <hr>
+                    <a href="kondensator.html">Kondensatoren</a>
+                    <a href="z-diode.html">Z-Dioden</a>
+                    <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Normen & Planung</button>
+                <div class="dropdown-content">
+                    <a href="installation.html">Elektroinstallation</a>
+                    <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                    <a href="vde-normen.html">VDE-Normen</a>
+                    <hr>
+                    <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                    <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                    <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                    <a href="grafcet.html">GRAFCET</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Systeme & Steuerung</button>
+                <div class="dropdown-content">
+                    <a href="digitaltechnik.html">Digitaltechnik</a>
+                    <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                    <a href="antriebstechnik.html">Antriebstechnik</a>
+                    <a href="pneumatik.html">Pneumatik</a>
+                    <hr>
+                    <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                    <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                    <a href="bussysteme.html">Bussysteme</a>
+                    <a href="logo-grundlagen.html">Siemens LOGO!</a>
+                </div>
+            </div>
+        </div>
+        <form action="suche.html" method="get" class="search-form">
+            <input type="search" name="q" placeholder="Thema suchen..." required>
+            <button type="submit">Suchen</button>
+        </form>
+    </nav>
+
+    <!-- Account-Tab für eingeloggte User -->
+    <div id="accountTab" style="display:none; position:fixed; top:1.2em; right:2.2em; z-index:2000;">
+        <button id="accountTabBtn" style="background:rgba(255,255,255,0.95); border:none; cursor:pointer; display:flex; align-items:center; gap:0.7em; border-radius:2em; box-shadow:0 2px 8px #0001; padding:0.3em 1.1em 0.3em 0.5em; transition:box-shadow 0.2s;">
+            <img id="accountTabImg" src="https://ui-avatars.com/api/?name=User" alt="Profil" style="width:38px; height:38px; border-radius:50%; border:2px solid #2563eb33; background:#e0e7ef;">
+            <!-- <span id="accountTabName" style="font-weight:600; color:#2563eb; font-size:1.08em;"></span> -->
+            <span class="material-symbols-outlined" style="font-size:1.5em; color:#2563eb;">expand_more</span>
+        </button>
+        <div id="accountDropdown" style="display:none; position:absolute; right:0; top:110%; background:#fff; border:1px solid #e0e7ef; border-radius:10px; box-shadow:0 8px 32px #0002; min-width:200px; overflow:hidden;">
+            <div style="padding:1.2em 1.2em 0.5em 1.2em; text-align:center; border-bottom:1px solid #f0f4fa;">
+                <img id="accountDropdownImg" src="https://ui-avatars.com/api/?name=User" alt="Profil" style="width:48px; height:48px; border-radius:50%; border:2px solid #2563eb33; background:#e0e7ef; margin-bottom:0.3em;">
+                <!-- <div id="accountDropdownName" style="font-weight:600; color:#2563eb; font-size:1.08em;"></div> -->
+            </div>
+            <a href="accountinfos.html" id="manageAccount" style="display:block; padding:0.9em 1.2em; color:#2563eb; text-decoration:none; font-weight:500; transition:background 0.15s;">Konto verwalten</a>
+            <a href="#" id="logoutDropdown" style="display:block; padding:0.9em 1.2em; color:#b71c1c; text-decoration:none; font-weight:500; transition:background 0.15s;">Logout</a>
+        </div>
+    </div>
+    <!-- Login-Button für nicht eingeloggte User -->
+    <button id="loginBtn" style="position:fixed; top:1.2em; right:2.2em; background:#2563eb; color:#fff; border:none; border-radius:2em; padding:0.5em 1.5em; font-size:1em; font-weight:bold; cursor:pointer; z-index:2000; display:none;">Login</button>
+
+    <div class="container">
+
+        <div class="welcome-panel">
+            <span class="welcome-icon">⚡</span>
+            <div>
+                <h2>Willkommen auf dem Mecha-Portal!</h2>
+                <p>
+                    Deine zentrale Anlaufstelle für alles rund um Elektrotechnik, Mechatronik und Automatisierung.<br>
+                    Egal ob Ausbildung, Prüfungsvorbereitung oder Praxis: Hier findest du verständliche Erklärungen, Formeln, Rechner und Tipps für den Alltag.
+                </p>
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <span class="icon">🛡️</span>
+                <strong>Sicherheit & Normen</strong>
+                <span>Die 5 Sicherheitsregeln, VDE-Normen und alles zu Schutzeinrichtungen.</span>
+            </div>
+            <div class="info-card">
+                <span class="icon">💡</span>
+                <strong>Steuerungstechnik</strong>
+                <span>Von der klassischen Schütztechnik bis zur modernen SPS-Programmierung.</span>
+            </div>
+            <div class="info-card">
+                <span class="icon">⚙️</span>
+                <strong>Kernelemente</strong>
+                <span>Sensorik, Aktorik, Antriebstechnik, Pneumatik und mehr.</span>
+            </div>
+            <div class="info-card">
+                <span class="icon">🧮</span>
+                <strong>Praxis & Rechner</strong>
+                <span>Stromlaufpläne lesen, Formelsammlung und praktische Online-Rechner.</span>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <h3>Warum dieses Portal?</h3>
+            <ul>
+                <li>Alle Inhalte sind <strong>praxisnah</strong> und leicht verständlich erklärt.</li>
+                <li>Regelmäßig neue Themen und <strong>aktuelle Normen</strong>.</li>
+                <li>Ideal für <strong>Azubis, Studierende</strong> und alle Technikbegeisterten.</li>
+                <li>Direkte <strong>Online-Rechner</strong> für schnelle Lösungen im Alltag.</li>
+            </ul>
+        </div>
+
+        <div class="content-box">
+            <h3>Schnelleinstieg</h3>
+            <div class="quicklinks">
+                <a class="quicklink" href="formeln.html">Formelsammlung</a>
+                <a class="quicklink" href="rechner.html">Grundlagen-Rechner</a>
+                <a class="quicklink" href="installation.html">Elektroinstallation</a>
+                <a class="quicklink" href="digitaltechnik.html">Digitaltechnik</a>
+                <a class="quicklink" href="antriebstechnik.html">Antriebstechnik</a>
+                <a class="quicklink" href="sicherheitstechnik.html">Sicherheitstechnik</a>
+            </div>
+        </div>
+
+        <div class="info-box">
+            Viel Erfolg bei deiner Ausbildung und viel Spaß beim Erkunden der faszinierenden Welt der Mechatronik!
+        </div>
+    </div>
+    
+    <footer>
+        <p>
+            Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+            <span style="float:right;">
+                <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+                <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+                <a href="readme.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">README</a>
+            </span>
+        </p>
+    </footer>
+
+    <script>
+        // Hamburger-Menü
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Dropdown-Menüs per Klick
+        document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.dropdown-content').forEach(dc => {
+                    if (dc !== this.nextElementSibling) dc.classList.remove('show');
+                });
+                this.nextElementSibling.classList.toggle('show');
+            });
+        });
+        // Schließt Dropdown, wenn außerhalb geklickt wird
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+            }
+        });
+
+        // --- Login System für Account-Tab und Login-Button ---
+        function getUsers() {
+            return JSON.parse(localStorage.getItem('mecha_users') || '[]');
+        }
+        function getCurrentUser() {
+            return localStorage.getItem('mecha_loggedin') || null;
+        }
+        function clearCurrentUser() {
+            localStorage.removeItem('mecha_loggedin');
+        }
+
+        const accountTab = document.getElementById('accountTab');
+        const accountTabBtn = document.getElementById('accountTabBtn');
+        const accountTabImg = document.getElementById('accountTabImg');
+        const accountDropdown = document.getElementById('accountDropdown');
+        const accountDropdownImg = document.getElementById('accountDropdownImg');
+        const accountDropdownName = document.getElementById('accountDropdownName');
+        const logoutDropdown = document.getElementById('logoutDropdown');
+        const loginBtn = document.getElementById('loginBtn');
+        const manageAccount = document.getElementById('manageAccount');
+
+        function updateAccountTab() {
+            const email = getCurrentUser();
+            if (email) {
+                accountTab.style.display = "block";
+                loginBtn.style.display = "none";
+                // Profilbild (Initialen)
+                accountTabImg.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(email);
+                accountDropdownImg.src = accountTabImg.src;
+                // accountTabName.textContent = email; // entfernt
+                // accountDropdownName.textContent = email; // entfernt
+            } else {
+                accountTab.style.display = "none";
+                loginBtn.style.display = "block";
+            }
+        }
+
+        // AccountTab Dropdown öffnen/schließen
+        accountTabBtn.onclick = function(e) {
+            e.stopPropagation();
+            accountDropdown.style.display = accountDropdown.style.display === "block" ? "none" : "block";
+        };
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('#accountTab')) {
+                accountDropdown.style.display = "none";
+            }
+        });
+        manageAccount.onclick = function(e) {
+            e.preventDefault();
+            window.location.href = "accountinfos.html";
+        };
+        logoutDropdown.onclick = function(e) {
+            e.preventDefault();
+            clearCurrentUser();
+            updateAccountTab();
+        };
+        loginBtn.onclick = function() {
+            window.location.href = "login.html";
+        };
+        window.addEventListener('DOMContentLoaded', function() {
+            updateAccountTab();
+        });
+
+        // Darkmode global anwenden
+        function applyDarkmodeSetting() {
+            if (localStorage.getItem('darkmode') === 'true') {
+                document.body.classList.add('darkmode');
+            } else {
+                document.body.classList.remove('darkmode');
+            }
+        }
+        applyDarkmodeSetting();
+        window.addEventListener('DOMContentLoaded', applyDarkmodeSetting);
+
+        // Optional: Darkmode-CSS, falls noch nicht vorhanden
+        if (!document.getElementById('darkmodeStyle')) {
+            const style = document.createElement('style');
+            style.id = 'darkmodeStyle';
+            style.innerHTML = `
+            body.darkmode {
+                background: #181f2a !important;
+                color: #e0e7ef !important;
+            }
+            body.darkmode .login-container,
+            body.darkmode .account-menu,
+            body.darkmode .content-box,
+            body.darkmode .info-card,
+            body.darkmode .info-box,
+            body.darkmode .welcome-panel {
+                background: #232c3b !important;
+                color: #e0e7ef !important;
+                box-shadow: 0 4px 24px #0006;
+            }
+            body.darkmode input, body.darkmode button, body.darkmode select {
+                background: #232c3b !important;
+                color: #e0e7ef !important;
+            }
+            body.darkmode .input-group {
+                background: #1a2230 !important;
+            }
+            `;
+            document.head.appendChild(style);
+        }
+    </script>
+</body>
+</html>

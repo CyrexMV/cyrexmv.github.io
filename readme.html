@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README – Mecha-Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: #f7f9fb;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        .readme-container {
+            max-width: 820px;
+            margin: 2.5rem auto 2rem auto;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 32px #0001;
+            padding: 2.5rem 2rem 2rem 2rem;
+        }
+        h1, h2, h3 {
+            color: #2563eb;
+            margin-top: 1.5em;
+        }
+        h1 {
+            font-size: 2.2em;
+            margin-top: 0;
+        }
+        h2 {
+            font-size: 1.4em;
+            margin-bottom: 0.5em;
+        }
+        h3 {
+            font-size: 1.1em;
+            margin-bottom: 0.3em;
+        }
+        .emoji {
+            font-size: 1.2em;
+            vertical-align: middle;
+        }
+        .project-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 1em;
+        }
+        .project-table th, .project-table td {
+            border: 1px solid #e0e7ef;
+            padding: 0.6em 1em;
+            text-align: left;
+        }
+        .project-table th {
+            background: #f3f6fa;
+            color: #2563eb;
+        }
+        .project-table tr:nth-child(even) {
+            background: #f9fbfd;
+        }
+        code {
+            background: #f3f6fa;
+            color: #2563eb;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 1em;
+        }
+        pre {
+            background: #232c3b;
+            color: #e0e7ef;
+            border-radius: 6px;
+            padding: 1em;
+            overflow-x: auto;
+            font-size: 1em;
+        }
+        .footer-note {
+            margin-top: 2.5em;
+            color: #888;
+            font-size: 1em;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            .readme-container {
+                padding: 1rem 0.5rem;
+            }
+            .project-table th, .project-table td {
+                padding: 0.4em 0.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="readme-container">
+        <h1>⚡️ Mecha-Portal</h1>
+        <p>
+            Willkommen beim <strong>Mecha-Portal</strong> – deiner modernen Plattform für Elektrotechnik, Mechatronik und Automatisierung!<br>
+            Hier findest du alles, was du für Ausbildung, Prüfungsvorbereitung und Praxis brauchst – klar, verständlich und immer aktuell.
+        </p>
+        <hr>
+        <h2>🚀 Was ist das Mecha-Portal?</h2>
+        <p>
+            Das Mecha-Portal ist eine stetig wachsende Wissensplattform für:
+        </p>
+        <ul>
+            <li>👨‍🔧 <strong>Auszubildende Mechatroniker</strong></li>
+            <li>🛠️ <strong>Elektroniker für Automatisierungstechnik</strong></li>
+            <li>🤓 <strong>Technikbegeisterte &amp; Profis</strong></li>
+        </ul>
+        <p>
+            Hier findest du anschauliche Erklärungen, Grafiken und praktische Tools zu allen wichtigen Themen der Elektrotechnik und Mechatronik.
+        </p>
+        <h2>✨ Highlights</h2>
+        <ul>
+            <li><strong>Elektrotechnik-Grundlagen</strong> – Von Ohm bis Kirchhoff, alles kompakt erklärt.</li>
+            <li><strong>Moderne Steuerungstechnik</strong> – VPS, SPS, Siemens LOGO! und mehr.</li>
+            <li><strong>Sensorik &amp; Aktorik</strong> – Die Sinne und Muskeln der Automatisierung.</li>
+            <li><strong>Antriebstechnik &amp; Pneumatik</strong> – Motoren, Ventile, Schaltungen.</li>
+            <li><strong>Sicherheit &amp; Normen</strong> – Die 5 Sicherheitsregeln, VDE, Schutzeinrichtungen.</li>
+            <li><strong>Schaltplanlesen</strong> – Symbole, Tipps und Tricks.</li>
+            <li><strong>Interaktive Rechner</strong> – Widerstand, Spannungsteiler, LED-Vorwiderstand u.v.m.</li>
+            <li><strong>Smarte Suche</strong> – Finde blitzschnell das passende Thema.</li>
+        </ul>
+        <h2>🗂️ Projektstruktur</h2>
+        <table class="project-table">
+            <thead>
+                <tr>
+                    <th>Datei/Ordner</th>
+                    <th>Inhalt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><code>index.html</code></td><td>Startseite &amp; Navigation</td></tr>
+                <tr><td><code>grundlagen.html</code></td><td>Elektrotechnik-Grundlagen</td></tr>
+                <tr><td><code>digitaltechnik.html</code></td><td>Logik, Gatter, FUP</td></tr>
+                <tr><td><code>sps-grundlagen.html</code></td><td>Speicherprogrammierbare Steuerungen</td></tr>
+                <tr><td><code>logo-grundlagen.html</code></td><td>Siemens LOGO! Einstieg</td></tr>
+                <tr><td><code>antriebstechnik.html</code></td><td>Motoren &amp; Ansteuerung</td></tr>
+                <tr><td><code>sensorik-aktorik.html</code></td><td>Sensoren &amp; Aktoren</td></tr>
+                <tr><td><code>pneumatik.html</code></td><td>Pneumatik-Grundlagen</td></tr>
+                <tr><td><code>vps-grundlagen.html</code></td><td>Verbindungsprogrammierte Steuerung</td></tr>
+                <tr><td><code>bussysteme.html</code></td><td>Feldbusse &amp; Kommunikation</td></tr>
+                <tr><td><code>installation.html</code></td><td>Elektroinstallation &amp; Sicherheit</td></tr>
+                <tr><td><code>vde-normen.html</code></td><td>Normen &amp; Vorschriften</td></tr>
+                <tr><td><code>schaltplanlesen.html</code></td><td>Schaltplan-Lesetraining</td></tr>
+                <tr><td><code>formeln.html</code></td><td>Formelsammlung</td></tr>
+                <tr><td><code>rechner.html</code></td><td>Interaktive Rechner</td></tr>
+                <tr><td><code>style.css</code></td><td>Zentrales Design</td></tr>
+            </tbody>
+        </table>
+        <h2>⚙️ Installation &amp; Nutzung</h2>
+        <ol>
+            <li>
+                <strong>Download oder Klonen</strong>
+                <pre><code>git clone https://github.com/dein-benutzername/cyrexmv.github.io</code></pre>
+            </li>
+            <li>
+                <strong>Öffnen</strong><br>
+                Öffne die <code>index.html</code> im Browser – und los geht's!
+            </li>
+        </ol>
+        <h2>🤝 Mitmachen &amp; Feedback</h2>
+        <p>
+            Du hast einen Fehler gefunden, möchtest Inhalte ergänzen oder hast Verbesserungsvorschläge?<br>
+            <strong>Pull Requests und Issues sind herzlich willkommen!</strong>
+        </p>
+        <h2>📜 Lizenz</h2>
+        <p>
+            MIT-Lizenz – frei nutzbar, auch für eigene Projekte.
+        </p>
+        <div class="footer-note">
+            <em>Viel Spaß beim Lernen und Entdecken!<br>
+            <span style="color:#2563eb;">Dein Mecha-Portal Team</span></em>
+        </div>
+    </div>
+</body>
+</html>

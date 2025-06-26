@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitungsdimensionierung – Grundlagen & Rechner</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-box {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(51,65,85,0.04);
+        }
+        h1, h2 {
+            color: #2563eb;
+        }
+        ul {
+            margin-left: 1.2rem;
+        }
+        .tab-nav {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+        .tab-btn {
+            background: #e0e7ef;
+            color: #2563eb;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px 6px 0 0;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .tab-btn.active {
+            background: #2563eb;
+            color: #fff;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            background: #f8fafc;
+        }
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 0.5rem 0.7rem;
+            text-align: center;
+        }
+        th {
+            background: #2563eb;
+            color: #fff;
+        }
+        .info-hint {
+            color: #64748b;
+            font-size: 0.97em;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Leitungsdimensionierung</h1>
+        <p>Wie wählt man den richtigen Leitungsquerschnitt? Grundlagen, Tabellen und Beispiele.</p>
+    </header>
+   <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <main class="container">
+        <div class="tab-nav">
+            <button class="tab-btn active" data-tab="grundlagen">Grundlagen</button>
+            <button class="tab-btn" data-tab="tabellen">Tabellen</button>
+            <button class="tab-btn" data-tab="beispiele">Beispiele</button>
+        </div>
+
+        <div class="tab-content active" id="grundlagen">
+            <div class="content-box">
+                <h2>Was ist Leitungsdimensionierung?</h2>
+                <p>
+                    Die Leitungsdimensionierung ist die Auswahl des richtigen Leitungsquerschnitts für elektrische Leitungen. Sie ist wichtig, um Überhitzung, Spannungsabfall und Brandgefahr zu vermeiden. Die Auswahl hängt ab von:
+                </p>
+                <ul>
+                    <li>Stromstärke (A)</li>
+                    <li>Leitungslänge</li>
+                    <li>Verlegeart (z.B. Aufputz, Unterputz, im Rohr)</li>
+                    <li>Umgebungstemperatur</li>
+                    <li>Material (Kupfer oder Aluminium)</li>
+                    <li>Absicherung (Sicherungswert)</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <h2>Grundformel für den Leitungsquerschnitt</h2>
+                <p>
+                    Für die überschlägige Berechnung des Mindestquerschnitts (Kupferleitung) gilt:
+                </p>
+                <pre style="background:#f1f5f9; padding:0.7em 1em; border-radius:7px; font-size:1.08em;">
+A = (2 × I × l) / (κ × ΔU)
+                </pre>
+                <ul>
+                    <li><strong>A</strong> = Querschnitt in mm²</li>
+                    <li><strong>I</strong> = Strom in Ampere (A)</li>
+                    <li><strong>l</strong> = Leitungslänge in Meter (m)</li>
+                    <li><strong>κ</strong> = Leitwert (Kupfer: 56, Aluminium: 36)</li>
+                    <li><strong>ΔU</strong> = zulässiger Spannungsabfall in Volt (meist 3% der Nennspannung)</li>
+                </ul>
+                <div class="info-hint">
+                    <strong>Hinweis:</strong> Für die Praxis sind die Tabellenwerte nach DIN VDE 0298-4 maßgeblich!
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="tabellen">
+            <div class="content-box">
+                <h2>Häufig genutzte Leitungsquerschnitte & Belastbarkeit</h2>
+                <table>
+                    <tr>
+                        <th>Querschnitt (mm²)</th>
+                        <th>Belastbarkeit (A)*</th>
+                        <th>Typische Anwendung</th>
+                    </tr>
+                    <tr>
+                        <td>0,75</td>
+                        <td>6</td>
+                        <td>Lampen, Steuerleitungen</td>
+                    </tr>
+                    <tr>
+                        <td>1,5</td>
+                        <td>16</td>
+                        <td>Steckdosen, Lichtstromkreise</td>
+                    </tr>
+                    <tr>
+                        <td>2,5</td>
+                        <td>20</td>
+                        <td>Küchengeräte, Steckdosen mit hoher Last</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>25</td>
+                        <td>Herd, Durchlauferhitzer (kurze Strecken)</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>32</td>
+                        <td>Herd, Wallbox, größere Verbraucher</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>40</td>
+                        <td>Hausanschluss, Hauptleitungen</td>
+                    </tr>
+                </table>
+                <div class="info-hint">
+                    * Werte für Kupfer, Verlegeart C, Umgebungstemperatur 25°C, nach DIN VDE 0298-4 (vereinfachte Übersicht).
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="beispiele">
+            <div class="content-box">
+                <h2>Beispiele aus der Praxis</h2>
+                <ul>
+                    <li><strong>Steckdose im Wohnzimmer (16 A, 10 m):</strong> 1,5 mm²</li>
+                    <li><strong>Waschmaschine (16 A, 15 m):</strong> 2,5 mm²</li>
+                    <li><strong>Herd (3-phasig, 20 A, 12 m):</strong> 4 mm²</li>
+                    <li><strong>Wallbox (32 A, 15 m):</strong> 6 mm²</li>
+                    <li><strong>Gartenhaus (10 A, 30 m):</strong> 2,5 mm² (wegen Leitungslänge!)</li>
+                </ul>
+                <div class="info-hint">
+                    <strong>Tipp:</strong> Bei langen Leitungen immer den Spannungsabfall berechnen und ggf. den nächsthöheren Querschnitt wählen!
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>
+            Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+            <span style="float:right;">
+                <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+                <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+            </span>
+        </p>
+    </footer>
+    <script>
+        // Hamburger-Menü
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Dropdown-Menüs per Klick
+        document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Alle Dropdowns schließen
+                document.querySelectorAll('.dropdown-content').forEach(dc => {
+                    if (dc !== this.nextElementSibling) dc.classList.remove('show');
+                });
+                // Dieses Dropdown öffnen/schließen
+                this.nextElementSibling.classList.toggle('show');
+            });
+        });
+
+        // Schließt Dropdown, wenn außerhalb geklickt wird
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+            }
+        });
+
+        // Tabs für Blättern
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

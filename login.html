@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login & Registration Form</title>
+  <link rel="stylesheet" href="loginstyle.css">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+  </nav>
+  <div class="container">
+    <input type="checkbox" id="check">
+    <div class="login form">
+      <header>Login</header>
+      <form action="#">
+        <input type="text" placeholder="Enter your email">
+        <input type="password" placeholder="Enter your password">
+        <a href="#">Forgot password?</a>
+        <input type="button" class="button" value="Login">
+      </form>
+      <div class="signup">
+        <span class="signup">Don't have an account?
+         <label for="check">Signup</label>
+        </span>
+      </div>
+    </div>
+    <div class="registration form">
+      <header>Signup</header>
+      <form action="#">
+        <input type="text" placeholder="Enter your email">
+        <input type="password" placeholder="Create a password">
+        <input type="password" placeholder="Confirm your password">
+        <input type="button" class="button" value="Signup">
+      </form>
+      <div class="signup">
+        <span class="signup">Already have an account?
+         <label for="check">Login</label>
+        </span>
+      </div>
+    </div>
+  </div>
+  <script>
+// Dummy-User für Demo-Zwecke (aus localStorage laden oder Standard)
+let users = [];
+if (localStorage.getItem('mecha_users')) {
+  users = JSON.parse(localStorage.getItem('mecha_users'));
+} else {
+  users = [{ email: "test@mecha-portal.de", password: "passwort123" }];
+  localStorage.setItem('mecha_users', JSON.stringify(users));
+}
+
+// Login-Funktion
+document.querySelector('.login.form form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const email = this.querySelector('input[type="text"]').value.trim();
+  const password = this.querySelector('input[type="password"]').value;
+  const user = users.find(u => (u.email === email && u.password === password));
+  // Vorherige Fehlermeldung entfernen
+  let oldError = this.querySelector('.login-error');
+  if (oldError) oldError.remove();
+  if (user) {
+    // Login speichern (z.B. als Flag)
+    localStorage.setItem('mecha_loggedin', email);
+    window.location.href = "index.html";
+  } else {
+    const err = document.createElement('div');
+    err.className = 'login-error';
+    err.textContent = 'Falsche E-Mail oder Passwort!';
+    this.insertBefore(err, this.querySelector('a'));
+  }
+});
+
+// Registrierung-Funktion
+document.querySelector('.registration.form form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const email = this.querySelector('input[type="text"]').value.trim();
+  const pw1 = this.querySelectorAll('input[type="password"]')[0].value;
+  const pw2 = this.querySelectorAll('input[type="password"]')[1].value;
+  let oldError = this.querySelector('.login-error');
+  if (oldError) oldError.remove();
+  if (!email || !pw1 || !pw2) {
+    showRegError(this, "Bitte alle Felder ausfüllen!");
+    return;
+  }
+  if (pw1 !== pw2) {
+    showRegError(this, "Passwörter stimmen nicht überein!");
+    return;
+  }
+  if (users.find(u => u.email === email)) {
+    showRegError(this, "E-Mail bereits registriert!");
+    return;
+  }
+  users.push({ email, password: pw1 });
+  localStorage.setItem('mecha_users', JSON.stringify(users));
+  alert("Registrierung erfolgreich! Du kannst dich jetzt einloggen.");
+  // Optional: Automatisch zum Login wechseln
+  document.getElementById('check').checked = false;
+});
+
+function showRegError(form, msg) {
+  const err = document.createElement('div');
+  err.className = 'login-error';
+  err.textContent = msg;
+  form.insertBefore(err, form.querySelector('input[type="button"],input[type="submit"]'));
+}
+
+// Button statt submit? Dann Buttons zu submit ändern:
+document.querySelectorAll('.login.form input.button').forEach(btn => {
+  btn.type = "submit";
+});
+document.querySelectorAll('.registration.form input.button').forEach(btn => {
+  btn.type = "submit";
+});
+</script>
+</body>
+</html>

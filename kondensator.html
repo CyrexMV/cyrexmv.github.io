@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Kondensator - E-Technik</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    <style>
+        .code-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.95em; }
+        .code-table th, .code-table td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        .code-table th { background-color: #e9ecef; }
+        .color-band-selector { width: 100%; padding: 8px; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Der Kondensator</h1>
+        <p>Speicher, Filter, Zeitgeber – das Multitalent der Elektronik.</p>
+    </header>
+
+    <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <div class="container">
+        <div class="section">
+            <h2>Was ist ein Kondensator?</h2>
+            <div class="content-box">
+                <p>
+                    Ein <strong>Kondensator</strong> ist ein passives elektrisches Bauelement, das elektrische Energie in einem elektrischen Feld speichert. 
+                    Man kann ihn sich wie einen kleinen, extrem schnell aufladbaren Akku vorstellen.
+                </p>
+                <div class="info-box">
+                    <strong>Merke:</strong> Kondensatoren speichern keine Ladung dauerhaft, sondern geben sie bei Bedarf blitzschnell wieder ab!
+                </div>
+            </div>
+            <div class="content-box">
+                <h3>Anwendungsbereiche</h3>
+                <ul>
+                    <li><strong>Glättung/Siebung:</strong> In Netzteilen wandeln sie pulsierenden Gleichstrom in eine saubere, stabile Gleichspannung um.</li>
+                    <li><strong>Zeitglieder:</strong> Zusammen mit einem Widerstand können sie Lade- und Entladevorgänge für Timer und Taktgeber steuern.</li>
+                    <li><strong>Filter:</strong> Sie blockieren Gleichstromanteile und lassen Wechselstrom passieren (Koppelkondensator) oder filtern Frequenzen.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Beschriftung und Farbcodes</h2>
+            <div class="content-box">
+                <p>
+                    Die Werte von Kondensatoren werden oft durch einen Code angegeben. Die Basiseinheit für diese Codes ist fast immer <strong>Pikofarad (pF)</strong>.
+                </p>
+            </div>
+            <div class="content-box">
+                <h3>Gedruckte Zahlencodes (Beispiel "104")</h3>
+                <p>Auf vielen Keramikkondensatoren findet man einen dreistelligen Code wie <strong>104</strong>.</p>
+                <ul>
+                    <li><strong>1. Ziffer:</strong> Erster Wert (hier: 1)</li>
+                    <li><strong>2. Ziffer:</strong> Zweiter Wert (hier: 0)</li>
+                    <li><strong>3. Ziffer:</strong> Multiplikator (Anzahl der Nullen, hier: 4)</li>
+                </ul>
+                <p>Die Berechnung ist also: 10 + "0000" pF = 100.000 pF = 100 nF = 0,1 µF.</p>
+            </div>
+            <div class="content-box">
+                <h3>Farbcode-Tabelle</h3>
+                <p>Ein gängiges System mit 5 Ringen wird so gelesen:</p>
+                <table class="code-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Farbe</th>
+                            <th rowspan="2">1. Ring (Ziffer)</th>
+                            <th rowspan="2">2. Ring (Ziffer)</th>
+                            <th rowspan="2">3. Ring (Multiplikator)</th>
+                            <th colspan="2">4. Ring (Toleranz)</th>
+                            <th rowspan="2">5. Ring (Spannung)</th>
+                        </tr>
+                        <tr>
+                            <th>C &lt; 10 pF</th>
+                            <th>C &gt; 10 pF</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td style="background-color:black; color:white;">Schwarz</td><td>0</td><td>0</td><td>x1 pF</td><td>-</td><td>±20%</td><td>-</td></tr>
+                        <tr><td style="background-color:brown; color:white;">Braun</td><td>1</td><td>1</td><td>x10 pF</td><td>±0,1 pF</td><td>±1%</td><td>100 V</td></tr>
+                        <tr><td style="background-color:red;">Rot</td><td>2</td><td>2</td><td>x100 pF</td><td>±0,25 pF</td><td>±2%</td><td>200 V</td></tr>
+                        <tr><td style="background-color:orange;">Orange</td><td>3</td><td>3</td><td>x1 kpF</td><td>-</td><td>-</td><td>300 V</td></tr>
+                        <tr><td style="background-color:yellow;">Gelb</td><td>4</td><td>4</td><td>x10 kpF</td><td>-</td><td>-</td><td>400 V</td></tr>
+                        <tr><td style="background-color:green; color:white;">Grün</td><td>5</td><td>5</td><td>x100 kpF</td><td>±0,5 pF</td><td>±0,5%</td><td>500 V</td></tr>
+                        <tr><td style="background-color:blue; color:white;">Blau</td><td>6</td><td>6</td><td>-</td><td>-</td><td>-</td><td>600 V</td></tr>
+                        <tr><td style="background-color:violet; color:white;">Violett</td><td>7</td><td>7</td><td>-</td><td>-</td><td>-</td><td>700 V</td></tr>
+                        <tr><td style="background-color:grey; color:white;">Grau</td><td>8</td><td>8</td><td>x0,01 pF</td><td>-</td><td>-</td><td>800 V</td></tr>
+                        <tr><td style="background-color:white;">Weiß</td><td>9</td><td>9</td><td>x0,1 pF</td><td>-</td><td>±10%</td><td>900 V</td></tr>
+                        <tr><td style="background-color:gold;">Gold</td><td>-</td><td>-</td><td>x0,1 pF</td><td>-</td><td>±5%</td><td>1000 V</td></tr>
+                        <tr><td style="background-color:silver;">Silber</td><td>-</td><td>-</td><td>-</td><td>-</td><td>±10%</td><td>2000 V</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="content-box">
+                <h3>Farbcode-Rechner</h3>
+                <select id="c-band1" class="color-band-selector" onchange="calculateCapacitor()"></select>
+                <select id="c-band2" class="color-band-selector" onchange="calculateCapacitor()"></select>
+                <select id="c-band3" class="color-band-selector" onchange="calculateCapacitor()"></select>
+                <select id="c-band4" class="color-band-selector" onchange="calculateCapacitor()"></select>
+                <select id="c-band5" class="color-band-selector" onchange="calculateCapacitor()"></select>
+                <div id="cap-result" class="result" style="min-height: 50px;"></div>
+                <div class="info-box" style="margin-top:1rem;">
+                    <strong>Tipp:</strong> Mit dem Rechner kannst du Farbringe direkt in Kapazitätswerte umwandeln!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+    <p>
+        Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+        <span style="float:right;">
+             <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+            <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+        </span>
+    </p>
+</footer>
+
+    <script>
+        const capColorData = {
+            black:  { digit: 0, multiplier: 1, tolerance: '±20%' },
+            brown:  { digit: 1, multiplier: 10, tolerance: '±1%', voltage: '100V' },
+            red:    { digit: 2, multiplier: 100, tolerance: '±2%', voltage: '200V' },
+            orange: { digit: 3, multiplier: 1000, voltage: '300V' },
+            yellow: { digit: 4, multiplier: 10000, voltage: '400V' },
+            green:  { digit: 5, multiplier: 100000, tolerance: '±0.5%', voltage: '500V' },
+            blue:   { digit: 6, voltage: '600V' },
+            violet: { digit: 7, voltage: '700V' },
+            grey:   { digit: 8, multiplier: 0.01, voltage: '800V' },
+            white:  { digit: 9, multiplier: 0.1, tolerance: '±10%', voltage: '900V' },
+            gold:   { multiplier: 0.1, tolerance: '±5%', voltage: '1000V' },
+            silver: { tolerance: '±10%', voltage: '2000V' }
+        };
+
+        function populateCapacitorSelects() {
+            const bands = ['c-band1', 'c-band2', 'c-band3', 'c-band4', 'c-band5'];
+            const colorNames = Object.keys(capColorData);
+
+            bands.forEach((bandId, index) => {
+                const select = document.getElementById(bandId);
+                let prompt = '';
+                if (index === 0) prompt = '1. Ring (1. Ziffer)';
+                if (index === 1) prompt = '2. Ring (2. Ziffer)';
+                if (index === 2) prompt = '3. Ring (Multiplikator)';
+                if (index === 3) prompt = '4. Ring (Toleranz)';
+                if (index === 4) prompt = '5. Ring (Spannung)';
+                select.add(new Option(prompt, ''));
+
+                colorNames.forEach(color => {
+                    const option = new Option(color.charAt(0).toUpperCase() + color.slice(1), color);
+                    select.add(option);
+                });
+            });
+        }
+        
+        function formatCapacitance(pValue) {
+            if (pValue >= 1000000) return `${(pValue / 1000000).toPrecision(3)} µF`;
+            if (pValue >= 1000) return `${(pValue / 1000).toPrecision(3)} nF`;
+            return `${pValue.toPrecision(3)} pF`;
+        }
+
+        function calculateCapacitor() {
+            const val1 = document.getElementById('c-band1').value;
+            const val2 = document.getElementById('c-band2').value;
+            const mult = document.getElementById('c-band3').value;
+            const tol = document.getElementById('c-band4').value;
+            const volt = document.getElementById('c-band5').value;
+            const resDiv = document.getElementById('cap-result');
+
+            if (!val1 || !val2 || !mult) {
+                resDiv.innerHTML = 'Bitte die ersten drei Ringe auswählen.';
+                return;
+            }
+
+            const digit1 = capColorData[val1]?.digit;
+            const digit2 = capColorData[val2]?.digit;
+            const multiplier = capColorData[mult]?.multiplier;
+
+            if (digit1 === undefined || digit2 === undefined || multiplier === undefined) {
+                 resDiv.innerHTML = 'Ungültige Farbkombination für die Kapazität.';
+                 return;
+            }
+            
+            const baseValue = (digit1 * 10 + digit2) * multiplier;
+            
+            let resultString = `Kapazität: <strong>${formatCapacitance(baseValue)}</strong>`;
+            if (tol && capColorData[tol]?.tolerance) {
+                resultString += `<br>Toleranz: ${capColorData[tol].tolerance}`;
+            }
+            if (volt && capColorData[volt]?.voltage) {
+                resultString += `<br>Spannung: ${capColorData[volt].voltage}`;
+            }
+            resDiv.innerHTML = resultString;
+        }
+
+        document.addEventListener('DOMContentLoaded', populateCapacitorSelects);
+    </script>
+    <script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+</body>
+</html>
