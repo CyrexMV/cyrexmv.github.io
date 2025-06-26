@@ -1,0 +1,197 @@
+  body {
+            background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+            min-height: 100vh;
+            margin: 0;
+        }
+        .account-wrapper {
+            display: flex;
+            max-width: 900px;
+            margin: 3rem auto 2rem auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 32px #0001;
+            min-height: 540px;
+            overflow: hidden;
+        }
+        .sidebar {
+            background: #f1f5f9;
+            min-width: 210px;
+            padding: 2rem 0 2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            border-right: 1px solid #e0e7ef;
+            justify-content: flex-start;
+        }
+        .sidebar h2 {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2563eb;
+            margin: 0 0 1.5rem 2.2rem;
+            letter-spacing: 0.03em;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-direction: column !important;
+            margin-top: 0;
+        }
+        .sidebar li {
+            margin-bottom: 0.5rem;
+        }
+        .sidebar a {
+            display: block;
+            padding: 0.7rem 2.2rem;
+            color: #222;
+            text-decoration: none;
+            border-left: 4px solid transparent;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+        }
+        .sidebar a.active, .sidebar a:hover {
+            background: #e0e7ef;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+        }
+        .account-content {
+            flex: 1 1 auto;
+            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            background: #fff;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        .profile-pic {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #2563eb33;
+            background: #e0e7ef;
+            margin-bottom: 1rem;
+        }
+        .profile-pic-upload {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .profile-pic-upload label {
+            background: #2563eb;
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .profile-pic-upload label:hover {
+            background: #1e293b;
+        }
+        .profile-pic-upload .btn-primary {
+            margin-left: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            font-size: 1em;
+        }
+        .input-group {
+            margin-bottom: 1.2rem;
+        }
+        .input-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            color: #334155;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: #f1f5f9;
+            font-size: 1em;
+            margin-bottom: 0.2rem;
+        }
+        .input-group input:focus {
+            border: 1.5px solid #2563eb;
+            background: #fff;
+            outline: none;
+            box-shadow: 0 0 0 2px #2563eb22;
+        }
+        .btn-primary {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.9rem 2.2rem;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px #0001;
+        }
+        .btn-primary:hover {
+            background: #1e293b;
+        }
+        .danger-zone {
+            margin-top: 2.5rem;
+            padding: 1.5rem 1.2rem;
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            border-radius: 10px;
+        }
+        .danger-zone h3 {
+            color: #e11d48;
+            margin-top: 0;
+        }
+        .btn-danger {
+            background: #e11d48;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 2rem;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 0.7rem;
+            transition: background 0.2s;
+        }
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+        .success-msg, .error-msg {
+            margin-bottom: 1rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 6px;
+            font-size: 1em;
+        }
+        .success-msg {
+            background: #e0fbe7;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+        }
+        .error-msg {
+            background: #fef2f2;
+            color: #e11d48;
+            border: 1px solid #fecdd3;
+        }
+        @media (max-width: 700px) {
+            .account-wrapper { flex-direction: column; }
+            .sidebar { min-width: 100%; border-right: none; border-bottom: 1px solid #e0e7ef; flex-direction: row; gap: 0; }
+            .sidebar ul { display: flex; flex-direction: row; width: 100%; }
+            .sidebar li { flex: 1 1 0; }
+            .sidebar a { padding: 0.7rem 0.5rem; text-align: center; }
+            .account-content { padding: 1.2rem 0.7rem; }
+        }
+        /* Infos weiter oben */
+        .account-content > .section > h2,
+        .account-content > .section > .profile-pic-upload,
+        .account-content > .section > form,
+        .account-content > .section > .danger-zone {
+            margin-top: 0;
+        }
