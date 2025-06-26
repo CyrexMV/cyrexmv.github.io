@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPS-Grundlagen - E-Technik</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .selfhold-svg { display: flex; justify-content: center; margin: 2rem 0; }
+        .selfhold-svg svg { max-width: 400px; width: 100%; height: auto; }
+        .table-overview { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        .table-overview th, .table-overview td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        .table-overview th { background: #e9ecef; }
+        @media (max-width: 700px) {
+            .selfhold-svg svg { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <h1>VPS &amp; die Selbsthalteschaltung</h1>
+        <p>Grundlagen der <strong>Verbindungsprogrammierte Steuerung</strong> (VPS) – von der klassischen Verdrahtung bis zur SPS-Logik.</p>
+    </header>
+
+   <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <div class="container">
+        <div class="section">
+            <div class="info-box">
+                <strong>Was ist VPS?</strong><br>
+                Die <strong>Verbindungsprogrammierte Steuerung</strong> (VPS) ist die klassische Art, Steuerungsaufgaben mit Relais, Schützen und Tastern zu lösen. Sie ist die Grundlage für das Verständnis moderner SPS-Programmierung, da viele Prinzipien (wie die Selbsthaltung) dort softwareseitig nachgebildet werden.
+            </div>
+            <h2>Die Selbsthalteschaltung: Die wichtigste Grundschaltung</h2>
+            <p>
+                Die Selbsthalteschaltung ist die elementarste Schaltung in der VPS, um z.B. einen Motor mit einem Taster einzuschalten, sodass er an bleibt, und mit einem zweiten Taster wieder auszuschalten.
+            </p>
+            <div class="content-box">
+                <h3>Aufbau und Funktion</h3>
+                <ul>
+                    <li><strong>Schließer-Taster (S1):</strong> Startet den Motor (Ein-Taster).</li>
+                    <li><strong>Öffner-Taster (S0):</strong> Stoppt den Motor (Aus-Taster).</li>
+                    <li><strong>Schütz (K1):</strong> Schaltet den Motor und besitzt einen Hilfskontakt.</li>
+                </ul>
+                <p><strong>Ablauf:</strong></p>
+                <ol>
+                    <li>Drücken von <strong>S1</strong> zieht das Schütz <strong>K1</strong> an.</li>
+                    <li><strong>K1</strong> schließt seinen Arbeitskontakt (Motor läuft) und einen Hilfskontakt.</li>
+                    <li>Der Hilfskontakt liegt parallel zu <strong>S1</strong> – lässt man S1 los, hält sich das Schütz selbst.</li>
+                    <li>Drücken von <strong>S0</strong> unterbricht den Stromkreis, das Schütz fällt ab, der Motor stoppt.</li>
+                </ol>
+                <div class="selfhold-svg">
+                    <!-- Einfache SVG-Grafik für Selbsthalteschaltung -->
+                    <svg viewBox="0 0 420 120">
+                        <!-- Leitungen -->
+                        <line x1="20" y1="30" x2="400" y2="30" stroke="#222" stroke-width="3"/>
+                        <line x1="20" y1="90" x2="400" y2="90" stroke="#222" stroke-width="3"/>
+                        <!-- S0 (Öffner) -->
+                        <rect x="40" y="20" width="30" height="20" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+                        <text x="55" y="35" font-size="13" text-anchor="middle" fill="#2563eb">S0</text>
+                        <line x1="55" y1="20" x2="55" y2="10" stroke="#2563eb" stroke-width="2"/>
+                        <circle cx="55" cy="10" r="4" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+                        <!-- S1 (Schließer) -->
+                        <rect x="100" y="20" width="30" height="20" fill="#fff" stroke="#16a34a" stroke-width="2"/>
+                        <text x="115" y="35" font-size="13" text-anchor="middle" fill="#16a34a">S1</text>
+                        <line x1="115" y1="40" x2="115" y2="60" stroke="#16a34a" stroke-width="2"/>
+                        <!-- K1 Hilfskontakt (parallel zu S1) -->
+                        <rect x="160" y="20" width="30" height="20" fill="#fff" stroke="#f59e42" stroke-width="2"/>
+                        <text x="175" y="35" font-size="13" text-anchor="middle" fill="#f59e42">K1</text>
+                        <line x1="175" y1="40" x2="175" y2="60" stroke="#f59e42" stroke-width="2"/>
+                        <!-- Verbindungslinien -->
+                        <line x1="115" y1="60" x2="175" y2="60" stroke="#aaa" stroke-width="2" stroke-dasharray="4"/>
+                        <line x1="175" y1="60" x2="175" y2="90" stroke="#aaa" stroke-width="2"/>
+                        <line x1="115" y1="60" x2="115" y2="90" stroke="#aaa" stroke-width="2"/>
+                        <!-- Schützspule -->
+                        <rect x="230" y="20" width="40" height="20" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+                        <text x="250" y="35" font-size="13" text-anchor="middle" fill="#2563eb">K1</text>
+                        <line x1="250" y1="40" x2="250" y2="90" stroke="#2563eb" stroke-width="2"/>
+                        <!-- Motor -->
+                        <circle cx="340" cy="30" r="15" fill="#fff" stroke="#16a34a" stroke-width="2"/>
+                        <text x="340" y="35" font-size="13" text-anchor="middle" fill="#16a34a">M</text>
+                        <line x1="340" y1="45" x2="340" y2="90" stroke="#16a34a" stroke-width="2"/>
+                        <!-- N und L -->
+                        <text x="20" y="110" font-size="13" fill="#222">N</text>
+                        <text x="400" y="110" font-size="13" fill="#222">L</text>
+                    </svg>
+                </div>
+                <div class="info-box">
+                    Diese Logik ist die Grundlage für das Verständnis von SPS-Programmen, da sie dort softwareseitig nachgebildet wird.
+                </div>
+            </div>
+            <div class="content-box">
+                <h3>Vergleich: VPS vs. SPS</h3>
+                <table class="table-overview">
+                    <tr>
+                        <th></th>
+                        <th>VPS (klassisch)</th>
+                        <th>SPS (modern)</th>
+                    </tr>
+                    <tr>
+                        <td>Aufbau</td>
+                        <td>Verdrahtung mit Relais, Schützen, Tastern</td>
+                        <td>Software-Logik, programmiert (z.B. FUP, KOP)</td>
+                    </tr>
+                    <tr>
+                        <td>Änderungen</td>
+                        <td>Nur durch Umverdrahten</td>
+                        <td>Durch Programmänderung</td>
+                    </tr>
+                    <tr>
+                        <td>Flexibilität</td>
+                        <td>Gering</td>
+                        <td>Sehr hoch</td>
+                    </tr>
+                    <tr>
+                        <td>Fehlersuche</td>
+                        <td>Mit Messgerät an der Verdrahtung</td>
+                        <td>Mit Software-Tools und Diagnose</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="info-box">
+                <strong>Praxistipp:</strong> Zeichne dir die Selbsthalteschaltung immer als Stromlaufplan auf – das hilft beim Verständnis und bei der Fehlersuche!
+            </div>
+        </div>
+    </div>
+    <footer>
+    <p>
+        Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+        <span style="float:right;">
+             <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+            <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+        </span>
+    </p>
+</footer>
+    <script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+</body>
+</html>

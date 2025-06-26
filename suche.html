@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suchergebnisse - Mecha-Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .search-results-container {
+            margin-top: 2rem;
+        }
+        .result-item {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            border-left: 5px solid var(--secondary-color);
+        }
+        .result-item h3 {
+            margin-top: 0;
+        }
+        .result-item a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+        .result-item a:hover {
+            text-decoration: underline;
+        }
+        .no-results {
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Suchergebnisse</h1>
+    </header>
+
+   <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <div class="container">
+        <div class="section">
+            <h2 id="search-heading">Suchergebnisse für ""</h2>
+            <div id="results-container" class="search-results-container">
+                </div>
+        </div>
+    </div>
+
+    <footer>
+    <p>
+        Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+        <span style="float:right;">
+             <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+            <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+        </span>
+    </p>
+</footer>
+
+
+    <script>
+        // Der "Datenbank"-Index aller Seiten
+        const searchIndex = [
+            { url: 'index.html', title: 'Startseite', keywords: 'home portal mechatronik übersicht' },
+            { url: 'grundlagen.html', title: 'Grundlagen der Elektrotechnik', keywords: 'ohm kirchhoff spannung strom widerstand gesetz' },
+            { url: 'formeln.html', title: 'Formelsammlung', keywords: 'formel leistung arbeit gleichstrom wechselstrom' },
+            { url: 'rechner.html', title: 'Interaktive Rechner', keywords: 'rechner spannungsteiler widerstand parallel reihe wechselstrom drehstrom' },
+            { url: 'kondensator.html', title: 'Kondensatoren', keywords: 'kapazität farad dielektrikum glättung siebung' },
+            { url: 'z-diode.html', title: 'Z-Dioden', keywords: 'zener spannungsstabilisierung durchbruchspannung dimensionierung' },
+            { url: 'vorwiderstand.html', title: 'LED-Vorwiderstand berechnen', keywords: 'led widerstand rechner flussspannung strom' },
+            { url: 'digitaltechnik.html', title: 'Digitaltechnik', keywords: 'logik gatter and or not nand nor xor fup logo' },
+            { url: 'sensorik-aktorik.html', title: 'Sensorik & Aktorik', keywords: 'sensoren aktoren näherungsschalter lichtschranke induktiv kapazitiv' },
+            { url: 'pneumatik.html', title: 'Grundlagen der Pneumatik', keywords: 'druckluft zylinder ventil 5/2-wegeventil elektropneumatik' },
+            { url: 'antriebstechnik.html', title: 'Antriebstechnik', keywords: 'motor frequenzumrichter fu drehstrom schrittmotor dc stern-dreieck' },
+            { url: 'sicherheitstechnik.html', title: 'Sicherheitstechnik', keywords: 'not-aus not-halt schutztür sicherheitsrelais sicherheitskette' },
+            { url: 'schaltplanlesen.html', title: 'Schaltplanlesen', keywords: 'stromlaufplan symbole din iec schütz relais' },
+            { url: 'vps-grundlagen.html', title: 'VPS & Selbsthalteschaltung', keywords: 'vps verbindungsprogrammiert relaissteuerung selbsthaltung' },
+            { url: 'sps-grundlagen.html', title: 'SPS-Grundlagen', keywords: 'sps sps plc steuerung siemens tia kop fup' },
+            { url: 'logo-grundlagen.html', title: 'Siemens LOGO!', keywords: 'logo kleinsteuerung logikmodul siemens fup funktionsplan' },
+            
+            // NEU HINZUGEFÜGT
+            { url: 'installation.html', title: 'Elektroinstallation Grundlagen', keywords: 'installation 5 sicherheitsregeln fi rcd ls schutzschalter aderfarben vde 0100 netzformen' },
+            { url: 'vde-normen.html', title: 'VDE-Normen und Vorschriften', keywords: 'vde normen vorschriften din 0100 0105 0701-0702 0113 sicherheit prüfzeichen' },
+            { url: 'bussysteme.html', title: 'Bussysteme', keywords: 'Bus Bussysteme AS-i Profinet Profibus PD' },
+            { url: 'schutzkleinspannung.html', title: 'Schutzkleinspannung', keywords: 'SELF PELV FELV Schutzkleinspannung' }
+        ];
+
+        // Die eigentliche Suchfunktion
+        document.addEventListener('DOMContentLoaded', () => {
+            const resultsContainer = document.getElementById('results-container');
+            const searchHeading = document.getElementById('search-heading');
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+
+            if (!query || query.trim() === '') {
+                searchHeading.textContent = 'Bitte geben Sie einen Suchbegriff ein.';
+                return;
+            }
+
+            searchHeading.textContent = `Suchergebnisse für "${query}"`;
+            const lowerCaseQuery = query.toLowerCase();
+
+            const results = searchIndex.filter(item => 
+                item.title.toLowerCase().includes(lowerCaseQuery) || 
+                item.keywords.toLowerCase().includes(lowerCaseQuery)
+            );
+
+            if (results.length > 0) {
+                results.forEach(item => {
+                    const resultElement = document.createElement('div');
+                    resultElement.className = 'result-item';
+                    resultElement.innerHTML = `
+                        <h3><a href="${item.url}">${item.title}</a></h3>
+                        <p>Stichworte: ${item.keywords.replaceAll(' ', ', ')}</p>
+                    `;
+                    resultsContainer.appendChild(resultElement);
+                });
+            } else {
+                resultsContainer.innerHTML = '<p class="no-results">Keine Ergebnisse für Ihre Suche gefunden.</p>';
+            }
+        });
+    </script>
+     <script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+</body>
+</html>

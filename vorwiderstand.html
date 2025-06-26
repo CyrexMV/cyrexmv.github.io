@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LED-Vorwiderstand berechnen - E-Technik</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+    <header><h1>LED-Vorwiderstand berechnen</h1></header>
+
+    <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+    <div class="container">
+        <div class="section">
+            <h2>Warum ein Vorwiderstand?</h2>
+            <p>Eine Leuchtdiode (LED) ist kein ohmscher Verbraucher. Sie darf nicht direkt an eine Spannungsquelle angeschlossen werden, da sie sonst versucht, unendlich viel Strom zu ziehen und sofort durchbrennt. Ein Vorwiderstand begrenzt den Strom auf einen für die LED sicheren Wert.</p>
+
+            <div class="content-box">
+                <h3>Die Berechnung</h3>
+                <p>Um den richtigen Widerstandswert zu finden, benötigen wir drei Werte:</p>
+                <ul>
+                    <li>Die <strong>Gesamtspannung</strong> der Quelle (\(U_{ges}\)), z.B. von einer Batterie oder einem Netzteil.</li>
+                    <li>Die <strong>Flussspannung</strong> der LED (\(U_F\)), die im Datenblatt steht (typisch: Rot ~2V, Blau/Weiß ~3.2V).</li>
+                    <li>Den gewünschten <strong>Durchlassstrom</strong> der LED (\(I_F\)), ebenfalls aus dem Datenblatt (typisch: 10-20mA).</li>
+                </ul>
+                <p>Die Spannung, die am Widerstand abfallen muss, ist die Gesamtspannung minus der LED-Spannung. Mit dem Ohm'schen Gesetz ergibt sich dann der Widerstand:</p>
+                <p class="formula">\(R_V = \frac{U_{ges} - U_F}{I_F}\)</p>
+                <div class="info-box"><strong>Achtung:</strong> Der Strom \(I_F\) muss in der Formel in Ampere (A) eingesetzt werden, nicht in Milliampere (mA)! (z.B. 20mA = 0.02A)</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Interaktiver Rechner</h2>
+            <div class="card">
+                <h3>LED-Vorwiderstand berechnen</h3>
+                <input type="number" id="led-uges" class="calculator-input" placeholder="Gesamtspannung Uges (in Volt)">
+                <input type="number" id="led-uf" class="calculator-input" placeholder="Flussspannung der LED Uf (in Volt)">
+                <input type="number" id="led-if" class="calculator-input" placeholder="LED-Strom If (in Milliampere, z.B. 20)">
+                <button onclick="calculateLedResistor()">Berechnen</button>
+                <div id="led-result" class="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+    <p>
+        Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+        <span style="float:right;">
+             <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+            <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+        </span>
+    </p>
+</footer>
+
+    
+    <script>
+        function calculateLedResistor() {
+            const u_ges = parseFloat(document.getElementById('led-uges').value);
+            const u_f = parseFloat(document.getElementById('led-uf').value);
+            const i_f_mA = parseFloat(document.getElementById('led-if').value);
+            const resultDiv = document.getElementById('led-result');
+
+            if (isNaN(u_ges) || isNaN(u_f) || isNaN(i_f_mA)) {
+                resultDiv.innerText = 'Bitte alle Felder ausfüllen.';
+                return;
+            }
+            if (u_ges <= u_f) {
+                resultDiv.innerText = 'Gesamtspannung muss größer als die Flussspannung der LED sein!';
+                return;
+            }
+            if (i_f_mA <= 0) {
+                 resultDiv.innerText = 'Der Strom muss positiv sein.';
+                return;
+            }
+
+            const i_f_A = i_f_mA / 1000; // Umrechnung von mA in A
+            const r_v = (u_ges - u_f) / i_f_A;
+
+            // E12-Reihe für den nächsthöheren Standardwert
+            const e12series = [10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82];
+            let magnitude = Math.pow(10, Math.floor(Math.log10(r_v)));
+            let normalized_rv = r_v / magnitude;
+            let next_e12_val = e12series.find(val => val >= normalized_rv) || 100; // Fallback
+            let standard_r = next_e12_val * magnitude;
+            
+            // Wenn der berechnete Wert schon fast ein Standardwert ist, nehmen wir diesen.
+             if(Math.abs(r_v - (e12series.find(val => val < normalized_rv) * magnitude)) < r_v*0.01) {
+                standard_r = r_v;
+             }
+             if (r_v > 82 * magnitude) standard_r = 100 * magnitude;
+
+
+            resultDiv.innerHTML = `Berechneter Widerstand: <strong>${r_v.toFixed(0)} Ω</strong><br>
+                                   <div class="info-box">Empfehlung: Wählen Sie den nächsthöheren Standardwert aus der E12-Reihe, z.B. <strong>${standard_r} Ω</strong>, um die LED zu schonen.</div>`;
+        }
+    </script>
+
+    <script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+
+</body>
+</html>
