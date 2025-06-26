@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Z-Diode - E-Technik</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    <style>
+        .symbol-diagram { text-align: center; margin: 1rem 0; }
+        .symbol-diagram svg { max-width: 250px; height: auto; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Die Z-Diode (Zener-Diode)</h1>
+        <p>Spannungsstabilisierung und Schutz – das Multitalent unter den Dioden.</p>
+    </header>
+
+    <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <div class="container">
+        <div class="section">
+            <h2>Was ist eine Z-Diode?</h2>
+            <div class="content-box">
+                <p>
+                    Eine <strong>Z-Diode</strong> ist eine spezielle Diode, die dafür entwickelt wurde, dauerhaft in Sperrrichtung betrieben zu werden. Ihre Hauptaufgabe ist es, eine Spannung zu stabilisieren (eine Referenzspannung zu erzeugen).
+                </p>
+                <div class="info-box">
+                    <strong>Merke:</strong> Z-Dioden werden meist in Sperrrichtung betrieben und halten die Spannung auf einem festen Wert!
+                </div>
+            </div>
+            <div class="content-box">
+                <h3>Schaltzeichen und Kennlinie</h3>
+                <p>Das Schaltzeichen ähnelt einer normalen Diode, hat aber "geknickte" Striche an der Kathode, die ein "Z" andeuten.</p>
+                <div class="symbol-diagram">
+                    <svg viewBox="0 0 200 100">
+                        <line x1="10" y1="50" x2="70" y2="50" stroke="black" stroke-width="2"/>
+                        <polygon points="70,30 70,70 110,50" fill="white" stroke="black" stroke-width="2"/>
+                        <line x1="110" y1="30" x2="110" y2="70" stroke="black" stroke-width="2"/>
+                        <line x1="110" y1="30" x2="100" y2="30" stroke="black" stroke-width="2"/>
+                        <line x1="110" y1="70" x2="120" y2="70" stroke="black" stroke-width="2"/>
+                        <line x1="120" y1="50" x2="190" y2="50" stroke="black" stroke-width="2"/>
+                        <text x="40" y="25" font-size="12">Anode (+)</text>
+                        <text x="145" y="25" font-size="12">Kathode (-)</text>
+                    </svg>
+                </div>
+                <p>Die Kennlinie zeigt das typische Verhalten: In Durchlassrichtung wie eine normale Diode, in Sperrrichtung bricht die Spannung bei der Z-Spannung \(U_Z\) schlagartig durch und wird konstant gehalten.</p>
+            </div>
+            <div class="content-box">
+                <h3>Funktionsweise</h3>
+                <p>
+                    Wird die Z-Spannung in Sperrrichtung erreicht, wird die Diode leitend (Zener-Effekt oder Lawineneffekt). Sie hält dann die Spannung über sich selbst nahezu konstant auf dem Wert \(U_Z\), auch wenn der Strom durch sie in einem gewissen Bereich schwankt.
+                </p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Dimensionierung einer Stabilisierungsschaltung</h2>
+            <div class="content-box">
+                <p>
+                    Die häufigste Aufgabe ist die Berechnung des passenden Vorwiderstands \(R_V\) für eine Stabilisierungsschaltung.
+                </p>
+                <div class="info-box">
+                    <strong>Praxis:</strong> Der Vorwiderstand schützt die Z-Diode und begrenzt den Strom – immer auf die Verlustleistung achten!
+                </div>
+            </div>
+            <div class="content-box">
+                <h3>Berechnung des Vorwiderstands (\(R_V\))</h3>
+                <ol>
+                    <li><strong>Spannung am Widerstand berechnen:</strong> \(U_V = U_{ein} - U_Z\)</li>
+                    <li><strong>Gesamtstrom berechnen:</strong> \(I_{ges} = I_L + I_Z\) (Laststrom + Zenerstrom)</li>
+                    <li><strong>Widerstand berechnen:</strong> \(R_V = \frac{U_V}{I_{ges}}\)</li>
+                </ol>
+            </div>
+            <div class="content-box">
+                <h3>Verlustleistung prüfen!</h3>
+                <ul>
+                    <li><strong>Leistung des Widerstands:</strong> \(P_V = U_V \cdot I_{ges}\). Der gewählte Widerstand muss diese Leistung aushalten (z.B. 1/4W, 1/2W).</li>
+                    <li><strong>Leistung der Z-Diode:</strong> \(P_Z = U_Z \cdot I_Z\). Dieser Wert muss kleiner sein als die maximale Verlustleistung \(P_{tot}\) aus dem Datenblatt.</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <h3>Berechnungsbeispiel</h3>
+                <p><strong>Aufgabe:</strong> Eine unstabile Spannung von 12V soll auf stabile 5,1V für eine Last, die 20mA benötigt, stabilisiert werden.</p>
+                <ol>
+                    <li>Spannung am Widerstand: \(U_V = 12V - 5,1V = 6,9V\)</li>
+                    <li>Gesamtstrom: \(I_{ges} = 20mA + 10mA = 30mA = 0,03A\) (Annahme: 10mA für die Z-Diode)</li>
+                    <li><strong>Vorwiderstand: \(R_V = \frac{6,9V}{0,03A} = 230\Omega\)</strong> (Man wählt den nächstgelegenen Wert aus der E-Reihe, z.B. 220Ω oder 240Ω)</li>
+                    <li>Leistungs-Check: \(P_V = 6,9V \cdot 0,03A = 0,207W\). Ein Standard-Widerstand mit 1/4W (0,25W) ist ausreichend.</li>
+                </ol>
+            </div>
+            <div class="card">
+                <h3>Vorwiderstands-Rechner</h3>
+                <input type="number" id="z-uin" class="calculator-input" placeholder="Eingangsspannung Uein (V)">
+                <input type="number" id="z-uz" class="calculator-input" placeholder="Z-Spannung Uz (V)">
+                <input type="number" id="z-il" class="calculator-input" placeholder="Laststrom Il (mA)">
+                <input type="number" id="z-iz" class="calculator-input" placeholder="Zener-Strom Iz (mA)">
+                <button onclick="calculateZenerResistor()">Berechnen</button>
+                <div id="zener-result" class="result" style="min-height: 80px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+    <p>
+        Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+        <span style="float:right;">
+             <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+            <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+        </span>
+    </p>
+</footer>
+
+    <script>
+        // Rechner-Funktion für die Z-Diode
+        function calculateZenerResistor() {
+            const U_in = parseFloat(document.getElementById('z-uin').value);
+            const U_z = parseFloat(document.getElementById('z-uz').value);
+            const I_l_mA = parseFloat(document.getElementById('z-il').value);
+            const I_z_mA = parseFloat(document.getElementById('z-iz').value);
+            const resDiv = document.getElementById('zener-result');
+
+            if (isNaN(U_in) || isNaN(U_z) || isNaN(I_l_mA) || isNaN(I_z_mA)) {
+                resDiv.innerHTML = 'Bitte alle Felder ausfüllen.';
+                return;
+            }
+            if (U_in <= U_z) {
+                resDiv.innerHTML = 'Eingangsspannung muss größer als die Z-Spannung sein.';
+                return;
+            }
+
+            const I_l_A = I_l_mA / 1000;
+            const I_z_A = I_z_mA / 1000;
+            
+            const U_v = U_in - U_z;
+            const I_ges = I_l_A + I_z_A;
+            const R_v = U_v / I_ges;
+
+            const P_v = U_v * I_ges;
+            const P_z = U_z * I_z_A;
+
+            const e12series = [10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82, 100, 120, 150, 180, 220, 270, 330, 390, 470, 560, 680, 820];
+            let standard_r = e12series.find(val => val >= R_v) || R_v;
+            
+            if (R_v > 820) {
+                 let magnitude = Math.pow(10, Math.floor(Math.log10(R_v)));
+                 let normalized_rv = R_v / magnitude;
+                 let next_e12_val = e12series.find(val => (val/10) >= normalized_rv) || 10;
+                 standard_r = (next_e12_val/10) * magnitude * 10;
+                 if (standard_r < R_v) standard_r = Math.ceil(R_v / 10) * 10;
+            }
+            
+            resDiv.innerHTML = `Benötigter Widerstand: <strong>${R_v.toFixed(1)} Ω</strong><br>
+                                Nächster E12-Wert: <strong>${standard_r} Ω</strong><br>
+                                Leistung (Widerstand): ${P_v.toFixed(3)} W<br>
+                                Leistung (Z-Diode): ${P_z.toFixed(3)} W`;
+        }
+
+        // Hamburger Menü Logik
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Dropdown-Menüs per Klick
+        document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Alle Dropdowns schließen
+                document.querySelectorAll('.dropdown-content').forEach(dc => {
+                    if (dc !== this.nextElementSibling) dc.classList.remove('show');
+                });
+                // Dieses Dropdown öffnen/schließen
+                this.nextElementSibling.classList.toggle('show');
+            });
+        });
+
+        // Schließt Dropdown, wenn außerhalb geklickt wird
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+            }
+        });
+    </script>
+</body>
+</html>
