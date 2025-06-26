@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitaltechnik - E-Technik</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    <style>
+        .gate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .gate-card {
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius, 12px);
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(51,65,85,0.04);
+        }
+        .gate-card h3 {
+            margin-top: 0;
+            border-bottom: 2px solid var(--secondary-color, #2563eb);
+            padding-bottom: 0.5rem;
+            color: var(--primary-color, #2563eb);
+        }
+        .gate-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .gate-details svg {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            margin: 0 auto;
+        }
+        .truth-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        .truth-table th, .truth-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+        .truth-table th {
+            background-color: #e9ecef;
+        }
+        .formula {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        .info-box {
+            background: #dbeafe;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-weight: bold;
+            color: #1e293b;
+            box-shadow: 0 2px 8px rgba(51,65,85,0.04);
+        }
+        @media (max-width: 700px) {
+            .gate-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Grundlagen der Digitaltechnik</h1>
+        <p>Die Welt der Einsen und Nullen – von logischen Gattern bis zu komplexen Schaltungen.</p>
+    </header>
+
+    <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <div class="container">
+        <div class="section">
+            <div class="info-box">
+                In der Digitaltechnik werden Informationen mit nur zwei Zuständen verarbeitet: <strong>0</strong> (LOW, AUS) und <strong>1</strong> (HIGH, EIN). Logische Gatter sind die Grundbausteine jeder digitalen Schaltung – von der SPS bis zum Computer.
+            </div>
+            <h2>Logische Gatter: Die Bausteine der digitalen Welt</h2>
+            <div class="gate-grid">
+                <!-- AND-Gatter -->
+                <div class="gate-card">
+                    <h3>AND (UND-Gatter)</h3>
+                    <p>Der Ausgang ist nur dann <strong>1</strong>, wenn Eingang A <strong>UND</strong> Eingang B <strong>1</strong> sind.</p>
+                    <div class="gate-details">
+                        <svg viewBox="0 0 100 80"><rect x="30" y="10" width="50" height="60" stroke="black" fill="none" stroke-width="2"/><line x1="0" y1="25" x2="30" y2="25"/><line x1="0" y1="55" x2="30" y2="55"/><line x1="80" y1="40" x2="100" y2="40"/><text x="5" y="20">A</text><text x="5" y="50">B</text><text x="90" y="35">Y</text><text x="55" y="45" font-size="20" text-anchor="middle">&amp;</text></svg>
+                        <table class="truth-table"><tr><th>A</th><th>B</th><th>Y</th></tr><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>1</td></tr></table>
+                    </div>
+                    <div class="formula">\(Y = A \cdot B\)</div>
+                </div>
+                <!-- OR-Gatter -->
+                <div class="gate-card">
+                    <h3>OR (ODER-Gatter)</h3>
+                    <p>Der Ausgang ist <strong>1</strong>, wenn Eingang A <strong>ODER</strong> Eingang B (oder beide) <strong>1</strong> sind.</p>
+                    <div class="gate-details">
+                        <svg viewBox="0 0 100 80"><rect x="30" y="10" width="50" height="60" stroke="black" fill="none" stroke-width="2"/><line x1="0" y1="25" x2="30" y2="25"/><line x1="0" y1="55" x2="30" y2="55"/><line x1="80" y1="40" x2="100" y2="40"/><text x="5" y="20">A</text><text x="5" y="50">B</text><text x="90" y="35">Y</text><text x="55" y="45" font-size="20" text-anchor="middle">≥1</text></svg>
+                        <table class="truth-table"><tr><th>A</th><th>B</th><th>Y</th></tr><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>1</td></tr></table>
+                    </div>
+                    <div class="formula">\(Y = A + B\)</div>
+                </div>
+                <!-- NOT-Gatter -->
+                <div class="gate-card">
+                    <h3>NOT (Inverter)</h3>
+                    <p>Der Ausgang ist immer das genaue Gegenteil des Eingangs. Er negiert das Signal.</p>
+                    <div class="gate-details">
+                        <svg viewBox="0 0 100 80"><rect x="30" y="20" width="50" height="40" stroke="black" fill="none" stroke-width="2"/><line x1="0" y1="40" x2="30" y2="40"/><line x1="80" y1="40" x2="90" y2="40"/><circle cx="95" cy="40" r="5" stroke="black" fill="white" stroke-width="2"/><text x="5" y="35">A</text><text x="55" y="45" font-size="20" text-anchor="middle">1</text></svg>
+                        <table class="truth-table"><tr><th>A</th><th>Y</th></tr><tr><td>0</td><td>1</td></tr><tr><td>1</td><td>0</td></tr></table>
+                    </div>
+                    <div class="formula">\(Y = \overline{A}\)</div>
+                </div>
+                <!-- NAND-Gatter -->
+                <div class="gate-card">
+                    <h3>NAND (Nicht-UND)</h3>
+                    <p>Ein negiertes UND. Der Ausgang ist immer <strong>1</strong>, außer wenn beide Eingänge <strong>1</strong> sind.</p>
+                    <div class="gate-details">
+                        <svg viewBox="0 0 100 80"><rect x="30" y="10" width="50" height="60" stroke="black" fill="none" stroke-width="2"/><line x1="0" y1="25" x2="30" y2="25"/><line x1="0" y1="55" x2="30" y2="55"/><line x1="80" y1="40" x2="90" y2="40"/><circle cx="95" cy="40" r="5" stroke="black" fill="white" stroke-width="2"/><text x="5" y="20">A</text><text x="5" y="50">B</text><text x="55" y="45" font-size="20" text-anchor="middle">&amp;</text></svg>
+                        <table class="truth-table"><tr><th>A</th><th>B</th><th>Y</th></tr><tr><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>0</td></tr></table>
+                    </div>
+                    <div class="formula">\(Y = \overline{A \cdot B}\)</div>
+                </div>
+                <!-- NOR-Gatter -->
+                <div class="gate-card">
+                    <h3>NOR (Nicht-ODER)</h3>
+                    <p>Ein negiertes ODER. Der Ausgang ist nur dann <strong>1</strong>, wenn beide Eingänge <strong>0</strong> sind.</p>
+                    <div class="gate-details">
+                        <svg viewBox="0 0 100 80"><rect x="30" y="10" width="50" height="60" stroke="black" fill="none" stroke-width="2"/><line x1="0" y1="25" x2="30" y2="25"/><line x1="0" y1="55" x2="30" y2="55"/><line x1="80" y1="40" x2="90" y2="40"/><circle cx="95" cy="40" r="5" stroke="black" fill="white" stroke-width="2"/><text x="5" y="20">A</text><text x="5" y="50">B</text><text x="55" y="45" font-size="20" text-anchor="middle">≥1</text></svg>
+                        <table class="truth-table"><tr><th>A</th><th>B</th><th>Y</th></tr><tr><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td></tr></table>
+                    </div>
+                    <div class="formula">\(Y = \overline{A + B}\)</div>
+                </div>
+                <!-- XOR-Gatter -->
+                <div class="gate-card">
+                    <h3>XOR (Exklusiv-ODER)</h3>
+                    <p>Der Ausgang ist <strong>1</strong>, wenn sich die Eingänge unterscheiden (einer 0, der andere 1).</p>
+                    <div class="gate-details">
+                        <svg viewBox="0 0 100 80"><rect x="30" y="10" width="50" height="60" stroke="black" fill="none" stroke-width="2"/><line x1="0" y1="25" x2="30" y2="25"/><line x1="0" y1="55" x2="30" y2="55"/><line x1="80" y1="40" x2="100" y2="40"/><text x="5" y="20">A</text><text x="5" y="50">B</text><text x="90" y="35">Y</text><text x="55" y="45" font-size="20" text-anchor="middle">=1</text></svg>
+                        <table class="truth-table"><tr><th>A</th><th>B</th><th>Y</th></tr><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>0</td></tr></table>
+                    </div>
+                    <div class="formula">\(Y = A \oplus B\)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Elektrotechnik-Portal &copy; 2025</p>
+    </footer>
+    
+    <script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+</body>
+</html>

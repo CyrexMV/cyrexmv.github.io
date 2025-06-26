@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formelsammlung E-Technik</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+    <header>
+        <h1>Umfassende Formelsammlung</h1>
+        <p>Alle wichtigen Formeln für Schule, Ausbildung und Praxis.</p>
+    </header>
+
+    <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <div class="container">
+        <div class="section">
+            <h2>Gleichstromkreis</h2>
+            <div class="content-box">
+                <h3>Ohm'sches Gesetz & Leistung</h3>
+                <p class="formula">\(U = R \cdot I\)</p>
+                <p class="formula">\(P = U \cdot I = I^2 \cdot R = \frac{U^2}{R}\)</p>
+                <div class="info-box">
+                    <strong>Tipp:</strong> Das Ohm'sche Gesetz ist die Grundlage für fast alle Berechnungen!
+                </div>
+            </div>
+            <div class="content-box">
+                <h3>Elektrische Arbeit / Energie</h3>
+                <p class="formula">\(W = P \cdot t = U \cdot I \cdot t\)</p>
+            </div>
+            <div class="content-box">
+                <h3>Widerstände in Reihe</h3>
+                <p class="formula">\(R_{ges} = R_1 + R_2 + \dots + R_n\)</p>
+            </div>
+            <div class="content-box">
+                <h3>Widerstände parallel</h3>
+                <p class="formula">\(\frac{1}{R_{ges}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots + \frac{1}{R_n}\)</p>
+                <p>Für zwei Widerstände gilt auch: <span class="formula">\(R_{ges} = \frac{R_1 \cdot R_2}{R_1 + R_2}\)</span></p>
+            </div>
+            <div class="content-box">
+                <h3>Spannungsteiler (unbelastet)</h3>
+                <p class="formula">\(U_2 = U_{ges} \cdot \frac{R_2}{R_1 + R_2}\)</p>
+                <div class="info-box">
+                    <strong>Praxis:</strong> Spannungsteiler werden oft zur Messwertanpassung genutzt.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Wechselstromkreis</h2>
+            <div class="content-box">
+                <h3>Grundgrößen</h3>
+                <p>Kreisfrequenz: <span class="formula">\(\omega = 2 \pi f\)</span></p>
+                <p>Periodendauer: <span class="formula">\(T = \frac{1}{f}\)</span></p>
+            </div>
+            <div class="content-box">
+                <h3>Blindwiderstände (Impedanzen)</h3>
+                <p>Induktiver Blindwiderstand (Spule): <span class="formula">\(X_L = \omega L = 2 \pi f L\)</span></p>
+                <p>Kapazitiver Blindwiderstand (Kondensator): <span class="formula">\(X_C = \frac{1}{\omega C} = \frac{1}{2 \pi f C}\)</span></p>
+            </div>
+            <div class="content-box">
+                <h3>Leistungsdreieck</h3>
+                <p>Wirkleistung (P) in Watt (W): <span class="formula">\(P = U \cdot I \cdot \cos(\varphi)\)</span></p>
+                <p>Blindleistung (Q) in Var (var): <span class="formula">\(Q = U \cdot I \cdot \sin(\varphi)\)</span></p>
+                <p>Scheinleistung (S) in Voltampere (VA): <span class="formula">\(S = U \cdot I = \sqrt{P^2 + Q^2}\)</span></p>
+                <p>Leistungsfaktor: <span class="formula">\(\cos(\varphi) = \frac{P}{S}\)</span></p>
+                <div class="info-box">
+                    <strong>Merke:</strong> In der Praxis ist ein hoher Leistungsfaktor (nahe 1) wünschenswert!
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Wirkungsgrad</h2>
+            <div class="content-box">
+                <h3>Definition & Formel</h3>
+                <p>
+                    Der <strong>Wirkungsgrad</strong> gibt an, wie viel der zugeführten Energie in nutzbare Energie umgewandelt wird.<br>
+                    <span class="formula">\(\eta = \frac{P_\text{ab}}{P_\text{zu}} \cdot 100\,\%\)</span>
+                </p>
+                <ul>
+                    <li><strong>\(\eta\)</strong>: Wirkungsgrad in Prozent (%)</li>
+                    <li><strong>\(P_\text{ab}\)</strong>: abgegebene (nutzbare) Leistung</li>
+                    <li><strong>\(P_\text{zu}\)</strong>: zugeführte (aufgenommene) Leistung</li>
+                </ul>
+                <div class="info-box">
+                    <strong>Praxis:</strong> Der Wirkungsgrad liegt immer unter 100 %, da es immer Verluste (z.B. Wärme) gibt.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+    <p>
+        Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+        <span style="float:right;">
+             <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+            <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+        </span>
+    </p>
+</footer>
+
+<script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+</body>
+</html>

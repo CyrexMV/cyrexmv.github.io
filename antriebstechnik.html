@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antriebstechnik - E-Technik</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header><h1>Grundlagen der Antriebstechnik</h1></header>
+
+  <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <div class="container">
+        <div class="section">
+            <h2>Motortypen und ihre Ansteuerung</h2>
+            <p>Die Antriebstechnik befasst sich damit, elektrische Energie in kontrollierte Bewegung umzuwandeln. Motoren sind die "Muskeln" in fast jeder Maschine.</p>
+            <div class="content-box">
+                <h3>Drehstrom-Asynchronmotor</h3>
+                <p>Dies ist der Standardmotor in der Industrie – robust, wartungsarm und kostengünstig. Er wird mit dreiphasigem Wechselstrom (Drehstrom) betrieben und erzeugt durch ein magnetisches Drehfeld eine Rotation. Seine Drehzahl ist von der Frequenz des Stromnetzes abhängig.</p>
+            </div>
+            <div class="content-box">
+                <h3>Frequenzumrichter (FU)</h3>
+                <p>Ein FU ist ein elektronisches Gerät zur Steuerung von Drehstrommotoren. Er kann die Frequenz und die Spannung des Stroms, der zum Motor geht, variabel ändern.
+                <br><strong>Funktion:</strong> Indem der FU die Frequenz ändert, ändert er die Drehzahl des Motors stufenlos. Dies ermöglicht sanftes Anlaufen, Abbremsen und eine präzise Drehzahlanpassung im Betrieb, was Energie spart und den Verschleiß reduziert.</p>
+            </div>
+            <div class="content-box">
+                <h3>Gleichstrommotor (DC-Motor)</h3>
+                <p>DC-Motoren werden mit Gleichspannung betrieben. Ihre Drehzahl lässt sich sehr einfach durch die Höhe der angelegten Spannung steuern. Sie werden oft in kleineren Anwendungen, in der Robotik oder in batteriebetriebenen Geräten eingesetzt.</p>
+            </div>
+            <div class="content-box">
+                <h3>Schrittmotor</h3>
+                <p>Ein Schrittmotor dreht sich nicht kontinuierlich, sondern in festen, diskreten Schritten. Er wird durch digitale Impulse von einer Steuerung bewegt. Jeder Impuls führt zu einer exakten Teildrehung.
+                <br><strong>Anwendung:</strong> Überall dort, wo präzise Positionierung ohne Rückmeldung (Sensor) erforderlich ist, z.B. in 3D-Druckern, CNC-Maschinen oder Scannern.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Praktische Schaltungen und Konzepte</h2>
+            <div class="content-box">
+                <h3>Das Motortypenschild lesen</h3>
+                <p>Das Typenschild ist der "Personalausweis" des Motors. Die wichtigsten Angaben sind:</p>
+                <ul>
+                    <li><strong>Spannung (U):</strong> z.B. `▲ 230V / Y 400V`. Das bedeutet, die Wicklungen sind für 230V ausgelegt. Im Dreieck (▲) muss der Motor an ein 230V-Netz, im Stern (Y) an ein 400V-Netz.</li>
+                    <li><strong>Strom (I):</strong> Der Nennstrom in Ampere (A), den der Motor bei Nennleistung aufnimmt. Wichtig für die Einstellung des Motorschutzes.</li>
+                    <li><strong>Leistung (P):</strong> Die abgegebene mechanische Leistung an der Welle in Kilowatt (kW).</li>
+                    <li><strong>Drehzahl (n):</strong> Die Nenndrehzahl in Umdrehungen pro Minute (U/min oder rpm) bei Nennlast.</li>
+                    <li><strong>cos φ (Leistungsfaktor):</strong> Gibt das Verhältnis von Wirk- zu Scheinleistung an.</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <h3>Stern-Dreieck-Schaltung</h3>
+                <p><strong>Zweck:</strong> Große Drehstrommotoren haben einen sehr hohen Anlaufstrom (ein Vielfaches des Nennstroms), der das Netz belasten und Sicherungen auslösen kann. Die Stern-Dreieck-Schaltung reduziert diesen Anlaufstrom.</p>
+                <p><strong>Prinzip:</strong> Der Motor wird über eine Schützschaltung zuerst im **Stern (Y)** eingeschaltet. Dabei liegt an jeder Motorwicklung eine geringere Spannung an, was den Strom stark reduziert. Nachdem der Motor hochgelaufen ist, schaltet die Steuerung die Schütze automatisch um, sodass der Motor in der **Dreieck-Schaltung (▲)** mit voller Leistung weiterläuft.</p>
+            </div>
+            <div class="content-box">
+                <h3>Drehrichtungsumkehr (Wendeschützschaltung)</h3>
+                <p>Um die Drehrichtung eines Drehstrommotors umzukehren, müssen lediglich **zwei der drei Außenleiter** (Phasen) vertauscht werden.
+                <br><strong>Umsetzung:</strong> Dies geschieht durch eine **Wendeschützschaltung**. Sie besteht aus zwei Schützen: einem für den Rechtslauf (z.B. L1, L2, L3) und einem für den Linkslauf (z.B. L1, L3, L2). Eine elektrische und oft auch mechanische **Verriegelung** zwischen den beiden Schützen stellt sicher, dass niemals beide gleichzeitig anziehen können, was zu einem Kurzschluss der Phasen führen würde.</p>
+            </div>
+            <div class="content-box">
+                <h3>Der Motorschutzschalter (MSS)</h3>
+                <p>Der Motorschutzschalter ist die wichtigste Schutzeinrichtung für einen Motor. Er kombiniert zwei Funktionen:</p>
+                <ol>
+                    <li><strong>Thermischer Überlastschutz:</strong> Ein Bimetall-Auslöser schützt den Motor vor langsamer Überlastung (z.B. wenn eine Maschine blockiert). Der Auslösestrom wird am MSS exakt auf den Nennstrom des Motors (laut Typenschild) eingestellt.</li>
+                    <li><strong>Magnetischer Kurzschlussschutz:</strong> Ein Schnellauslöser trennt den Motor bei einem Kurzschluss sofort vom Netz.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+            <span style="float:right;">
+                 <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+                <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+            </span>
+        </p>
+    </footer>
+    
+    <script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+
+</script>
+
+</body>
+</html>

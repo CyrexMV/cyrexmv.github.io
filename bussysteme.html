@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bussysteme - E-Technik</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .bus-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        .bus-table th, .bus-table td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        .bus-table th { background: #e9ecef; }
+        .info-box {
+            background: #dbeafe;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-weight: bold;
+            color: #1e293b;
+            box-shadow: 0 2px 8px rgba(51,65,85,0.04);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Grundlagen der Bussysteme</h1>
+        <p>Kommunikation in der Automatisierung – von der Parallelverdrahtung zum modernen Feldbus.</p>
+    </header>
+
+   <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+    
+    <div class="container">
+        <div class="section">
+            <div class="info-box">
+                <strong>Warum Bussysteme?</strong><br>
+                Früher wurde jeder Sensor und Aktor einzeln mit der Steuerung verdrahtet. Das führte zu riesigen Kabelbäumen und aufwändiger Fehlersuche. Bussysteme reduzieren den Verdrahtungsaufwand drastisch und ermöglichen eine flexible, schnelle Kommunikation zwischen vielen Teilnehmern.
+            </div>
+            <h2>Von der Parallelverdrahtung zum Feldbus</h2>
+            <p>
+                In der klassischen Steuerungstechnik (VPS) wird jeder Sensor und jeder Aktor einzeln mit der Steuerung verkabelt. Bei einer großen Maschine mit hunderten von E/As führt diese <strong>Parallelverdrahtung</strong> zu riesigen Kabelbäumen, hohem Arbeitsaufwand und einer schwierigen Fehlersuche.
+            </p>
+            <p>
+                Die moderne Lösung ist ein <strong>Bussystem</strong>. Hierbei werden alle Teilnehmer an eine gemeinsame Leitung (den "Bus") angeschlossen und tauschen Daten in Form von digitalen Telegrammen aus. Man kann es sich wie eine Buslinie in einer Stadt vorstellen: Eine Straße (das Buskabel) verbindet viele Haltestellen (die Geräte).
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Wichtige Bussysteme in der Industrie</h2>
+            <div class="content-box">
+                <h3>AS-i (Aktor-Sensor-Interface)</h3>
+                <p><strong>Zweck:</strong> AS-i ist das einfachste Bussystem für die unterste Feldebene. Es dient dazu, eine große Anzahl von einfachen, digitalen Sensoren und Aktoren (wie Taster oder Ventile) kostengünstig einzusammeln.</p>
+                <ul>
+                    <li>Charakteristisches, gelbes Flachkabel.</li>
+                    <li>Daten und Energie (24V) werden über dieselbe zweiadrige Leitung übertragen.</li>
+                    <li>Einfache Installation durch "Vampirtechnik" (Durchdringungstechnik), bei der die Module einfach auf das Kabel geklemmt werden.</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <h3>PROFIBUS DP</h3>
+                <p><strong>Zweck:</strong> PROFIBUS (Process Field Bus) war jahrzehntelang der führende Standard für die Automatisierung und ist in Bestandsanlagen noch extrem verbreitet. Die Variante "DP" (Dezentrale Peripherie) dient der schnellen Kommunikation zwischen einer zentralen Steuerung (Master, z.B. eine S7-SPS) und dezentralen Feldgeräten (Slaves, z.B. Frequenzumrichter, Ventilinseln).</p>
+                <ul>
+                    <li>Charakteristisches, violettes Kabel.</li>
+                    <li>Basiert auf einer seriellen RS-485-Schnittstelle.</li>
+                    <li>Ermöglicht hohe Übertragungsgeschwindigkeiten über weite Strecken.</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <h3>PROFINET</h3>
+                <p><strong>Zweck:</strong> PROFINET ist der moderne Nachfolger von PROFIBUS und der heutige Standard für neue Anlagen, besonders im Siemens-Umfeld. Es ist kein einfacher Bus mehr, sondern ein vollwertiges Industrie-Netzwerk.</p>
+                <ul>
+                    <li>Basiert auf dem <strong>Industrie-Ethernet-Standard</strong>.</li>
+                    <li>Verwendet Standard-Netzwerkkomponenten und -kabel (grünes Industriekabel, RJ45- oder M12-Stecker).</li>
+                    <li>Ermöglicht extrem schnelle Datenübertragung, flexible Topologien (Linie, Stern, Ring) und die nahtlose Integration in die IT-Welt.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Bussysteme im Vergleich</h2>
+            <table class="bus-table">
+                <tr>
+                    <th>Bussystem</th>
+                    <th>Typische Farbe</th>
+                    <th>Topologie</th>
+                    <th>Max. Teilnehmer</th>
+                    <th>Typische Anwendung</th>
+                </tr>
+                <tr>
+                    <td>AS-i</td>
+                    <td style="background:#ffe066;">Gelb</td>
+                    <td>Linie, Stern</td>
+                    <td>31 (Standard)</td>
+                    <td>Sensoren, einfache Aktoren</td>
+                </tr>
+                <tr>
+                    <td>PROFIBUS DP</td>
+                    <td style="background:#b39ddb; color:#222;">Violett</td>
+                    <td>Linie</td>
+                    <td>126</td>
+                    <td>Feldgeräte, dezentrale Peripherie</td>
+                </tr>
+                <tr>
+                    <td>PROFINET</td>
+                    <td style="background:#81c784; color:#222;">Grün</td>
+                    <td>Linie, Stern, Ring</td>
+                    <td>200+ (praktisch unbegrenzt)</td>
+                    <td>Vernetzte Anlagen, IT-Integration</td>
+                </tr>
+            </table>
+            <div class="info-box">
+                <strong>Praxistipp:</strong> Die Wahl des Bussystems hängt von der Anwendung, der Anzahl der Teilnehmer und der gewünschten Flexibilität ab. In modernen Anlagen wird meist PROFINET eingesetzt!
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+            <span style="float:right;">
+                 <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+                <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+            </span>
+        </p>
+    </footer>
+
+    <script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+</body>
+</html>

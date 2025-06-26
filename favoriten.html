@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favoriten - Mecha-Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <style>
+        .favoriten-main {
+            max-width: 700px;
+            margin: 3rem auto;
+            background: #f8fafc;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px #0001;
+            padding: 2.5rem 2rem 2rem 2rem;
+            animation: fadeIn 0.7s;
+        }
+        .favoriten-main h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+        .favoriten-list {
+            list-style: none;
+            padding: 0;
+        }
+        .favoriten-list li {
+            background: #fff;
+            margin-bottom: 0.7rem;
+            padding: 0.7rem 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px #0001;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        .favoriten-list a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .favoriten-list a:hover {
+            text-decoration: underline;
+        }
+        .favoriten-list button {
+            background: #b71c1c;
+            color: #fff;
+            border: none;
+            border-radius: 0.3rem;
+            padding: 0.3rem 0.7rem;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .favoriten-list button:hover {
+            background: #d32f2f;
+        }
+        .favoriten-search {
+            display: flex;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+        }
+        .favoriten-search input {
+            flex: 1;
+            padding: 0.7rem;
+            border-radius: 0.5rem;
+            border: 1px solid #bbb;
+            font-size: 1rem;
+            background: #fff;
+        }
+        .favoriten-add {
+            display: flex;
+            gap: 0.7rem;
+            margin-top: 1.5rem;
+        }
+        .favoriten-add input {
+            flex: 1;
+            padding: 0.7rem;
+            border-radius: 0.5rem;
+            border: 1px solid #bbb;
+            font-size: 1rem;
+            background: #fff;
+        }
+        .star-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 0.7rem;
+            font-size: 1.5rem;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            transition: transform 0.1s;
+        }
+        .star-btn:active {
+            transform: scale(1.2);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: none; }
+        }
+        @media (max-width: 700px) {
+            .favoriten-main {
+                padding: 1.2rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header><h1>Favoriten</h1></header>
+    <main class="favoriten-main">
+        <h2><span class="material-symbols-outlined" style="color:#ff9900;vertical-align:middle;">star</span> Deine Favoriten</h2>
+        <div class="favoriten-search">
+            <input type="text" id="favoritenSuche" placeholder="Alle Themen durchsuchen...">
+        </div>
+        <ul class="favoriten-list" id="favoritenList"></ul>
+        <div id="noFavs" style="text-align:center;color:#888;margin-top:2rem;display:none;">Kein Treffer.</div>
+        <div class="favoriten-add">
+            <input type="text" id="themaInput" placeholder="Neues Thema als Favorit...">
+            <button id="addBtn" class="add-btn"><span class="material-symbols-outlined">star</span> Hinzufügen</button>
+        </div>
+    </main>
+    <footer>
+        <p>
+            Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+            <span style="float:right;">
+                 <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+                <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+            </span>
+        </p>
+    </footer>
+    <script>
+        // Favoriten aus LocalStorage holen (wie im Login-System)
+        function getUsers() {
+            return JSON.parse(localStorage.getItem('users') || '{}');
+        }
+        function getCurrentUser() {
+            return localStorage.getItem('currentUser') || null;
+        }
+        // Alle verfügbaren Themen (aus allen Seiten)
+        const allPages = [
+            { name: 'Grundlagen', file: 'grundlagen.html' },
+            { name: 'Formelsammlung', file: 'formeln.html' },
+            { name: 'Grundlagen-Rechner', file: 'rechner.html' },
+            { name: 'Kondensatoren', file: 'kondensator.html' },
+            { name: 'Z-Dioden', file: 'z-diode.html' },
+            { name: 'LED-Vorwiderstand', file: 'vorwiderstand.html' },
+            { name: 'Elektroinstallation', file: 'installation.html' },
+            { name: 'VDE-Normen', file: 'vde-normen.html' },
+            { name: 'Sicherheitstechnik', file: 'sicherheitstechnik.html' },
+            { name: 'Schaltplanlesen', file: 'schaltplanlesen.html' },
+            { name: 'Digitaltechnik', file: 'digitaltechnik.html' },
+            { name: 'Sensorik & Aktorik', file: 'sensorik-aktorik.html' },
+            { name: 'Pneumatik', file: 'pneumatik.html' },
+            { name: 'Antriebstechnik', file: 'antriebstechnik.html' },
+            { name: 'SPS-Grundlagen', file: 'sps-grundlagen.html' },
+            { name: 'Bussysteme', file: 'bussysteme.html' },
+            { name: 'VPS-Grundlagen', file: 'vps-grundlagen.html' },
+            { name: 'Siemens LOGO!', file: 'logo-grundlagen.html' },
+            { name: 'Steuerungstechnik', file: 'steuerungstechnik.html' }
+        ];
+        // Favoriten und alle Themen anzeigen
+        function showFavoriten(filter = "") {
+            const user = getCurrentUser();
+            let users = getUsers();
+            let favoriten = [];
+            if (user && users[user] && users[user].favoriten) {
+                favoriten = users[user].favoriten;
+            }
+            const list = document.getElementById('favoritenList');
+            list.innerHTML = '';
+            let filterLower = filter.toLowerCase();
+            // Alle Themen (Favoriten und andere) für die Suche zusammenstellen
+            let allThemen = [...favoriten];
+            allPages.forEach(({ name }) => {
+                if (!allThemen.includes(name)) allThemen.push(name);
+            });
+            // Filtern nach Stichwörtern
+            let keywords = filterLower.split(/\s+/).filter(Boolean);
+            let filtered = allThemen.filter(thema => {
+                if (!filter) return favoriten.includes(thema); // Ohne Suche nur Favoriten
+                const themaLower = thema.toLowerCase();
+                return keywords.every(kw => themaLower.includes(kw));
+            });
+            filtered.forEach(thema => {
+                let isFav = favoriten.includes(thema);
+                let page = findPageForThema(thema);
+                const li = document.createElement('li');
+                if (page) {
+                    const a = document.createElement('a');
+                    a.href = page;
+                    a.textContent = thema;
+                    li.appendChild(a);
+                } else {
+                    li.textContent = thema;
+                }
+                // Stern-Button
+                const starBtn = document.createElement('button');
+                starBtn.className = 'star-btn';
+                starBtn.innerHTML = isFav ? '<span class="material-symbols-outlined" style="color:#ff9900;">star</span>' : '<span class="material-symbols-outlined" style="color:#bbb;">star</span>';
+                starBtn.title = isFav ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen';
+                starBtn.onclick = function() {
+                    toggleFavorit(thema);
+                };
+                li.appendChild(starBtn);
+                list.appendChild(li);
+            });
+            document.getElementById('noFavs').style.display = list.children.length === 0 ? 'block' : 'none';
+        }
+        // Favorit toggeln
+        function toggleFavorit(thema) {
+            const user = getCurrentUser();
+            let users = getUsers();
+            if (!user || !users[user]) return;
+            let favs = users[user].favoriten;
+            if (favs.includes(thema)) {
+                users[user].favoriten = favs.filter(f => f !== thema);
+            } else {
+                users[user].favoriten.push(thema);
+            }
+            localStorage.setItem('users', JSON.stringify(users));
+            showFavoriten(document.getElementById('favoritenSuche').value);
+        }
+        // Suche nach passender Seite für ein Thema
+        function findPageForThema(thema) {
+            for (let p of allPages) {
+                if (p.name.toLowerCase() === thema.toLowerCase()) return p.file;
+            }
+            return null;
+        }
+        document.getElementById('favoritenSuche').oninput = function(e) {
+            showFavoriten(e.target.value);
+        };
+        window.onload = function() {
+            showFavoriten(); // Zeigt nur Favoriten, Themen erscheinen erst bei Suche
+        };
+    </script>
+</body>
+</html>

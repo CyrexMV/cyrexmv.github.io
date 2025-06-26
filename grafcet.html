@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRAFCET – Grundlagen & Übersicht</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-box {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(51,65,85,0.04);
+        }
+        h1, h2 {
+            color: #2563eb;
+        }
+        .grafcet-img {
+            display: block;
+            margin: 1.5rem auto;
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(51,65,85,0.08);
+        }
+        ul {
+            margin-left: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GRAFCET – Ablaufsteuerungen einfach erklärt</h1>
+        <p>Grundlagen, Symbole und Beispiele für die Praxis.</p>
+    </header>
+    <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <main class="container">
+        <div class="content-box">
+            <h2>Was ist GRAFCET?</h2>
+            <p>
+                GRAFCET (Graphe Fonctionnel de Commande Étape/Transition) ist eine grafische Beschreibungssprache für Ablaufsteuerungen in der Automatisierungstechnik. Sie wird genutzt, um Abläufe, wie sie z.B. in SPS-Programmen vorkommen, übersichtlich und normgerecht darzustellen.
+            </p>
+            <ul>
+                <li>Normiert nach DIN EN 60848</li>
+                <li>Ideal für die Planung, Dokumentation und Fehlersuche</li>
+                <li>Wird häufig in der Ausbildung und Praxis eingesetzt</li>
+            </ul>
+        </div>
+
+        <div class="content-box">
+            <h2>Grundelemente eines GRAFCET</h2>
+            <ul>
+                <li><strong>Schritt (Step):</strong> Zustand im Ablauf, meist als Rechteck dargestellt</li>
+                <li><strong>Aktion:</strong> Was im jeweiligen Schritt passiert (z.B. Motor EIN)</li>
+                <li><strong>Transition:</strong> Bedingung für den Übergang zum nächsten Schritt (z.B. Taster gedrückt)</li>
+                <li><strong>Verbindungslinie:</strong> Zeigt die Reihenfolge der Schritte und Transitionen</li>
+            </ul>
+            <!-- GRAFCET Zeichnung als SVG -->
+            <div style="text-align:center; margin-top:2rem;">
+                <svg width="380" height="120" viewBox="0 0 380 120">
+                    <!-- Schritt 1 -->
+                    <rect x="20" y="40" width="60" height="40" rx="8" fill="#e0e7ef" stroke="#2563eb" stroke-width="2"/>
+                    <text x="50" y="65" font-size="15" text-anchor="middle" fill="#2563eb" font-weight="bold">S1</text>
+                    <!-- Transition 1 -->
+                    <line x1="80" y1="60" x2="120" y2="60" stroke="#2563eb" stroke-width="2"/>
+                    <rect x="120" y="52" width="12" height="16" rx="3" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+                    <text x="126" y="64" font-size="12" text-anchor="middle" fill="#2563eb">T1</text>
+                    <!-- Schritt 2 -->
+                    <line x1="132" y1="60" x2="170" y2="60" stroke="#2563eb" stroke-width="2"/>
+                    <rect x="170" y="40" width="60" height="40" rx="8" fill="#e0e7ef" stroke="#2563eb" stroke-width="2"/>
+                    <text x="200" y="65" font-size="15" text-anchor="middle" fill="#2563eb" font-weight="bold">S2</text>
+                    <!-- Transition 2 -->
+                    <line x1="230" y1="60" x2="270" y2="60" stroke="#2563eb" stroke-width="2"/>
+                    <rect x="270" y="52" width="12" height="16" rx="3" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+                    <text x="276" y="64" font-size="12" text-anchor="middle" fill="#2563eb">T2</text>
+                    <!-- Schritt 1 zurück -->
+                    <line x1="282" y1="60" x2="320" y2="60" stroke="#2563eb" stroke-width="2"/>
+                    <polygon points="320,60 310,55 310,65" fill="#2563eb"/>
+                    <line x1="320" y1="60" x2="320" y2="100" stroke="#2563eb" stroke-width="2"/>
+                    <line x1="320" y1="100" x2="50" y2="100" stroke="#2563eb" stroke-width="2"/>
+                    <line x1="50" y1="100" x2="50" y2="80" stroke="#2563eb" stroke-width="2"/>
+                    <polygon points="50,80 45,90 55,90" fill="#2563eb"/>
+                </svg>
+                <div style="font-size:0.95em; color:#64748b; margin-top:0.5rem;">
+                    <strong>Legende:</strong> S = Schritt, T = Transition (Übergang)
+                </div>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <h2>Beispiel: Einfache Start-Stopp-Steuerung</h2>
+            <ul>
+                <li><strong>Schritt 1:</strong> Anlage AUS</li>
+                <li><strong>Transition:</strong> Start-Taster wird gedrückt</li>
+                <li><strong>Schritt 2:</strong> Anlage EIN</li>
+                <li><strong>Transition:</strong> Stopp-Taster wird gedrückt</li>
+                <li><strong>Zurück zu Schritt 1</strong></li>
+            </ul>
+            <!-- GRAFCET Start-Stopp Zeichnung als SVG -->
+            <div style="text-align:center; margin-top:2rem;">
+                <svg width="340" height="110" viewBox="0 0 340 110">
+                    <!-- Schritt AUS -->
+                    <rect x="20" y="40" width="60" height="40" rx="8" fill="#e0e7ef" stroke="#2563eb" stroke-width="2"/>
+                    <text x="50" y="65" font-size="15" text-anchor="middle" fill="#2563eb" font-weight="bold">AUS</text>
+                    <!-- Transition Start -->
+                    <line x1="80" y1="60" x2="120" y2="60" stroke="#2563eb" stroke-width="2"/>
+                    <rect x="120" y="52" width="12" height="16" rx="3" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+                    <text x="126" y="64" font-size="12" text-anchor="middle" fill="#2563eb">Start</text>
+                    <!-- Schritt EIN -->
+                    <line x1="132" y1="60" x2="170" y2="60" stroke="#2563eb" stroke-width="2"/>
+                    <rect x="170" y="40" width="60" height="40" rx="8" fill="#e0e7ef" stroke="#2563eb" stroke-width="2"/>
+                    <text x="200" y="65" font-size="15" text-anchor="middle" fill="#2563eb" font-weight="bold">EIN</text>
+                    <!-- Transition Stopp -->
+                    <line x1="230" y1="60" x2="270" y2="60" stroke="#2563eb" stroke-width="2"/>
+                    <rect x="270" y="52" width="12" height="16" rx="3" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+                    <text x="276" y="64" font-size="12" text-anchor="middle" fill="#2563eb">Stopp</text>
+                    <!-- Zurück zu AUS -->
+                    <line x1="282" y1="60" x2="320" y2="60" stroke="#2563eb" stroke-width="2"/>
+                    <polygon points="320,60 310,55 310,65" fill="#2563eb"/>
+                    <line x1="320" y1="60" x2="320" y2="100" stroke="#2563eb" stroke-width="2"/>
+                    <line x1="320" y1="100" x2="50" y2="100" stroke="#2563eb" stroke-width="2"/>
+                    <line x1="50" y1="100" x2="50" y2="80" stroke="#2563eb" stroke-width="2"/>
+                    <polygon points="50,80 45,90 55,90" fill="#2563eb"/>
+                </svg>
+                <div style="font-size:0.95em; color:#64748b; margin-top:0.5rem;">
+                    <strong>Legende:</strong> AUS/EIN = Schritt, Start/Stopp = Transition
+                </div>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <h2>Vorteile von GRAFCET</h2>
+            <ul>
+                <li>Klare, normierte Darstellung von Abläufen</li>
+                <li>Erleichtert die Kommunikation zwischen Planung, Inbetriebnahme und Wartung</li>
+                <li>Hilft bei der Fehlersuche und Dokumentation</li>
+            </ul>
+        </div>
+
+        <div class="content-box">
+            <h2>Weiterführende Links</h2>
+            <ul>
+                <li><a href="https://de.wikipedia.org/wiki/GRAFCET" target="_blank">Wikipedia: GRAFCET</a></li>
+                <li><a href="https://www.elektro-technik-wissen.de/grundlagen/grafcet.html" target="_blank">elektro-technik-wissen.de: GRAFCET</a></li>
+                <li><a href="https://www.sps-lehrgang.de/grafcet/" target="_blank">sps-lehrgang.de: GRAFCET</a></li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>
+            Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+            <span style="float:right;">
+                <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+                <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+            </span>
+        </p>
+    </footer>
+    <script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+</body>
+</html>
