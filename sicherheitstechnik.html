@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sicherheitstechnik - E-Technik</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header><h1>Grundlagen der Sicherheitstechnik</h1></header>
+    <nav>
+        <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+        <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="grundlagen.html">Grundlagen</a>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Bauteile & Rechner</a>
+                <div class="dropdown-content">
+                    <a href="formeln.html">Formelsammlung</a>
+                    <a href="rechner.html">Grundlagen-Rechner</a>
+                    <hr>
+                    <a href="kondensator.html">Kondensatoren</a>
+                    <a href="z-diode.html">Z-Dioden</a>
+                    <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Normen & Planung</a>
+                <div class="dropdown-content">
+                    <a href="installation.html">Elektroinstallation</a>
+                    <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                    <a href="vde-normen.html">VDE-Normen</a>
+                    <hr>
+                    <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                    <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                    <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                    <a href="grafcet.html">GRAFCET</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Systeme & Steuerung</a>
+                <div class="dropdown-content">
+                    <a href="digitaltechnik.html">Digitaltechnik</a>
+                    <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                    <a href="antriebstechnik.html">Antriebstechnik</a>
+                    <a href="pneumatik.html">Pneumatik</a>
+                    <hr>
+                    <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                    <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                    <a href="bussysteme.html">Bussysteme</a>
+                    <a href="logo-grundlagen.html">Siemens LOGO!</a>
+                </div>
+            </div>
+        </div>
+        <form action="suche.html" method="get" class="search-form">
+            <input type="search" name="q" placeholder="Thema suchen..." required>
+            <button type="submit">Suchen</button>
+        </form>
+    </nav>
+
+    <div class="container">
+        <div class="section">
+            <h2>Schutz von Mensch und Maschine</h2>
+            <p>Die Sicherheitstechnik hat immer Vorrang vor der normalen Maschinenfunktion. Ihr Ziel ist es, Gefahren zu minimieren und im Notfall einen sicheren Zustand der Anlage zu erzwingen.</p>
+            <div class="content-box">
+                <h3>Die Sicherheitskette</h3>
+                <p>Eine Sicherheitsfunktion wird als Kette realisiert, die drei Schritte umfasst:</p>
+                <ol>
+                    <li><strong>Erfassen (Sensorik):</strong> Ein Sensor erkennt die Gefahr (z.B. ein NOT-AUS-Taster wird gedrückt, eine Schutztür wird geöffnet).</li>
+                    <li><strong>Verarbeiten (Logik):</strong> Ein Sicherheitsrelais oder eine Sicherheits-SPS verarbeitet das Signal sicher und zuverlässig. Es prüft z.B. auf Kurzschlüsse und ist intern redundant aufgebaut.</li>
+                    <li><strong>Reagieren (Aktorik):</strong> Die Logik gibt den Befehl zum sicheren Abschalten an die Aktoren (z.B. Schütze, die die Energiezufuhr zu einem Motor unterbrechen).</li>
+                </ol>
+            </div>
+             <div class="content-box">
+                <h3>NOT-AUS-Taster vs. AUS-Taster</h3>
+                <p>Ein roter NOT-AUS-Taster auf gelbem Grund ist kein normaler Ausschalter. Er muss spezielle Anforderungen erfüllen: Er rastet beim Drücken mechanisch ein und kann nur durch eine separate Aktion (z.B. Drehen) entriegelt werden. Zudem muss er zwangsöffnende Kontakte haben, die den Stromkreis auch dann sicher trennen, wenn die Kontakte im Inneren (z.B. durch Verschleiß) verklebt sein sollten.</p>
+            </div>
+             <div class="content-box">
+                <h3>Sicherheitsrelais</h3>
+                <p>Ein Sicherheitsrelais ist das Gehirn der Sicherheitskette. Im Gegensatz zu einem normalen Relais ist es intern redundant (z.B. mit zwei überwachten Kanälen) aufgebaut. Es überwacht die angeschlossenen Sicherheitssensoren und schaltet die Ausgänge nur dann frei, wenn alle Bedingungen erfüllt sind. Bei einem Fehler in der Kette oder im Gerät selbst, geht es in einen sicheren Zustand und verhindert ein Wiedereinschalten.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+    <p>
+        Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+        <span style="float:right;">
+             <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+            <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+        </span>
+    </p>
+</footer>
+
+<script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+
+</body>
+</html>

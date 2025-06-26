@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schutzkleinspannung (SELV, PELV, FELV) - E-Technik</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .info-box {
+            background: #dbeafe;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-weight: bold;
+            color: #1e293b;
+            box-shadow: 0 2px 8px rgba(51,65,85,0.04);
+        }
+        .schutz-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        .schutz-table th, .schutz-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .schutz-table th {
+            background: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Schutzkleinspannung: SELV, PELV, FELV</h1>
+        <p>Schutz durch kleine Spannungen – sicher und normgerecht in der Elektrotechnik.</p>
+    </header>
+   <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <div class="container">
+        <div class="section">
+            <div class="info-box">
+                <strong>Was ist Schutzkleinspannung?</strong><br>
+                Schutzkleinspannung ist eine Schutzmaßnahme gegen elektrischen Schlag. Sie nutzt Spannungen, die so niedrig sind, dass bei Berührung keine gefährlichen Ströme fließen können. Besonders wichtig in feuchten Bereichen, bei Handgeräten oder in der Steuerungstechnik.
+            </div>
+            <h2>Die drei Arten: SELV, PELV, FELV</h2>
+            <table class="schutz-table">
+                <tr>
+                    <th>Abkürzung</th>
+                    <th>Bedeutung</th>
+                    <th>Merkmale</th>
+                    <th>Typische Anwendung</th>
+                </tr>
+                <tr>
+                    <td><strong>SELV</strong></td>
+                    <td>Safety Extra Low Voltage<br>(Schutzkleinspannung)</td>
+                    <td>
+                        <ul>
+                            <li>Galvanisch getrennt vom Netz</li>
+                            <li>Keine Verbindung zu Erde oder anderen Stromkreisen</li>
+                            <li>Max. 50 V AC / 120 V DC</li>
+                        </ul>
+                    </td>
+                    <td>Spielzeuge, Badezimmer, Steuerstromkreise</td>
+                </tr>
+                <tr>
+                    <td><strong>PELV</strong></td>
+                    <td>Protective Extra Low Voltage<br>(Schutzkleinspannung mit Schutzleiter)</td>
+                    <td>
+                        <ul>
+                            <li>Galvanisch getrennt vom Netz</li>
+                            <li>Eine Seite kann mit Erde verbunden sein</li>
+                            <li>Max. 50 V AC / 120 V DC</li>
+                        </ul>
+                    </td>
+                    <td>Steuerungen in Maschinen, SPS, Industrie</td>
+                </tr>
+                <tr>
+                    <td><strong>FELV</strong></td>
+                    <td>Functional Extra Low Voltage<br>(Funktionskleinspannung)</td>
+                    <td>
+                        <ul>
+                            <li>Keine galvanische Trennung vom Netz</li>
+                            <li>Schutz gegen elektrischen Schlag muss zusätzlich erfolgen</li>
+                            <li>Max. 50 V AC / 120 V DC</li>
+                        </ul>
+                    </td>
+                    <td>Signalübertragung, Klingelanlagen</td>
+                </tr>
+            </table>
+            <div class="info-box">
+                <strong>Merke:</strong> Nur SELV und PELV bieten vollständigen Schutz gegen elektrischen Schlag. Bei FELV sind zusätzliche Schutzmaßnahmen nötig!
+            </div>
+        </div>
+        <div class="section">
+            <h2>Vergleich: SELV, PELV, FELV</h2>
+            <ul>
+                <li><strong>SELV:</strong> Höchste Sicherheit, da keine Verbindung zu Erde oder anderen Stromkreisen besteht.</li>
+                <li><strong>PELV:</strong> Ähnlich wie SELV, aber eine Seite darf geerdet sein (z.B. Steuerstromkreise in Maschinen).</li>
+                <li><strong>FELV:</strong> Keine Trennung vom Netz – daher ist ein zusätzlicher Schutz (z.B. Isolierung) erforderlich.</li>
+            </ul>
+            <p>
+                In der Praxis werden SELV und PELV oft für Steuerungen, Sensorik und überall dort eingesetzt, wo Menschen mit elektrischen Teilen in Berührung kommen könnten.
+            </p>
+        </div>
+        <div class="info-box">
+            <strong>Praxistipp:</strong> Achte bei der Planung immer auf die richtige Auswahl und Kennzeichnung der Schutzkleinspannung – das ist nicht nur Vorschrift, sondern schützt Leben!
+        </div>
+    </div>
+    <footer>
+    <p>
+        Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+        <span style="float:right;">
+             <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+            <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+        </span>
+    </p>
+</footer>
+    <script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+</body>
+</html>

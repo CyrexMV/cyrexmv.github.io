@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaktive Rechner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Interaktive Rechner</h1>
+        <p>Berechne schnell und einfach die wichtigsten Größen der Elektrotechnik.</p>
+    </header>
+
+   <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <div class="container">
+        <div class="section">
+            <h2>Rechner für den Gleichstromkreis</h2>
+            <div class="info-box">
+                Berechne Spannung, Strom, Widerstand, Spannungsteiler und Widerstandskombinationen – ideal für Ausbildung und Praxis!
+            </div>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Ohm'sches Gesetz</h3>
+                    <select id="ohm-calc-type" class="calculator-input">
+                        <option value="U">Spannung (U) berechnen</option>
+                        <option value="R">Widerstand (R) berechnen</option>
+                        <option value="I">Strom (I) berechnen</option>
+                    </select>
+                    <input type="number" id="ohm-val1" class="calculator-input" placeholder="Widerstand (R) in Ω">
+                    <input type="number" id="ohm-val2" class="calculator-input" placeholder="Strom (I) in A">
+                    <button onclick="calculateOhm()">Berechnen</button>
+                    <div id="ohm-result" class="result"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Spannungsteiler</h3>
+                    <input type="number" id="vt-uin" class="calculator-input" placeholder="Eingangsspannung U_ges (V)">
+                    <input type="number" id="vt-r1" class="calculator-input" placeholder="Widerstand R1 (Ω)">
+                    <input type="number" id="vt-r2" class="calculator-input" placeholder="Widerstand R2 (Ω)">
+                    <button onclick="calculateVoltageDivider()">Berechnen</button>
+                    <div id="vt-result" class="result"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Widerstandsschaltung</h3>
+                    <input type="number" id="res-r1" class="calculator-input" placeholder="Widerstand R1 (Ω)">
+                    <input type="number" id="res-r2" class="calculator-input" placeholder="Widerstand R2 (Ω)">
+                    <button onclick="calculateResistors()">Berechnen</button>
+                    <div id="res-result" class="result"></div>
+                </div>
+
+                <!-- Brückenschaltung-Rechner: Nach den anderen .card-Elementen im Gleichstromkreis -->
+                <div class="card">
+                    <h3>Brückenschaltung</h3>
+                    <input type="number" id="bruecke-r1" class="calculator-input" placeholder="R1 (Ω)">
+                    <input type="number" id="bruecke-r2" class="calculator-input" placeholder="R2 (Ω)">
+                    <input type="number" id="bruecke-r3" class="calculator-input" placeholder="R3 (Ω)">
+                    <input type="number" id="bruecke-r4" class="calculator-input" placeholder="R4 (Ω)">
+                    <input type="number" id="bruecke-uin" class="calculator-input" placeholder="Eingangsspannung U_in (V)">
+                    <button onclick="calculateBridge()">Berechnen</button>
+                    <div id="bruecke-result" class="result"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Rechner für Wechsel- & Drehstrom</h2>
+            <div class="info-box">
+                Finde Wirkleistung, Scheinleistung und Blindleistung für Wechsel- und Drehstrom – inklusive Leistungsfaktor!
+            </div>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Leistung (Wechselstrom)</h3>
+                    <input type="number" id="ac-u" class="calculator-input" placeholder="Spannung U (V)">
+                    <input type="number" id="ac-i" class="calculator-input" placeholder="Strom I (A)">
+                    <input type="number" id="ac-cos" class="calculator-input" placeholder="Leistungsfaktor cos φ (z.B. 0.9)">
+                    <button onclick="calculateACPower()">Berechnen</button>
+                    <div id="ac-result" class="result"></div>
+                </div>
+                <div class="card">
+                    <h3>Leistung (Drehstrom)</h3>
+                    <input type="number" id="ds-u" class="calculator-input" placeholder="Spannung U (verkettet, z.B. 400V)">
+                    <input type="number" id="ds-i" class="calculator-input" placeholder="Strom I (A)">
+                    <input type="number" id="ds-cos" class="calculator-input" placeholder="Leistungsfaktor cos φ (z.B. 0.85)">
+                    <button onclick="calculateThreePhasePower()">Berechnen</button>
+                    <div id="ds-result" class="result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+    <p>
+        Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+        <span style="float:right;">
+             <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+            <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+        </span>
+    </p>
+</footer>
+
+    <script>
+        // Ohm's Law
+        document.getElementById('ohm-calc-type').addEventListener('change', function() {
+            const val1 = document.getElementById('ohm-val1');
+            const val2 = document.getElementById('ohm-val2');
+            if (this.value === 'U') { val1.placeholder = "Widerstand R (Ω)"; val2.placeholder = "Strom I (A)"; }
+            else if (this.value === 'R') { val1.placeholder = "Spannung U (V)"; val2.placeholder = "Strom I (A)"; }
+            else { val1.placeholder = "Spannung U (V)"; val2.placeholder = "Widerstand R (Ω)"; }
+        });
+        function calculateOhm() {
+            const type = document.getElementById('ohm-calc-type').value;
+            const v1 = parseFloat(document.getElementById('ohm-val1').value);
+            const v2 = parseFloat(document.getElementById('ohm-val2').value);
+            const resDiv = document.getElementById('ohm-result');
+            if(isNaN(v1) || isNaN(v2)) { resDiv.innerText = 'Bitte Werte eingeben.'; return; }
+            let res = 0;
+            if (type === 'U') res = `U = ${(v1 * v2).toFixed(2)} V`;
+            else if (type === 'R') res = v2 !== 0 ? `R = ${(v1 / v2).toFixed(2)} Ω` : 'Strom darf nicht 0 sein.';
+            else res = v2 !== 0 ? `I = ${(v1 / v2).toFixed(2)} A` : 'Widerstand darf nicht 0 sein.';
+            resDiv.innerText = res;
+        }
+
+        // Voltage Divider
+        function calculateVoltageDivider() {
+            const u_in = parseFloat(document.getElementById('vt-uin').value);
+            const r1 = parseFloat(document.getElementById('vt-r1').value);
+            const r2 = parseFloat(document.getElementById('vt-r2').value);
+            const resDiv = document.getElementById('vt-result');
+            if(isNaN(u_in) || isNaN(r1) || isNaN(r2)) { resDiv.innerText = 'Bitte Werte eingeben.'; return; }
+            if ((r1 + r2) === 0) { resDiv.innerText = 'Gesamtwiderstand darf nicht 0 sein.'; return; }
+            const u_out = u_in * (r2 / (r1 + r2));
+            resDiv.innerText = `U_out = ${u_out.toFixed(2)} V`;
+        }
+        
+        // Resistors
+        function calculateResistors() {
+            const r1 = parseFloat(document.getElementById('res-r1').value);
+            const r2 = parseFloat(document.getElementById('res-r2').value);
+            const resDiv = document.getElementById('res-result');
+            if(isNaN(r1) || isNaN(r2)) { resDiv.innerText = 'Bitte Werte eingeben.'; return; }
+            const r_series = r1 + r2;
+            const r_parallel = (r1 + r2) !== 0 ? (r1 * r2) / (r1 + r2) : 0;
+            resDiv.innerHTML = `Reihe: ${r_series.toFixed(2)} Ω<br>Parallel: ${r_parallel.toFixed(2)} Ω`;
+        }
+
+        // Bridge Circuit
+        // Brückenschaltung (Wheatstone-Brücke)
+        function calculateBridge() {
+            const r1 = parseFloat(document.getElementById('bruecke-r1').value);
+            const r2 = parseFloat(document.getElementById('bruecke-r2').value);
+            const r3 = parseFloat(document.getElementById('bruecke-r3').value);
+            const r4 = parseFloat(document.getElementById('bruecke-r4').value);
+            const uin = parseFloat(document.getElementById('bruecke-uin').value);
+            const resDiv = document.getElementById('bruecke-result');
+            if([r1, r2, r3, r4, uin].some(isNaN)) {
+                resDiv.innerText = 'Bitte alle Werte eingeben.';
+                return;
+            }
+            // Spannung zwischen Brückenmitte (Uab)
+            const uab = uin * ((r2/(r1+r2)) - (r4/(r3+r4)));
+            resDiv.innerHTML = `Brückenspannung U<sub>AB</sub>: ${uab.toFixed(4)} V<br>`
+                + (Math.abs(uab) < 1e-6 ? "<span style='color:green'>Brücke ist abgeglichen!</span>" : "<span style='color:#2563eb'>Brücke ist nicht abgeglichen.</span>");
+        }
+
+        // AC Power Calculator
+        function calculateACPower() {
+            const U = parseFloat(document.getElementById('ac-u').value);
+            const I = parseFloat(document.getElementById('ac-i').value);
+            const cosPhi = parseFloat(document.getElementById('ac-cos').value);
+            const resDiv = document.getElementById('ac-result');
+
+            if(isNaN(U) || isNaN(I) || isNaN(cosPhi)) { resDiv.innerText = 'Bitte alle Werte eingeben.'; return; }
+            if(cosPhi < 0 || cosPhi > 1) { resDiv.innerText = 'cos φ muss zwischen 0 und 1 sein.'; return; }
+
+            const S = U * I; // Scheinleistung
+            const P = S * cosPhi; // Wirkleistung
+            const Q = Math.sqrt(S*S - P*P); // Blindleistung
+
+            resDiv.innerHTML = `Scheinleistung S: ${S.toFixed(2)} VA<br>
+                                Wirkleistung P: ${P.toFixed(2)} W<br>
+                                Blindleistung Q: ${Q.toFixed(2)} Var`;
+        }
+
+        // Three-Phase Power Calculator
+        function calculateThreePhasePower() {
+            const U = parseFloat(document.getElementById('ds-u').value);
+            const I = parseFloat(document.getElementById('ds-i').value);
+            const cosPhi = parseFloat(document.getElementById('ds-cos').value);
+            const resDiv = document.getElementById('ds-result');
+
+            if(isNaN(U) || isNaN(I) || isNaN(cosPhi)) { resDiv.innerText = 'Bitte alle Werte eingeben.'; return; }
+            if(cosPhi < 0 || cosPhi > 1) { resDiv.innerText = 'cos φ muss zwischen 0 und 1 sein.'; return; }
+            
+            const sqrt3 = Math.sqrt(3);
+            const S = U * I * sqrt3; // Scheinleistung
+            const P = S * cosPhi;     // Wirkleistung
+            const Q = Math.sqrt(S*S - P*P); // Blindleistung
+
+            resDiv.innerHTML = `Scheinleistung S: ${S.toFixed(2)} VA<br>
+                                Wirkleistung P: ${P.toFixed(2)} W<br>
+                                Blindleistung Q: ${Q.toFixed(2)} Var`;
+        }
+    </script>
+    
+    <script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+</body>
+</html>

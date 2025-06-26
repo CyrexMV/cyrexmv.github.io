@@ -1,0 +1,384 @@
+/* =========================
+   Mecha-Portal Modern CSS
+   ========================= */
+
+/* === Farbvariablen & Basis === */
+:root {
+  --primary: #2563eb;
+  --secondary: #ff9900;
+  --bg: #f4f7f6;
+  --text: #222;
+  --text-light: #fff;
+  --card-bg: #fff;
+  --radius: 14px;
+  --shadow: 0 4px 24px rgba(30,41,59,0.08);
+}
+
+/* === Grundlayout === */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+  color: var(--text);
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* === Container & Cards === */
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  flex: 1 0 auto;
+}
+
+.content-box, .info-box, .section {
+  background: #f1f5f9;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(51,65,85,0.04);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.info-box {
+  background: #dbeafe;
+  color: #1e293b;
+  font-weight: bold;
+  margin-top: 1.5rem;
+}
+
+/* === Header & Footer === */
+header {
+  background: #1e293b;
+  color: #fff;
+  padding: 2rem 0 1rem 0;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(30,41,59,0.08);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+footer {
+  background: #1e293b;
+  color: #bcd1ee;
+  padding: 2rem 0 1.2rem 0;
+  border-radius: 0 0 16px 16px;
+  margin-top: 2.5rem;
+  text-align: center;
+  box-shadow: 0 -2px 8px rgba(30,41,59,0.08);
+}
+
+footer div, footer span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+footer a {
+  background: var(--primary);
+  color: #fff;
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+footer a:hover {
+  background: var(--secondary);
+  color: var(--primary);
+}
+
+/* === Navigation === */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #334155;
+  padding: 0.5rem 2rem;
+  box-shadow: 0 2px 8px rgba(51,65,85,0.08);
+  flex-wrap: wrap;
+}
+
+.nav-logo {
+  color: var(--text-light);
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-links a, .dropdown .dropbtn {
+  color: var(--text-light);
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: var(--radius);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1em;
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active, .dropdown .dropbtn:hover, .dropdown .dropbtn.active {
+  background: var(--secondary);
+  color: var(--primary);
+}
+
+/* === Dropdown-Menü === */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: #f9f9f9;
+  min-width: 220px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.dropdown-content.show {
+  display: block;
+}
+
+.dropdown-content a {
+  color: #222;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  font-weight: normal;
+  border-radius: 0;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dropdown-content a:hover {
+  background: #f1f1f1;
+  color: var(--primary);
+}
+
+.dropdown-content a.active {
+  color: var(--primary);
+  background: #e9ecef;
+  font-weight: bold;
+}
+
+/* === Suchleiste === */
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-form input[type="search"] {
+  padding: 8px;
+  border: 1px solid #555;
+  border-radius: var(--radius) 0 0 var(--radius);
+  background: #555;
+  color: #fff;
+  min-width: 150px;
+  border-right: none;
+}
+
+.search-form input[type="search"]::placeholder {
+  color: #ccc;
+}
+
+.search-form button {
+  padding: 8px 12px;
+  border: 1px solid var(--secondary);
+  background: var(--secondary);
+  color: var(--primary);
+  cursor: pointer;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-weight: bold;
+}
+
+/* === Cards, Grid, Quicklinks === */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border-left: 5px solid var(--secondary);
+  display: flex;
+  flex-direction: column;
+}
+
+.card h3 {
+  margin-top: 0;
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+
+.card a {
+  background: var(--primary);
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 4px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1rem;
+  margin-top: auto;
+}
+
+.quicklinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.quicklink {
+  background: var(--primary);
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.quicklink:hover {
+  background: #1e293b;
+}
+
+/* === Info Cards & Panels === */
+.welcome-panel {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: #f1f5f9;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(51,65,85,0.04);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.welcome-icon {
+  font-size: 3rem;
+  color: var(--primary);
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.info-card {
+  background: #e0e7ef;
+  border-radius: 12px;
+  padding: 1.2rem 1rem;
+  box-shadow: 0 2px 8px rgba(51,65,85,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.info-card .icon {
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+/* === Formular & Buttons === */
+input, button, select {
+  font-family: inherit;
+  font-size: 1em;
+}
+
+button, .add-btn, .logout-btn {
+  background: var(--secondary);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px #0001;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+button:hover, .add-btn:hover, .logout-btn:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* === Responsive Design === */
+@media (max-width: 900px) {
+  .container { padding: 1rem; }
+  nav { flex-direction: column; gap: 1rem; }
+  .nav-links { flex-direction: column; gap: 0.5rem; }
+  .info-grid { grid-template-columns: 1fr; }
+  .welcome-panel { flex-direction: column; text-align: center; }
+  .quicklinks { flex-direction: column; }
+}
+
+@media (max-width: 600px) {
+  .container, .content-box, .info-box, .section { padding: 1rem 0.5rem; }
+  .welcome-panel { padding: 1rem; }
+  .project-table th, .project-table td { padding: 0.4em 0.5em; }
+}
+
+/* === Utility & Details === */
+hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 5px 0;
+}
+
+p {
+  color: #7b8bb7;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* === Scrollbar Styling === */
+::-webkit-scrollbar {
+  width: 10px;
+  background: #181a20;
+}
+::-webkit-scrollbar-thumb {
+  background: #23272f;
+  border-radius: 8px;
+}
+
+/* === Animation === */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: none;}
+}
+

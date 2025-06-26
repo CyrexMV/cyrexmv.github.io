@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPS-Grundlagen - E-Technik</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .sps-cycle-svg {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .sps-cycle-svg svg {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+        }
+        .info-box {
+            background: #dbeafe;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-weight: bold;
+            color: #1e293b;
+            box-shadow: 0 2px 8px rgba(51,65,85,0.04);
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <h1>SPS – Speicherprogrammierbare Steuerung</h1>
+        <p>Das Herzstück jeder modernen Automatisierungsanlage.</p>
+    </header>
+
+    <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <div class="container">
+        <div class="section">
+            <div class="info-box">
+                <strong>Was ist eine SPS?</strong><br>
+                Eine <strong>SPS</strong> (Speicherprogrammierbare Steuerung, engl. PLC) ist ein robuster Industriecomputer, der Maschinen und Anlagen automatisiert. Sie ersetzt klassische Relaistechnik und ist heute Standard in der Automatisierung.
+            </div>
+            <h2>Das Gehirn der modernen Anlage</h2>
+            <p>
+                Die SPS übernimmt das Steuern, Regeln und Überwachen von Prozessen. Sie ist flexibel programmierbar und kann jederzeit an neue Aufgaben angepasst werden.
+            </p>
+            <div class="content-box">
+                <h3>Aufbau und Zyklus</h3>
+                <p>Eine SPS besteht im Kern aus drei Teilen:</p>
+                <ul>
+                    <li><strong>Eingabebaugruppe:</strong> Liest die Signale von Sensoren (Taster, Lichtschranken etc.).</li>
+                    <li><strong>Zentraleinheit (CPU):</strong> Verarbeitet das Anwenderprogramm.</li>
+                    <li><strong>Ausgabebaugruppe:</strong> Schaltet die Aktoren (Motoren, Lampen, Ventile etc.).</li>
+                </ul>
+                <p>Dies geschieht in einem permanenten, schnellen <strong>Zyklus</strong>:</p>
+                <ol>
+                    <li>Alle Eingänge einlesen.</li>
+                    <li>Das Programm Schritt für Schritt abarbeiten.</li>
+                    <li>Die Ausgänge entsprechend dem Programmergebnis setzen.</li>
+                </ol>
+                <div class="sps-cycle-svg">
+                    <!-- Einfache SVG-Grafik für den SPS-Zyklus -->
+                    <svg viewBox="0 0 420 120">
+                        <rect x="30" y="30" width="80" height="60" fill="#f1f5f9" stroke="#2563eb" stroke-width="2"/>
+                        <text x="70" y="65" font-size="14" text-anchor="middle" fill="#2563eb">Eingänge</text>
+                        <rect x="160" y="30" width="100" height="60" fill="#f1f5f9" stroke="#16a34a" stroke-width="2"/>
+                        <text x="210" y="65" font-size="14" text-anchor="middle" fill="#16a34a">CPU / Programm</text>
+                        <rect x="300" y="30" width="80" height="60" fill="#f1f5f9" stroke="#f59e42" stroke-width="2"/>
+                        <text x="340" y="65" font-size="14" text-anchor="middle" fill="#f59e42">Ausgänge</text>
+                        <polygon points="110,60 160,60 160,70 110,70" fill="#2563eb"/>
+                        <polygon points="260,60 300,60 300,70 260,70" fill="#f59e42"/>
+                        <text x="130" y="90" font-size="12" fill="#2563eb">lesen</text>
+                        <text x="260" y="90" font-size="12" fill="#f59e42">setzen</text>
+                        <text x="210" y="25" font-size="12" fill="#16a34a">Programmzyklus</text>
+                    </svg>
+                </div>
+            </div>
+            <div class="content-box">
+                <h3>Programmiersprachen (nach IEC 61131-3)</h3>
+                <p>Die Logik wird in einer speziellen Programmiersprache erstellt. Die wichtigsten für Mechatroniker sind:</p>
+                <ul>
+                    <li><strong>KOP (Kontaktplan):</strong> Sieht aus wie ein Stromlaufplan aus der VPS. Sehr intuitiv für Elektriker. Die Selbsthalteschaltung lässt sich hier 1:1 nachbilden.</li>
+                    <li><strong>FUP (Funktionsbausteinsprache):</strong> Arbeitet mit grafischen Logik-Boxen, die an die Gatter aus der Digitaltechnik erinnern (AND, OR, Timer, Zähler).</li>
+                    <li><strong>SCL/ST (Strukturierter Text):</strong> Eine textbasierte Hochsprache, die an Pascal oder C erinnert. Gut für komplexe Berechnungen und Datenverarbeitung.</li>
+                </ul>
+            </div>
+            <div class="info-box">
+                <strong>Der perfekte Einstieg:</strong> Für kleinere Projekte und zum Lernen der SPS-Logik eignen sich sogenannte Kleinsteuerungen oder Logikmodule hervorragend. Das bekannteste Beispiel ist die <a href="logo-grundlagen.html">Siemens LOGO!</a>.
+            </div>
+        </div>
+    </div>
+    <footer>
+    <p>
+        Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+        <span style="float:right;">
+             <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+            <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+        </span>
+    </p>
+</footer>
+
+    <script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensorik & Aktorik - E-Technik</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .component-card {
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+        }
+        .component-card h3 {
+            margin-top: 0;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        .component-card svg {
+            display: block;
+            margin: 1rem auto;
+            width: 100%;
+            max-width: 80px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header><h1>Sensorik & Aktorik</h1></header>
+
+    <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <div class="container">
+        <div class="section">
+            <h2>Sensorik: Die Sinne der Maschine</h2>
+            <p>Sensoren sind die "Sinnesorgane" einer Anlage. Sie wandeln physikalische Größen (z.B. Abstand, Temperatur, Licht) in elektrische Signale um, die eine Steuerung (SPS) verarbeiten kann.</p>
+
+            <div class="component-grid">
+                <div class="component-card">
+                    <h3>Induktiver Sensor</h3>
+                    <svg viewBox="0 0 50 50"><rect x="5" y="5" width="40" height="40" stroke="black" fill="none" stroke-width="2"/><path d="M 25 10 L 40 25 L 25 40 L 10 25 Z" stroke="black" fill="none" stroke-width="2"/></svg>
+                    <p><strong>Funktion:</strong> Erkennt berührungslos metallische Objekte. Er ist robust, verschleißfrei und unempfindlich gegen Schmutz.</p>
+                    <p><strong>Anwendung:</strong> Endlagenabfrage bei Zylindern, Erkennung von Werkstücken aus Metall.</p>
+                </div>
+                <div class="component-card">
+                    <h3>Kapazitiver Sensor</h3>
+                    <svg viewBox="0 0 60 50"><rect x="5" y="5" width="40" height="40" stroke="black" fill="none" stroke-width="2"/><path d="M 25 10 L 40 25 L 25 40 L 10 25 Z" stroke="black" fill="none" stroke-width="2"/><line x1="48" y1="15" x2="48" y2="35" stroke="black" stroke-width="2"/><line x1="53" y1="15" x2="53" y2="35" stroke="black" stroke-width="2"/></svg>
+                    <p><strong>Funktion:</strong> Erkennt neben Metallen auch fast alle anderen Materialien (Kunststoffe, Flüssigkeiten, Holz, Granulate).</p>
+                    <p><strong>Anwendung:</strong> Füllstandskontrolle in Behältern, Erkennung von verpackten Objekten.</p>
+                </div>
+                <div class="component-card">
+                    <h3>Optischer Sensor</h3>
+                    <svg viewBox="0 0 60 50"><rect x="5" y="5" width="40" height="40" stroke="black" fill="none" stroke-width="2"/><path d="M 25 10 L 40 25 L 25 40 L 10 25 Z" stroke="black" fill="none" stroke-width="2"/><path d="M 48 15 L 58 15 M 53 10 L 58 15 L 53 20" stroke="black" fill="none" stroke-width="1.5"/><path d="M 48 35 L 58 35 M 53 30 L 58 35 L 53 40" stroke="black" fill="none" stroke-width="1.5"/></svg>
+                    <p><strong>Funktion:</strong> Arbeitet mit einem Lichtstrahl (Sender und Empfänger). Man unterscheidet Taster, Einweg- und Reflexionslichtschranken.</p>
+                    <p><strong>Anwendung:</strong> Anwesenheitskontrolle, Zählaufgaben, Positionierung.</p>
+                </div>
+            </div>
+            
+            <div class="content-box" style="margin-top: 2rem;">
+                <h3>Wichtiges Konzept: PNP vs. NPN Sensoren</h3>
+                <p>Die meisten 3-Draht-Sensoren sind entweder PNP oder NPN. Dies beschreibt, wie der elektrische Ausgang schaltet:</p>
+                <ul>
+                    <li><strong>PNP (Plus-schaltend):</strong> Der Sensor schaltet die **positive Spannung (+24V)** auf den Ausgang durch. Dies ist der **Standard in Europa**. Der SPS-Eingang wird mit dem Sensor-Ausgang verbunden und seine andere Seite liegt auf Masse (0V).</li>
+                    <li><strong>NPN (Minus-schaltend):</strong> Der Sensor schaltet die **Masse (0V)** auf den Ausgang durch. Dies ist vor allem im asiatischen Raum verbreitet. Der SPS-Eingang wird mit dem Sensor-Ausgang verbunden und seine andere Seite liegt auf +24V.</li>
+                </ul>
+                <div class="info-box">Es ist entscheidend, den richtigen Sensortyp für die SPS-Eingangskarte zu wählen, da diese oft entweder für PNP oder NPN konfiguriert sind.</div>
+            </div>
+             <div class="content-box">
+                <h3>Digital vs. Analog</h3>
+                <p>Die oben genannten Sensoren sind **digitale** Sensoren: Sie liefern nur ein EIN/AUS-Signal (1 oder 0). Es gibt auch **analoge** Sensoren (z.B. für Druck, Temperatur, Abstand), die einen variablen Messwert liefern, z.B. als Spannungssignal (0-10V) oder Stromsignal (4-20mA).</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Aktorik: Die Muskeln der Maschine</h2>
+            <p>Aktoren (oder Aktuatoren) sind die "Muskeln". Sie wandeln die elektrischen Steuersignale in eine Aktion um (z.B. Bewegung, Licht, Wärme).</p>
+            <div class="component-grid">
+                <div class="component-card">
+                    <h3>Schütz / Relais</h3>
+                    <svg viewBox="0 0 50 50"><rect x="10" y="15" width="30" height="20" stroke="black" fill="none" stroke-width="2"/><text x="12" y="12" font-size="8">A1</text><text x="12" y="42" font-size="8">A2</text></svg>
+                    <p><strong>Funktion:</strong> Ein elektrisch betätigter Schalter, der mit einem kleinen Steuerstrom (z.B. 24V von einer SPS an Klemme A1/A2) einen großen Laststrom (z.B. 400V für einen Motor) schaltet.</p>
+                </div>
+                <div class="component-card">
+                    <h3>Magnetventil</h3>
+                    <svg viewBox="0 0 50 50"><rect x="10" y="15" width="30" height="20" stroke="black" fill="none" stroke-width="2"/><path d="M 10 15 L 0 5 M 10 25 L 0 15 M 10 35 L 0 25" stroke="black" fill="none"/></svg>
+                    <p><strong>Funktion:</strong> Ein elektrisch gesteuertes Ventil zur Steuerung des Durchflusses von Druckluft (Pneumatik) oder Flüssigkeiten (Hydraulik).</p>
+                </div>
+                <div class="component-card">
+                    <h3>Meldeleuchte</h3>
+                    <svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="15" stroke="black" fill="none" stroke-width="2"/><path d="M 15 15 L 35 35 M 35 15 L 15 35" stroke="black" fill="none" stroke-width="2"/></svg>
+                    <p><strong>Funktion:</strong> Signalisiert optisch den Zustand einer Maschine, z.B. "Betrieb" (grün), "Störung" (rot) oder "Automatik" (weiß).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+    <p>
+        Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+        <span style="float:right;">
+             <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+            <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+        </span>
+    </p>
+</footer>
+
+    <script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schaltplanlesen - E-Technik</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .info-box {
+            background: #dbeafe;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-weight: bold;
+            color: #1e293b;
+            box-shadow: 0 2px 8px rgba(51,65,85,0.04);
+        }
+        .symbol-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        .symbol-table th, .symbol-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        .symbol-table th {
+            background: #e9ecef;
+        }
+        .symbol-svg {
+            width: 40px;
+            height: 40px;
+            display: block;
+            margin: 0 auto;
+        }
+        @media (max-width: 700px) {
+            .symbol-svg { width: 30px; height: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Schaltpläne richtig lesen</h1>
+        <p>Die Sprache der Elektrotechnik – mit genormten Symbolen und klarer Struktur.</p>
+    </header>
+    <nav>
+    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="grundlagen.html">Grundlagen</a>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Bauteile & Rechner</a>
+            <div class="dropdown-content">
+                <a href="formeln.html">Formelsammlung</a>
+                <a href="rechner.html">Grundlagen-Rechner</a>
+                <hr>
+                <a href="kondensator.html">Kondensatoren</a>
+                <a href="z-diode.html">Z-Dioden</a>
+                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Normen & Planung</a>
+            <div class="dropdown-content">
+                <a href="installation.html">Elektroinstallation</a>
+                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+                <a href="vde-normen.html">VDE-Normen</a>
+                <hr>
+                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+                <a href="schaltplanlesen.html">Schaltplanlesen</a>
+                <a href="grafcet.html">GRAFCET</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#" class="dropbtn">Systeme & Steuerung</a>
+            <div class="dropdown-content">
+                <a href="digitaltechnik.html">Digitaltechnik</a>
+                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+                <a href="antriebstechnik.html">Antriebstechnik</a>
+                <a href="pneumatik.html">Pneumatik</a>
+                <hr>
+                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+                <a href="bussysteme.html">Bussysteme</a>
+                <a href="logo-grundlagen.html">Siemens LOGO!</a>
+            </div>
+        </div>
+    </div>
+    <form action="suche.html" method="get" class="search-form">
+        <input type="search" name="q" placeholder="Thema suchen..." required>
+        <button type="submit">Suchen</button>
+    </form>
+</nav>
+
+    <div class="container">
+        <div class="section">
+            <div class="info-box">
+                <strong>Warum Schaltpläne?</strong><br>
+                Ein Stromlaufplan ist die "Landkarte" einer elektrischen Anlage. Wer ihn lesen kann, versteht Aufbau, Funktion und kann Fehler schnell finden.
+            </div>
+            <h2>Die Sprache der Elektrotechnik</h2>
+            <p>Ein Stromlaufplan ist eine grafische Darstellung einer elektrischen Schaltung. Ihn zu verstehen ist eine absolute Kernkompetenz für jeden Mechatroniker.</p>
+            <div class="content-box">
+                <h3>Grundlegender Aufbau</h3>
+                <ul>
+                    <li><strong>Strompfade:</strong> Ein Plan wird von oben nach unten und von links nach rechts gelesen. Die senkrechten Linien stellen die Potentiale dar (z.B. 24V und 0V). Die waagerechten "Pfade" werden durchnummeriert und zeigen die einzelnen Teilfunktionen.</li>
+                    <li><strong>Haupt- vs. Steuerstromkreis:</strong> Man unterscheidet den <strong>Hauptstromkreis</strong> (hohe Leistung, z.B. 400V für den Motor) und den <strong>Steuerstromkreis</strong> (niedrige Spannung, z.B. 24V, mit dem die Logik arbeitet und Schütze ansteuert).</li>
+                    <li><strong>Betriebsmittelkennzeichen:</strong> Jedes Bauteil hat ein Kürzel (z.B. -K1 für ein Relais, -S1 für einen Taster, -F1 für eine Sicherung).</li>
+                </ul>
+            </div>
+            <div class="content-box">
+                <h3>Die wichtigsten Schaltzeichen (nach IEC/DIN EN 60617)</h3>
+                <table class="symbol-table">
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Bezeichnung</th>
+                        <th>Erklärung</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- Schließer (NO) -->
+                            <svg class="symbol-svg" viewBox="0 0 40 40">
+                                <line x1="5" y1="20" x2="20" y2="20" stroke="#222" stroke-width="2"/>
+                                <line x1="20" y1="20" x2="35" y2="10" stroke="#222" stroke-width="2"/>
+                            </svg>
+                        </td>
+                        <td>Schließer (NO)</td>
+                        <td>Kontakt, der im Ruhezustand geöffnet ist. Schließt bei Betätigung.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- Öffner (NC) -->
+                            <svg class="symbol-svg" viewBox="0 0 40 40">
+                                <line x1="5" y1="20" x2="20" y2="20" stroke="#222" stroke-width="2"/>
+                                <line x1="20" y1="20" x2="35" y2="30" stroke="#222" stroke-width="2"/>
+                                <circle cx="20" cy="20" r="2.5" fill="#fff" stroke="#222" stroke-width="1"/>
+                            </svg>
+                        </td>
+                        <td>Öffner (NC)</td>
+                        <td>Kontakt, der im Ruhezustand geschlossen ist. Öffnet bei Betätigung.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- Spule (Relais/Schütz) -->
+                            <svg class="symbol-svg" viewBox="0 0 40 40">
+                                <rect x="10" y="10" width="20" height="20" fill="none" stroke="#222" stroke-width="2"/>
+                                <text x="20" y="28" font-size="14" text-anchor="middle" fill="#222">K</text>
+                            </svg>
+                        </td>
+                        <td>Spule (Relais/Schütz)</td>
+                        <td>Wird bestromt, um die zugehörigen Kontakte zu schalten.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- Motor -->
+                            <svg class="symbol-svg" viewBox="0 0 40 40">
+                                <circle cx="20" cy="20" r="12" fill="none" stroke="#222" stroke-width="2"/>
+                                <text x="20" y="26" font-size="14" text-anchor="middle" fill="#222">M</text>
+                            </svg>
+                        </td>
+                        <td>Motor</td>
+                        <td>Wandelt elektrische in mechanische Energie um.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- Meldeleuchte -->
+                            <svg class="symbol-svg" viewBox="0 0 40 40">
+                                <circle cx="20" cy="20" r="10" fill="none" stroke="#222" stroke-width="2"/>
+                                <line x1="20" y1="5" x2="20" y2="15" stroke="#222" stroke-width="2"/>
+                                <line x1="20" y1="25" x2="20" y2="35" stroke="#222" stroke-width="2"/>
+                                <line x1="5" y1="20" x2="15" y2="20" stroke="#222" stroke-width="2"/>
+                                <line x1="25" y1="20" x2="35" y2="20" stroke="#222" stroke-width="2"/>
+                            </svg>
+                        </td>
+                        <td>Meldeleuchte</td>
+                        <td>Signalisiert einen Zustand.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- Sicherung -->
+                            <svg class="symbol-svg" viewBox="0 0 40 40">
+                                <line x1="5" y1="20" x2="35" y2="20" stroke="#222" stroke-width="2"/>
+                                <rect x="15" y="15" width="10" height="10" fill="none" stroke="#222" stroke-width="2"/>
+                            </svg>
+                        </td>
+                        <td>Sicherung</td>
+                        <td>Schützt vor Überstrom.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- Taster -->
+                            <svg class="symbol-svg" viewBox="0 0 40 40">
+                                <line x1="5" y1="30" x2="35" y2="30" stroke="#222" stroke-width="2"/>
+                                <line x1="20" y1="10" x2="20" y2="30" stroke="#222" stroke-width="2"/>
+                                <circle cx="20" cy="10" r="3" fill="#fff" stroke="#222" stroke-width="2"/>
+                            </svg>
+                        </td>
+                        <td>Taster</td>
+                        <td>Betätigtes Schaltelement, meist als Schließer oder Öffner ausgeführt.</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="info-box">
+                <strong>Praxistipp:</strong> Die genormten Symbole findest du in der DIN EN 60617 (IEC 60617). Ein gutes Verständnis der Zeichen ist die Basis für jede Fehlersuche!
+            </div>
+        </div>
+    </div>
+    <footer>
+    <p>
+        Elektrotechnik-Portal &copy; 2025 &ndash; Wissen für die Praxis
+        <span style="float:right;">
+             <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+            <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+        </span>
+    </p>
+</footer>
+   <script>
+    // Hamburger-Menü wie gehabt
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Dropdown-Menüs per Klick
+    document.querySelectorAll('.dropdown > .dropbtn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Alle Dropdowns schließen
+            document.querySelectorAll('.dropdown-content').forEach(dc => {
+                if (dc !== this.nextElementSibling) dc.classList.remove('show');
+            });
+            // Dieses Dropdown öffnen/schließen
+            this.nextElementSibling.classList.toggle('show');
+        });
+    });
+
+    // Schließt Dropdown, wenn außerhalb geklickt wird
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+        }
+    });
+</script>
+</body>
+</html>
