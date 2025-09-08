@@ -2,159 +2,110 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grundlagen der Mechanik</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+  <title>Hebelgesetz Rechner mit Wippe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* SVG Wippe zentrieren */
+    #wippe-container {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    svg {
+      overflow: visible;
+    }
+  </style>
 </head>
-<body>
+<body class="bg-gradient-to-r from-indigo-100 via-white to-blue-100 min-h-screen flex flex-col items-center justify-start font-sans pt-10">
 
-<header>
-  <h1>Grundlagen der Mechanik</h1>
-  <p>Die wichtigsten Begriffe, Kräfte und Hebelgesetze kompakt erklärt.</p>
-</header>
+  <div class="bg-white shadow-2xl rounded-2xl p-10 max-w-xl w-full">
+    <h1 class="text-3xl font-bold text-center mb-6 text-indigo-700">⚖️ Hebelgesetz Rechner</h1>
 
-<!-- NAVIGATION VOM PORTAL -->
-<nav>
-  <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
-  <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
-  <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="grundlagen.html">Grundlagen</a>
-      <div class="dropdown">
-          <button class="dropbtn">Bauteile & Rechner</button>
-          <div class="dropdown-content">
-              <a href="formeln.html">Formelsammlung</a>
-              <a href="rechner.html">Grundlagen-Rechner</a>
-              <hr>
-              <a href="kondensator.html">Kondensatoren</a>
-              <a href="z-diode.html">Z-Dioden</a>
-              <a href="vorwiderstand.html">LED-Vorwiderstand</a>
-          </div>
-      </div>
-      <div class="dropdown">
-          <button class="dropbtn">Normen & Planung</button>
-          <div class="dropdown-content">
-              <a href="installation.html">Elektroinstallation</a>
-              <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
-              <a href="vde-normen.html">VDE-Normen</a>
-              <hr>
-              <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
-              <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
-              <a href="schaltplanlesen.html">Schaltplanlesen</a>
-              <a href="grafcet.html">GRAFCET</a>
-          </div>
-      </div>
-      <div class="dropdown">
-          <button class="dropbtn">Systeme & Steuerung</button>
-          <div class="dropdown-content">
-              <a href="digitaltechnik.html">Digitaltechnik</a>
-              <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
-              <a href="antriebstechnik.html">Antriebstechnik</a>
-              <a href="pneumatik.html">Pneumatik</a>
-              <hr>
-              <a href="sps-grundlagen.html">SPS-Grundlagen</a>
-              <a href="vps-grundlagen.html">VPS-Grundlagen</a>
-              <a href="bussysteme.html">Bussysteme</a>
-              <a href="logo-grundlagen.html">Siemens LOGO!</a>
-          </div>
-      </div>
-  </div>
-  <form action="suche.html" method="get" class="search-form">
-      <input type="search" name="q" placeholder="Thema suchen..." required>
-      <button type="submit">Suchen</button>
-  </form>
-</nav>
-
-<div class="container">
-
-  <div class="section">
-    <h2>Die Basis: Kraft, Arbeit und Energie</h2>
-
-    <div class="content-box">
-      <h3>Kraft <span style="color:#2563eb;">(F)</span></h3>
-      <p>Eine <strong>Kraft</strong> beschreibt die Wechselwirkung zwischen Körpern.</p>
-      <div class="formula">\( F = m \cdot a \)</div>
+    <!-- Wippe -->
+    <div id="wippe-container">
+      <svg width="300" height="100">
+        <!-- Hebel -->
+        <rect id="hebel" x="50" y="45" width="200" height="10" fill="#4f46e5" rx="5" ry="5" transform-origin="150 50"/>
+        <!-- Fulcrum / Drehpunkt -->
+        <polygon points="145,55 155,55 150,80" fill="#000"/>
+        <!-- Linke Masse -->
+        <circle id="mass-left" cx="50" cy="50" r="15" fill="#f87171"/>
+        <!-- Rechte Masse -->
+        <circle id="mass-right" cx="250" cy="50" r="15" fill="#34d399"/>
+      </svg>
     </div>
 
-    <div class="content-box">
-      <h3>Arbeit <span style="color:#2563eb;">(W)</span></h3>
-      <p>Arbeit wird verrichtet, wenn eine Kraft entlang eines Weges wirkt.</p>
-      <div class="formula">\( W = F \cdot s \)</div>
+    <!-- Eingabeformular -->
+    <div class="space-y-4">
+      <div>
+        <label for="m1" class="block text-gray-700 font-medium">Masse links (m1 in kg):</label>
+        <input id="m1" type="number" value="85" class="mt-1 w-full border rounded-lg px-3 py-2 shadow-sm focus:ring focus:ring-indigo-300">
+      </div>
+
+      <div>
+        <label for="m2" class="block text-gray-700 font-medium">Masse rechts (m2 in kg):</label>
+        <input id="m2" type="number" value="14" class="mt-1 w-full border rounded-lg px-3 py-2 shadow-sm focus:ring focus:ring-indigo-300">
+      </div>
+
+      <div>
+        <label for="l2" class="block text-gray-700 font-medium">Hebelarm rechts (l2 in m):</label>
+        <input id="l2" type="number" value="2" step="0.01" class="mt-1 w-full border rounded-lg px-3 py-2 shadow-sm focus:ring focus:ring-indigo-300">
+      </div>
+
+      <button onclick="berechneL1()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-200">
+        Berechne l1
+      </button>
+    </div>
+
+    <!-- Ergebnis -->
+    <div id="result" class="mt-6 p-4 bg-indigo-50 rounded-lg text-indigo-800 font-semibold text-center shadow-inner">
+      Ergebnis erscheint hier...
+    </div>
+
+    <!-- Beispielaufgabe -->
+    <div class="mt-8 border-t pt-6">
+      <h2 class="text-xl font-bold text-gray-800 mb-2">📘 Beispielaufgabe</h2>
+      <p class="text-gray-700">
+        Eine Person mit <b>85 kg</b> sitzt auf der linken Seite, eine Person mit <b>14 kg</b> auf der rechten Seite in <b>2 m</b> Abstand.
+        <br><br>
+        Gesucht ist der Abstand <b>l1</b> der schweren Person.  
+      </p>
+      <p class="mt-3 font-semibold text-indigo-700">
+        Lösung: l1 = (14 × 2) / 85 = 0.329 m ≈ 33 cm
+      </p>
     </div>
   </div>
 
-  <div class="section">
-    <h2>Hebel & Drehmoment</h2>
+  <script>
+    function berechneL1() {
+      const m1 = parseFloat(document.getElementById("m1").value);
+      const m2 = parseFloat(document.getElementById("m2").value);
+      const l2 = parseFloat(document.getElementById("l2").value);
 
-    <div class="content-box">
-      <h3>Drehmoment <span style="color:#2563eb;">(M)</span></h3>
-      <p>Das Drehmoment beschreibt die Drehwirkung einer Kraft.</p>
-      <div class="formula">\( M = F \cdot l \)</div>
-    </div>
+      if (isNaN(m1) || isNaN(m2) || isNaN(l2) || m1 <= 0) {
+        document.getElementById("result").innerText = "❌ Bitte gültige Werte eingeben!";
+        return;
+      }
 
-    <!-- NEU: RECHNER -->
-    <div class="content-box">
-      <h3>🔢 Schritt 3: Hebelgesetz-Rechner</h3>
-      <p>Berechne Gleichgewicht nach dem Hebelgesetz \(F_1 \cdot l_1 = F_2 \cdot l_2\).</p>
-      
-      <form id="hebelForm">
-        <label>Kraft F1 (N): <input type="number" step="any" id="F1"></label><br>
-        <label>Hebelarm l1 (m): <input type="number" step="any" id="l1"></label><br>
-        <label>Kraft F2 (N): <input type="number" step="any" id="F2"></label><br>
-        <label>Hebelarm l2 (m): <input type="number" step="any" id="l2"></label><br><br>
-        <button type="button" onclick="berechneHebel()">Berechnen</button>
-      </form>
+      const l1 = (m2 * l2) / m1;
+      document.getElementById("result").innerText = 
+        `➡️ l1 = ${(l1).toFixed(3)} m (≈ ${(l1*100).toFixed(0)} cm)`;
 
-      <div id="hebelResult" class="info-box" style="margin-top:1em;"></div>
-    </div>
+      // Wippe animieren
+      const maxTilt = 15; // max Drehwinkel in Grad
+      const tilt = maxTilt * (m2*l2 - m1*l1) / Math.max(m1*l1, m2*l2);
+      document.getElementById("hebel").setAttribute("transform", `rotate(${tilt} 150 50)`);
 
-    <div class="content-box">
-      <h3>Das Hebelgesetz</h3>
-      <div class="formula">\( F_1 \cdot l_1 = F_2 \cdot l_2 \)</div>
-    </div>
-  </div>
+      // Massen nach unten/oben verschieben
+      document.getElementById("mass-left").setAttribute("cy", 50 - tilt);
+      document.getElementById("mass-right").setAttribute("cy", 50 + tilt);
+    }
 
-</div>
-
-<footer>
-  <p>
-    Mechanik-Portal &copy; 2025 – Wissen für die Praxis
-    <span style="float:right;">
-      <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
-      <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
-    </span>
-  </p>
-</footer>
-
-<script>
-function berechneHebel() {
-  let F1 = parseFloat(document.getElementById("F1").value);
-  let l1 = parseFloat(document.getElementById("l1").value);
-  let F2 = parseFloat(document.getElementById("F2").value);
-  let l2 = parseFloat(document.getElementById("l2").value);
-
-  let result = "";
-
-  if (!isNaN(F1) && !isNaN(l1) && !isNaN(F2)) {
-    l2 = (F1 * l1) / F2;
-    result = "Ergebnis: l2 = " + l2.toFixed(2) + " m";
-  } else if (!isNaN(F1) && !isNaN(l1) && !isNaN(l2)) {
-    F2 = (F1 * l1) / l2;
-    result = "Ergebnis: F2 = " + F2.toFixed(2) + " N";
-  } else if (!isNaN(F2) && !isNaN(l2) && !isNaN(l1)) {
-    F1 = (F2 * l2) / l1;
-    result = "Ergebnis: F1 = " + F1.toFixed(2) + " N";
-  } else if (!isNaN(F2) && !isNaN(l2) && !isNaN(F1)) {
-    l1 = (F2 * l2) / F1;
-    result = "Ergebnis: l1 = " + l1.toFixed(2) + " m";
-  } else {
-    result = "Bitte genau drei Werte eingeben!";
-  }
-
-  document.getElementById("hebelResult").innerText = result;
-}
-</script>
-
+    // Initiale Anzeige
+    berechneL1();
+  </script>
 </body>
 </html>
