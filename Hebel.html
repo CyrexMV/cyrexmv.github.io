@@ -1,182 +1,159 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grundlagen der Mechanik</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grundlagen der Mechanik</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
 </head>
 <body>
 
 <header>
-    <h1>Grundlagen der Mechanik</h1>
-    <p>Die wichtigsten Begriffe, Kräfte und Hebelgesetze kompakt erklärt.</p>
+  <h1>Grundlagen der Mechanik</h1>
+  <p>Die wichtigsten Begriffe, Kräfte und Hebelgesetze kompakt erklärt.</p>
 </header>
 
-  <nav>
-    <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
-    <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
-    <div class="hamburger">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-    </div>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="grundlagen.html">Grundlagen</a>
-        <div class="dropdown">
-            <a href="#" class="dropbtn">Bauteile & Rechner</a>
-            <div class="dropdown-content">
-                <a href="formeln.html">Formelsammlung</a>
-                <a href="rechner.html">Grundlagen-Rechner</a>
-                <hr>
-                <a href="kondensator.html">Kondensatoren</a>
-                <a href="z-diode.html">Z-Dioden</a>
-                <a href="vorwiderstand.html">LED-Vorwiderstand</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <a href="#" class="dropbtn">Normen & Planung</a>
-            <div class="dropdown-content">
-                <a href="installation.html">Elektroinstallation</a>
-                <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
-                <a href="vde-normen.html">VDE-Normen</a>
-                <hr>
-                <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
-                <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
-                <a href="schaltplanlesen.html">Schaltplanlesen</a>
-                <a href="grafcet.html">GRAFCET</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <a href="#" class="dropbtn">Systeme & Steuerung</a>
-            <div class="dropdown-content">
-                <a href="digitaltechnik.html">Digitaltechnik</a>
-                <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
-                <a href="antriebstechnik.html">Antriebstechnik</a>
-                <a href="pneumatik.html">Pneumatik</a>
-                <hr>
-                <a href="sps-grundlagen.html">SPS-Grundlagen</a>
-                <a href="vps-grundlagen.html">VPS-Grundlagen</a>
-                <a href="bussysteme.html">Bussysteme</a>
-                <a href="logo-grundlagen.html">Siemens LOGO!</a>
-            </div>
-        </div>
-    </div>
-    <form action="suche.html" method="get" class="search-form">
-        <input type="search" name="q" placeholder="Thema suchen..." required>
-        <button type="submit">Suchen</button>
-    </form>
+<!-- NAVIGATION VOM PORTAL -->
+<nav>
+  <a href="impressum.html" class="nav-logo">Mecha-Portal</a>
+  <a href="kontaktformular.html" class="kontakt-btn" style="margin-left: 1rem; display: inline-block; background: #2563eb; color: #fff; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: bold; text-decoration: none; transition: background 0.2s;">Kontakt aufnehmen</a>
+  <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="grundlagen.html">Grundlagen</a>
+      <div class="dropdown">
+          <button class="dropbtn">Bauteile & Rechner</button>
+          <div class="dropdown-content">
+              <a href="formeln.html">Formelsammlung</a>
+              <a href="rechner.html">Grundlagen-Rechner</a>
+              <hr>
+              <a href="kondensator.html">Kondensatoren</a>
+              <a href="z-diode.html">Z-Dioden</a>
+              <a href="vorwiderstand.html">LED-Vorwiderstand</a>
+          </div>
+      </div>
+      <div class="dropdown">
+          <button class="dropbtn">Normen & Planung</button>
+          <div class="dropdown-content">
+              <a href="installation.html">Elektroinstallation</a>
+              <a href="leitungsdimensionierung.html">Leitungsdimensionierung</a>
+              <a href="vde-normen.html">VDE-Normen</a>
+              <hr>
+              <a href="sicherheitstechnik.html">Sicherheitstechnik</a>
+              <a href="schutzkleinspannung.html">Schutzkleinspannung</a>
+              <a href="schaltplanlesen.html">Schaltplanlesen</a>
+              <a href="grafcet.html">GRAFCET</a>
+          </div>
+      </div>
+      <div class="dropdown">
+          <button class="dropbtn">Systeme & Steuerung</button>
+          <div class="dropdown-content">
+              <a href="digitaltechnik.html">Digitaltechnik</a>
+              <a href="sensorik-aktorik.html">Sensorik & Aktorik</a>
+              <a href="antriebstechnik.html">Antriebstechnik</a>
+              <a href="pneumatik.html">Pneumatik</a>
+              <hr>
+              <a href="sps-grundlagen.html">SPS-Grundlagen</a>
+              <a href="vps-grundlagen.html">VPS-Grundlagen</a>
+              <a href="bussysteme.html">Bussysteme</a>
+              <a href="logo-grundlagen.html">Siemens LOGO!</a>
+          </div>
+      </div>
+  </div>
+  <form action="suche.html" method="get" class="search-form">
+      <input type="search" name="q" placeholder="Thema suchen..." required>
+      <button type="submit">Suchen</button>
+  </form>
 </nav>
 
 <div class="container">
-    <div class="section">
-        <h2>Die Basis: Kraft, Arbeit und Energie</h2>
 
-        <div class="content-box">
-            <h3>Kraft <span style="color:#2563eb;">(F)</span></h3>
-            <p>
-                Eine <strong>Kraft</strong> beschreibt die Wechselwirkung zwischen Körpern. Sie kann Bewegungen verändern 
-                (beschleunigen, abbremsen) oder Verformungen hervorrufen. 
-                <br>Einheit: <strong>Newton (N)</strong>
-            </p>
-            <div class="formula">
-                \( F = m \cdot a \)
-            </div>
-            <div class="info-box">
-                1 Newton = die Kraft, die benötigt wird, um 1 kg mit 1 m/s² zu beschleunigen.
-            </div>
-        </div>
+  <div class="section">
+    <h2>Die Basis: Kraft, Arbeit und Energie</h2>
 
-        <div class="content-box">
-            <h3>Arbeit <span style="color:#2563eb;">(W)</span></h3>
-            <p>
-                Arbeit wird verrichtet, wenn eine Kraft entlang eines Weges wirkt.
-            </p>
-            <div class="formula">
-                \( W = F \cdot s \)
-            </div>
-            <p>
-                Einheit: Joule (J) – 1 Joule = 1 Newtonmeter.
-            </p>
-        </div>
-
-        <div class="content-box">
-            <h3>Energie</h3>
-            <p>
-                Energie ist die Fähigkeit, Arbeit zu verrichten. Sie tritt in vielen Formen auf (Bewegungsenergie, Lageenergie, Wärme).
-            </p>
-        </div>
+    <div class="content-box">
+      <h3>Kraft <span style="color:#2563eb;">(F)</span></h3>
+      <p>Eine <strong>Kraft</strong> beschreibt die Wechselwirkung zwischen Körpern.</p>
+      <div class="formula">\( F = m \cdot a \)</div>
     </div>
 
-    <div class="section">
-        <h2>Hebel & Drehmoment</h2>
-
-        <div class="content-box">
-            <h3>Drehmoment <span style="color:#2563eb;">(M)</span></h3>
-            <p>
-                Das Drehmoment beschreibt die Drehwirkung einer Kraft um einen Punkt (Drehachse).
-            </p>
-            <div class="formula">
-                \( M = F \cdot l \)
-            </div>
-            <p>
-                \(F\): Kraft in Newton &nbsp;&nbsp; \(l\): Hebelarm in Metern
-            </p>
-        </div>
-
-        <div class="content-box">
-            <h3>Das Hebelgesetz</h3>
-            <p>
-                Im Gleichgewicht gilt: 
-            </p>
-            <div class="formula">
-                \( F_1 \cdot l_1 = F_2 \cdot l_2 \)
-            </div>
-            <p>
-                Bedeutet: Das Drehmoment auf der linken Seite ist gleich dem Drehmoment auf der rechten Seite.
-            </p>
-            <div class="info-box">
-                Mit einem langen Hebelarm kann man eine kleine Kraft in eine große Wirkung umwandeln!
-            </div>
-        </div>
-
-        <div class="content-box">
-            <h3>Beispielaufgabe</h3>
-            <p>
-                Eine Person mit \( m_1 = 85 \,\text{kg} \) sitzt in \( l_1 \) Abstand zur Drehachse. 
-                Eine andere Person mit \( m_2 = 14 \,\text{kg} \) sitzt in \( l_2 = 2 \,\text{m} \) Abstand.  
-                Wo muss die schwere Person sitzen?
-            </p>
-            <div class="formula">
-                \( l_1 = \frac{m_2 \cdot l_2}{m_1} = \frac{14 \cdot 2}{85} \approx 0{,}33 \,\text{m} \)
-            </div>
-            <p>
-                Die schwere Person muss also sehr nah an der Drehachse sitzen, damit die Wippe im Gleichgewicht ist.
-            </p>
-        </div>
+    <div class="content-box">
+      <h3>Arbeit <span style="color:#2563eb;">(W)</span></h3>
+      <p>Arbeit wird verrichtet, wenn eine Kraft entlang eines Weges wirkt.</p>
+      <div class="formula">\( W = F \cdot s \)</div>
     </div>
+  </div>
+
+  <div class="section">
+    <h2>Hebel & Drehmoment</h2>
+
+    <div class="content-box">
+      <h3>Drehmoment <span style="color:#2563eb;">(M)</span></h3>
+      <p>Das Drehmoment beschreibt die Drehwirkung einer Kraft.</p>
+      <div class="formula">\( M = F \cdot l \)</div>
+    </div>
+
+    <!-- NEU: RECHNER -->
+    <div class="content-box">
+      <h3>🔢 Schritt 3: Hebelgesetz-Rechner</h3>
+      <p>Berechne Gleichgewicht nach dem Hebelgesetz \(F_1 \cdot l_1 = F_2 \cdot l_2\).</p>
+      
+      <form id="hebelForm">
+        <label>Kraft F1 (N): <input type="number" step="any" id="F1"></label><br>
+        <label>Hebelarm l1 (m): <input type="number" step="any" id="l1"></label><br>
+        <label>Kraft F2 (N): <input type="number" step="any" id="F2"></label><br>
+        <label>Hebelarm l2 (m): <input type="number" step="any" id="l2"></label><br><br>
+        <button type="button" onclick="berechneHebel()">Berechnen</button>
+      </form>
+
+      <div id="hebelResult" class="info-box" style="margin-top:1em;"></div>
+    </div>
+
+    <div class="content-box">
+      <h3>Das Hebelgesetz</h3>
+      <div class="formula">\( F_1 \cdot l_1 = F_2 \cdot l_2 \)</div>
+    </div>
+  </div>
+
 </div>
 
 <footer>
-    <p>
-        Mechanik-Portal &copy; 2025 &ndash; Wissen für die Praxis
-        <span style="float:right;">
-             <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
-            <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
-        </span>
-    </p>
+  <p>
+    Mechanik-Portal &copy; 2025 – Wissen für die Praxis
+    <span style="float:right;">
+      <a href="datenschutzerklärung.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none; margin-right:0.5rem;">Datenschutzerklärung</a>
+      <a href="impressum.html" style="background:#2563eb; color:#fff; padding:0.3rem 1rem; border-radius:6px; font-size:0.95rem; text-decoration:none;">Impressum</a>
+    </span>
+  </p>
 </footer>
 
 <script>
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-    }
+function berechneHebel() {
+  let F1 = parseFloat(document.getElementById("F1").value);
+  let l1 = parseFloat(document.getElementById("l1").value);
+  let F2 = parseFloat(document.getElementById("F2").value);
+  let l2 = parseFloat(document.getElementById("l2").value);
+
+  let result = "";
+
+  if (!isNaN(F1) && !isNaN(l1) && !isNaN(F2)) {
+    l2 = (F1 * l1) / F2;
+    result = "Ergebnis: l2 = " + l2.toFixed(2) + " m";
+  } else if (!isNaN(F1) && !isNaN(l1) && !isNaN(l2)) {
+    F2 = (F1 * l1) / l2;
+    result = "Ergebnis: F2 = " + F2.toFixed(2) + " N";
+  } else if (!isNaN(F2) && !isNaN(l2) && !isNaN(l1)) {
+    F1 = (F2 * l2) / l1;
+    result = "Ergebnis: F1 = " + F1.toFixed(2) + " N";
+  } else if (!isNaN(F2) && !isNaN(l2) && !isNaN(F1)) {
+    l1 = (F2 * l2) / F1;
+    result = "Ergebnis: l1 = " + l1.toFixed(2) + " m";
+  } else {
+    result = "Bitte genau drei Werte eingeben!";
+  }
+
+  document.getElementById("hebelResult").innerText = result;
+}
 </script>
 
 </body>
