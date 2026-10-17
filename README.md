@@ -1,1 +1,0 @@
-# DIYAR-KEBAB
