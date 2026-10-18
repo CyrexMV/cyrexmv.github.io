@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Angebot – Mietmeister</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top" id="siteHeader"></header>
+  <main id="root"></main>
+  <footer id="siteFooter"></footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+MM.ready.then(function () { return MM.loadItemExtras(new URLSearchParams(location.search).get('id')); }).then(function () {
+  MM.renderHeader('home');
+  var $ = function (id) { return document.getElementById(id); };
+  var root = $('root');
+  var id = new URLSearchParams(location.search).get('id');
+  var it = MM.item(id);
+  if (!it) {
+    root.innerHTML = '<p class="empty">Dieses Angebot gibt es nicht (mehr). <a href="index.html">Zurück zu den Angeboten</a></p>';
+    return;
+  }
+  document.title = it.name + ' – Mietmeister';
+  var me = MM.me(), isOwner = me && me.id === it.ownerId;
+  var r = MM.ratingOf(it), ownerR = MM.userRating(it.ownerId, 'owner');
+  var selectable = false;
+
+  /* ---------- Bewertungen ---------- */
+  function ratingBlock() {
+    if (!r.n) return '<p class="note">Noch keine Bewertungen. Bewerten kann, wer das Gerät gemietet und zurückgegeben hat.</p>';
+    var br = MM.ratingBreakdown(it), rows = '';
+    for (var s = 5; s >= 1; s--) {
+      rows += '<div class="bar-row"><span>' + s + ' ★</span><div class="bar-track"><i style="width:' + (br.total ? Math.round(br.counts[s] / br.total * 100) : 0) + '%"></i></div><span>' + br.counts[s] + '</span></div>';
+    }
+    var rv = MM.reviews(it.id).slice().sort(function (a, b) { return (b.ratedAt || 0) - (a.ratedAt || 0); });
+    return '<div class="rating-sum"><div class="rating-big">' + MM.num1(r.avg) + '<small>' + MM.plural(r.n, 'Bewertung', 'Bewertungen') + '</small></div><div class="bars">' + rows + '</div></div>' +
+      rv.map(function (b) {
+        return '<div class="review"><b>' + MM.esc(b.name) + '</b> · <span class="stars" aria-label="' + b.rating + ' von 5 Sternen">' + MM.starsText(b.rating) + '</span>' +
+          (b.ratedAt ? ' <small>' + new Date(b.ratedAt).toLocaleDateString('de-DE') + '</small>' : '') + (b.review ? '<br>' + MM.esc(b.review) : '') + '</div>';
+      }).join('');
+  }
+
+  function pickup() {
+    var street = MM.canSeeAddress(it) && it.street;
+    return '<div class="pickup"><b>📍 Abholort: ' + MM.esc(MM.regionOf(it)) + '</b>' +
+      (street ? '<span>' + MM.esc(it.street) + '</span><small>Diese genaue Adresse siehst du nur als Vermieter oder mit bestätigter Buchung.</small>'
+        : '<small>Die genaue Adresse siehst du, sobald der Vermieter deine Anfrage bestätigt hat.</small>') + '</div>';
+  }
+
+  var left =
+    '<div class="panel left"><div class="detail-art c' + MM.catIdx(it.cat) + '" aria-hidden="true">' + (MM.ICONS[it.cat] || '📦') + '</div>' +
+    '<div class="detail-body"><div><span class="eyebrow">' + MM.esc(it.cat) + '</span><h1>' + MM.esc(it.name) + '</h1></div>' +
+    '<div class="facts"><span>📍 ' + MM.esc(MM.regionOf(it)) + '</span>' +
+    '<span>Vermieter: ' + MM.esc(MM.userName(it.ownerId)) + (ownerR.n ? ' · ★ ' + MM.num1(ownerR.avg) + ' (' + ownerR.n + ')' : '') + '</span>' +
+    (r.n ? '<span>★ ' + MM.num1(r.avg) + ' (' + MM.plural(r.n, 'Bewertung', 'Bewertungen') + ')</span>' : '<span>Noch keine Bewertung</span>') +
+    '<span>Kaution ' + MM.eur0.format(it.dep) + '</span><span>' + MM.eur0.format(it.price) + ' pro Tag</span></div>' +
+    '<p style="margin:0">' + MM.esc(it.desc || 'Keine Beschreibung.') + '</p>' + pickup() +
+    '<h3>Bewertungen</h3>' + ratingBlock() + '</div></div>';
+
+  /* ---------- Belegungskalender ---------- */
+  function legend() {
+    return '<div class="cal-legend"><span><i style="background:var(--warn)"></i>Vergeben</span>' +
+      '<span><i style="background:repeating-linear-gradient(135deg,var(--accent) 0 3px,var(--bg) 3px 6px)"></i>Angefragt, noch buchbar</span>' +
+      (selectable ? '<span><i style="background:var(--brand)"></i>Dein Zeitraum</span>' : '') + '</div>';
+  }
+  function calBox() { return '<div class="cal" id="cal"></div><div class="cal-legend" id="calLegend"></div>'; }
+  function occupied() {
+    var today = MM.iso(new Date());
+    return MM.occupancy(it.id).filter(function (b) { return b.end >= today && (b.status === 'bestaetigt' || b.status === 'angefragt'); });
+  }
+  var now = new Date(), cal = { month: new Date(now.getFullYear(), now.getMonth(), 1), picking: false };
+  function renderCal() {
+    var el = $('cal'); if (!el) return;
+    var y = cal.month.getFullYear(), m = cal.month.getMonth(), today = MM.iso(new Date());
+    var isFirst = (y === now.getFullYear() && m === now.getMonth());
+    var s = selectable ? $('dStart').value : '', e = selectable ? $('dEnd').value : '';
+    var occ = occupied();
+    var h = '<div class="cal-head"><button type="button" class="cal-nav" data-nav="-1" aria-label="Vorheriger Monat"' + (isFirst ? ' disabled' : '') + '>‹</button>' +
+      '<span>' + cal.month.toLocaleDateString('de-DE', { month: 'long', year: 'numeric' }) + '</span>' +
+      '<button type="button" class="cal-nav" data-nav="1" aria-label="Nächster Monat">›</button></div><div class="cal-grid">';
+    ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].forEach(function (wd) { h += '<div class="cal-wd">' + wd + '</div>'; });
+    var offset = (new Date(y, m, 1).getDay() + 6) % 7, days = new Date(y, m + 1, 0).getDate();
+    for (var i = 0; i < offset; i++) h += '<span></span>';
+    for (var d = 1; d <= days; d++) {
+      var day = MM.iso(new Date(y, m, d)), blocked = false, pending = false;
+      occ.forEach(function (b) { if (b.start <= day && day <= b.end) { if (b.status === 'bestaetigt') blocked = true; else pending = true; } });
+      var past = day < today;
+      var cls = 'day' + (past ? ' past' : '') + (blocked ? ' blocked' : '') + (pending && !blocked ? ' pending' : '') + (day === today ? ' today' : '');
+      if (selectable && s && e && day >= s && day <= e) cls += (day === s || day === e) ? ' sel' : ' in-range';
+      var label = d + '. ' + cal.month.toLocaleDateString('de-DE', { month: 'long' }) + (blocked ? ', vergeben' : pending ? ', angefragt' : past ? '' : ', frei');
+      h += '<button type="button" class="' + cls + '" data-day="' + day + '"' + ((past || blocked || !selectable) ? ' disabled' : '') + ' aria-label="' + label + '"' + (blocked ? ' title="Vergeben"' : pending ? ' title="Angefragt, noch buchbar"' : '') + '>' + d + '</button>';
+    }
+    el.innerHTML = h + '</div>';
+    $('calLegend').innerHTML = legend().replace(/^<div class="cal-legend">|<\/div>$/g, '');
+  }
+
+  /* ---------- Rechte Spalte ---------- */
+  var right;
+  if (isOwner) {
+    right = '<div class="panel"><h3>Dein Angebot</h3><p class="note" style="font-size:15px">Du kannst dein eigenes Angebot nicht mieten. Anfragen und Änderungen findest du in deinem Vermieter-Bereich.</p><a class="btn" href="meine-angebote.html">Zu Meine Angebote</a></div>' +
+      '<div class="panel" style="margin-top:16px"><h3>Belegung</h3>' + calBox() + '</div>';
+  } else if (!me) {
+    right = '<div class="panel"><h3>Jetzt anfragen</h3><p class="note" style="font-size:15px">Zum Anfragen brauchst du ein Konto. Deine Mietungen werden dann in „Meine Mietungen“ gespeichert.</p>' +
+      '<a class="btn accent" href="login.html?next=' + encodeURIComponent('item.html?id=' + it.id) + '">Anmelden oder registrieren</a></div>' +
+      '<div class="panel" style="margin-top:16px"><h3>Verfügbarkeit</h3>' + calBox() + '</div>';
+  } else {
+    selectable = true;
+    var today = MM.iso(new Date()), start = MM.addDays(2), end = MM.addDays(3);
+    for (var n = 2; n < 150; n++) {   /* ersten freien Zwei-Tages-Zeitraum vorschlagen */
+      if (!MM.overlap(it.id, MM.addDays(n), MM.addDays(n + 1), ['bestaetigt']).length) { start = MM.addDays(n); end = MM.addDays(n + 1); break; }
+    }
+    var sd = new Date(start + 'T00:00:00'); cal.month = new Date(sd.getFullYear(), sd.getMonth(), 1);
+    right = '<form class="panel" id="bookForm"><h3>Jetzt anfragen</h3>' + calBox() +
+      '<div class="row2"><label>Abholung <input class="field" type="date" id="dStart" min="' + today + '" value="' + start + '" required></label>' +
+      '<label>Rückgabe <input class="field" type="date" id="dEnd" min="' + today + '" value="' + end + '" required></label></div>' +
+      '<label class="check"><input type="checkbox" id="dIns"><span>Mietmeister-Schutz für 2 € pro Tag. Deckt Schäden und Diebstahl bis zum Gerätewert ab.</span></label>' +
+      '<label>Nachricht an den Vermieter (optional)<textarea class="field" id="dMsg" maxlength="500" placeholder="Wofür brauchst du das Gerät? Wann passt die Abholung?"></textarea></label>' +
+      '<div class="lines" id="lines"></div><p class="err" id="dErr" role="alert"></p>' +
+      '<button type="submit" class="btn accent block" id="bookBtn">Verbindlich anfragen</button></form>';
+  }
+  root.innerHTML = '<div class="detail">' + left + '<div id="side" class="sticky">' + right + '</div></div>';
+
+  $('side').addEventListener('click', function (e) {
+    var nav = e.target.closest('[data-nav]');
+    if (nav) { cal.month = new Date(cal.month.getFullYear(), cal.month.getMonth() + (+nav.getAttribute('data-nav')), 1); renderCal(); return; }
+    var d = e.target.closest('[data-day]');
+    if (!d || !selectable || d.disabled) return;
+    var day = d.getAttribute('data-day');
+    if (!cal.picking || day < $('dStart').value) { $('dStart').value = day; $('dEnd').value = day; cal.picking = true; }
+    else { $('dEnd').value = day; cal.picking = false; }
+    update();
+  });
+
+  if (!selectable) { renderCal(); return; }
+
+  function update() {
+    var s = $('dStart').value, e = $('dEnd').value;
+    var c = MM.calc(it, s, e, $('dIns').checked);
+    var err = '';
+    if (!c) err = 'Das Rückgabedatum liegt vor dem Abholdatum. Bitte passe den Zeitraum an.';
+    else if (s < MM.iso(new Date())) err = 'Die Abholung darf nicht in der Vergangenheit liegen.';
+    else if (c.days > 30) err = 'Die maximale Mietdauer beträgt 30 Tage.';
+    else {
+      var ov = MM.overlap(it.id, s, e, ['bestaetigt']);
+      if (ov.length) err = 'Das Gerät ist vom ' + MM.fmtDate(ov[0].start) + ' bis ' + MM.fmtDate(ov[0].end) + ' bereits vergeben. Bitte wähle einen anderen Zeitraum.';
+    }
+    $('dErr').textContent = err;
+    $('bookBtn').disabled = !!err;
+    renderCal();
+    if (!c) { $('lines').innerHTML = ''; return; }
+    var h = '<div class="line"><span>' + MM.eur.format(it.price) + ' × ' + MM.plural(c.days, 'Tag', 'Tage') + '</span><span>' + MM.eur.format(c.base) + '</span></div>';
+    if (c.disc) h += '<div class="line"><span>Wochenrabatt (−20 %)</span><span>−' + MM.eur.format(c.disc) + '</span></div>';
+    h += '<div class="line"><span>Servicegebühr (8 %)</span><span>' + MM.eur.format(c.service) + '</span></div>';
+    if (c.insurance) h += '<div class="line"><span>Mietmeister-Schutz</span><span>' + MM.eur.format(c.insurance) + '</span></div>';
+    h += '<div class="line total"><span>Gesamt</span><span>' + MM.eur.format(c.total) + '</span></div>';
+    h += '<div class="line sub"><span>Zusätzlich geblockte Kaution (wird freigegeben)</span><span>' + MM.eur.format(it.dep) + '</span></div>';
+    $('lines').innerHTML = h;
+  }
+  $('dStart').addEventListener('change', function () {
+    if ($('dEnd').value < $('dStart').value) $('dEnd').value = $('dStart').value;
+    var d = new Date($('dStart').value + 'T00:00:00');
+    if (!isNaN(d)) cal.month = new Date(d.getFullYear(), d.getMonth(), 1);
+    cal.picking = false; update();
+  });
+  $('dEnd').addEventListener('change', function () { cal.picking = false; update(); });
+  $('dIns').addEventListener('change', update);
+
+  $('bookForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = $('bookBtn'); btn.disabled = true; $('dErr').textContent = '';
+    MM.book({ itemId: it.id, start: $('dStart').value, end: $('dEnd').value, ins: $('dIns').checked, msg: $('dMsg').value }).then(function (res) {
+      if (!res.ok) { btn.disabled = false; $('dErr').textContent = res.error; return; }
+      var b = res.booking;
+      selectable = false;
+      $('side').innerHTML = '<div class="panel"><h3>Anfrage gesendet ✓</h3>' +
+        '<div class="ticket"><span class="eyebrow">Leihschein</span><div class="code">' + MM.esc(b.code) + '</div><div>' + MM.esc(it.name) + '</div>' +
+        '<div>' + MM.fmtDate(b.start) + ' bis ' + MM.fmtDate(b.end) + ' (' + MM.plural(b.days, 'Tag', 'Tage') + ', ' + MM.eur.format(b.total) + ')</div></div>' +
+        '<p style="margin:0">' + MM.esc(MM.userName(it.ownerId)) + ' sieht deine Anfrage jetzt im Vermieter-Bereich und kann sie bestätigen oder ablehnen. Danach siehst du die genaue Abholadresse.</p>' +
+        '<a class="btn" href="meine-mietungen.html">Zu Meine Mietungen</a><a class="btn ghost" href="index.html">Weitere Angebote ansehen</a></div>';
+      MM.renderHeader('home');
+    });
+  });
+  update();
+});
+</script>
+</body>
+</html>

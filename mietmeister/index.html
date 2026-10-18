@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mietmeister – Leihen statt kaufen</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top" id="siteHeader"></header>
+
+  <section class="hero">
+    <div class="hero-in">
+      <span class="pill">Leihen statt kaufen</span>
+      <h1>Leih dir, was du nur <em>einmal</em> brauchst.</h1>
+      <p>Bohrhammer, Kamera, Zelt oder Biertischgarnitur. Mieten bei Nachbarn in deiner Region, versichert und mit Kaution geschützt.</p>
+      <form class="search" id="searchForm" role="search">
+        <label class="sf"><span>Was?</span><input id="q" type="search" placeholder="z. B. Bohrhammer"></label>
+        <label class="sf"><span>Wo?</span><input id="where" type="search" list="regions" placeholder="Ort oder PLZ"></label>
+        <button class="btn accent" type="submit">Suchen</button>
+      </form>
+      <datalist id="regions"></datalist>
+      <ul class="trust"><li>✓ Versicherungsschutz optional</li><li>✓ Kaution wird freigegeben</li><li>✓ Abholung in deiner Nähe</li></ul>
+    </div>
+  </section>
+
+  <section id="angebote" aria-labelledby="angH">
+    <div class="bar">
+      <h2 id="angH">Angebote entdecken</h2>
+      <label class="sort">Sortieren
+        <select id="sort">
+          <option value="new">Neueste zuerst</option>
+          <option value="priceAsc">Preis aufsteigend</option>
+          <option value="rating">Bewertung</option>
+        </select>
+      </label>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Kategorien"></div>
+    <p class="count" id="count" aria-live="polite"></p>
+    <div class="grid" id="grid"></div>
+    <p class="empty" id="empty" hidden>Keine Treffer. Versuch einen anderen Suchbegriff, eine andere Region oder Kategorie.</p>
+  </section>
+
+  <section class="block" id="ablauf" aria-labelledby="ablH">
+    <span class="eyebrow">Ablauf</span>
+    <h2 id="ablH">In drei Schritten zum Gerät</h2>
+    <div class="steps">
+      <div class="step"><b>1</b><h3>Finden und anfragen</h3><p>Gerät in deiner Region suchen, Zeitraum wählen, Preis sehen und mit deinem Konto anfragen.</p></div>
+      <div class="step"><b>2</b><h3>Abholen und nutzen</h3><p>Der Vermieter bestätigt. Danach siehst du die genaue Abholadresse, ihr prüft das Gerät gemeinsam.</p></div>
+      <div class="step"><b>3</b><h3>Zurückgeben und bewerten</h3><p>Nach der Rückgabe wird die Kaution freigegeben, der Vermieter bekommt seine Auszahlung und du bewertest.</p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="panel" style="grid-template-columns:1fr auto;align-items:center">
+      <div><h2>Selbst etwas zu vermieten?</h2><p class="note" style="font-size:15px;margin-top:6px">Stell deinen Gegenstand mit Abholort ein und sieh alle Anfragen in deinem Vermieter-Bereich.</p></div>
+      <a class="btn accent" href="vermieten.html">Mehr erfahren</a>
+    </div>
+  </section>
+
+  <footer id="siteFooter"></footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+MM.ready.then(function () {
+  MM.renderHeader('home');
+  var $ = function (id) { return document.getElementById(id); };
+  var params = new URLSearchParams(location.search);
+  var state = { cat: MM.CATS.indexOf(params.get('cat')) !== -1 ? params.get('cat') : 'Alle', q: params.get('q') || '', where: params.get('wo') || '', sort: 'new' };
+  $('q').value = state.q; $('where').value = state.where;
+
+  var orts = {};
+  MM.items().forEach(function (i) { if (i.ort) orts[i.ort] = 1; });
+  $('regions').innerHTML = Object.keys(orts).sort().map(function (o) { return '<option value="' + MM.esc(o) + '">'; }).join('');
+
+  function renderChips() {
+    $('chips').innerHTML = ['Alle'].concat(MM.CATS).map(function (c) {
+      return '<button type="button" class="chip" data-cat="' + MM.esc(c) + '" aria-pressed="' + (state.cat === c) + '">' + (MM.ICONS[c] ? MM.ICONS[c] + ' ' : '') + MM.esc(c) + '</button>';
+    }).join('');
+  }
+  function visible() {
+    var q = state.q.trim().toLowerCase(), w = state.where.trim().toLowerCase();
+    var list = MM.items().filter(function (i) {
+      var okQ = !q || (i.name + ' ' + i.cat + ' ' + i.desc).toLowerCase().indexOf(q) !== -1;
+      var okW = !w || (i.plz || '').indexOf(w) === 0 || (i.ort || '').toLowerCase().indexOf(w) !== -1;
+      return (state.cat === 'Alle' || i.cat === state.cat) && okQ && okW;
+    });
+    list.sort(function (a, b) {
+      if (state.sort === 'priceAsc') return a.price - b.price;
+      if (state.sort === 'rating') return MM.ratingOf(b).avg - MM.ratingOf(a).avg;
+      return (b.created || 0) - (a.created || 0);
+    });
+    return list;
+  }
+  function renderGrid() {
+    var list = visible();
+    $('empty').hidden = list.length > 0;
+    $('empty').innerHTML = MM.items().length ? 'Keine Treffer. Versuch einen anderen Suchbegriff, eine andere Region oder Kategorie.' : 'Noch gibt es keine Angebote. <a href="meine-angebote.html#gegenstaende">Stelle den ersten Gegenstand ein</a>.';
+    $('count').textContent = MM.plural(list.length, 'Angebot', 'Angebote') + (state.where.trim() ? ' in „' + state.where.trim() + '“' : '');
+    $('grid').innerHTML = list.map(function (i) {
+      var r = MM.ratingOf(i);
+      return '<a class="card" href="item.html?id=' + encodeURIComponent(i.id) + '">' +
+        '<div class="art c' + MM.catIdx(i.cat) + '"><span class="tag">' + MM.esc(i.cat) + '</span>' + (!r.n ? '<span class="badge-new">NEU</span>' : '') + '<span aria-hidden="true">' + (MM.ICONS[i.cat] || '📦') + '</span></div>' +
+        '<div class="card-body"><h3>' + MM.esc(i.name) + '</h3>' +
+        '<div class="meta"><span>📍 ' + MM.esc(MM.regionOf(i)) + '</span>' + (r.n ? '<span>★ ' + MM.num1(r.avg) + ' (' + r.n + ')</span>' : '') + '</div>' +
+        '<div class="meta"><span>' + MM.esc(MM.userName(i.ownerId)) + '</span></div></div>' +
+        '<div class="card-foot"><span class="price">' + MM.eur0.format(i.price) + ' <small>/ Tag</small></span><span class="meta">Kaution ' + MM.eur0.format(i.dep) + '</span></div></a>';
+    }).join('');
+  }
+
+  $('chips').addEventListener('click', function (e) {
+    var b = e.target.closest('.chip'); if (!b) return;
+    state.cat = b.getAttribute('data-cat'); renderChips(); renderGrid();
+  });
+  $('sort').addEventListener('change', function () { state.sort = $('sort').value; renderGrid(); });
+  $('q').addEventListener('input', function () { state.q = $('q').value; renderGrid(); });
+  $('where').addEventListener('input', function () { state.where = $('where').value; renderGrid(); });
+  $('searchForm').addEventListener('submit', function (e) {
+    e.preventDefault(); state.q = $('q').value; state.where = $('where').value;
+    renderGrid(); $('angebote').scrollIntoView({ behavior: 'smooth' });
+  });
+  renderChips(); renderGrid();
+});
+</script>
+</body>
+</html>

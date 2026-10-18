@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Meine Angebote – Mietmeister</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top" id="siteHeader"></header>
+  <div class="page-title">
+    <span class="eyebrow">Als Vermieter</span>
+    <h1>Meine Angebote</h1>
+    <p>Hier siehst du die Anfragen zu deinen Gegenständen und verwaltest deine Angebote.</p>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="tabs" role="tablist">
+    <button type="button" class="tab" role="tab" id="tabReq" aria-selected="true">Anfragen <span class="nav-badge" id="reqBadge" hidden></span></button>
+    <button type="button" class="tab" role="tab" id="tabItems" aria-selected="false">Meine Gegenstände</button>
+  </div>
+
+  <section id="paneReq">
+    <div class="chips" id="chips" role="group" aria-label="Status filtern" style="margin-bottom:16px"></div>
+    <div class="list" id="reqList"></div>
+    <p class="empty" id="reqEmpty" hidden>Keine Anfragen in dieser Ansicht.</p>
+  </section>
+
+  <section id="paneItems" hidden>
+    <div class="two">
+      <form class="panel" id="itemForm">
+        <h2 id="formTitle">Gegenstand einstellen</h2>
+        <input type="hidden" id="fId">
+        <label>Bezeichnung <input class="field" id="fName" required maxlength="40" placeholder="z. B. Akku-Schlagbohrer"></label>
+        <label>Kategorie <select class="field" id="fCat"></select></label>
+        <div class="row2">
+          <label>PLZ des Abholorts <input class="field" id="fPlz" required inputmode="numeric" pattern="\d{5}" maxlength="5" placeholder="z. B. 28195"></label>
+          <label>Ort / Region <input class="field" id="fOrt" required maxlength="40" placeholder="z. B. Bremen"></label>
+        </div>
+        <label>Straße und Hausnummer <small>optional, erst sichtbar nach Bestätigung einer Anfrage</small><input class="field" id="fStreet" maxlength="60" placeholder="z. B. Hauptstraße 12"></label>
+        <div class="row2">
+          <label>Preis pro Tag (€) <input class="field" id="fPrice" type="number" min="1" max="500" step="0.5" required value="10"></label>
+          <label>Kaution (€) <input class="field" id="fDep" type="number" min="0" max="2000" step="10" required value="50"></label>
+        </div>
+        <label>Beschreibung <textarea class="field" id="fDesc" maxlength="300" placeholder="Zustand, Zubehör, Besonderheiten"></textarea></label>
+        <p class="err" id="fErr" role="alert"></p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn accent" type="submit" id="fSubmit">Gegenstand einstellen</button>
+          <button class="btn ghost" type="button" id="fCancel" hidden>Abbrechen</button>
+        </div>
+      </form>
+      <div>
+        <div class="list" id="itemList"></div>
+        <p class="empty" id="itemEmpty" hidden>Du hast noch keine Gegenstände eingestellt.</p>
+      </div>
+    </div>
+  </section>
+  <footer id="siteFooter"></footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+MM.ready.then(function () {
+  if (!MM.requireLogin()) return;
+  MM.renderHeader('mine');
+  var $ = function (id) { return document.getElementById(id); };
+  var me = MM.me(), filter = 'angefragt';
+  var FILTERS = [['angefragt', 'Offen'], ['bestaetigt', 'Bestätigt'], ['zurueck', 'Abgeschlossen'], ['abgelehnt', 'Abgelehnt / Storniert'], ['alle', 'Alle']];
+
+  $('fCat').innerHTML = MM.CATS.map(function (c) { return '<option>' + MM.esc(c) + '</option>'; }).join('');
+
+  function incoming() { return MM.bookings().filter(function (b) { return b.ownerId === me.id; }); }
+
+  function stats() {
+    var all = incoming();
+    var open = all.filter(function (b) { return b.status === 'angefragt'; }).length;
+    var conf = all.filter(function (b) { return b.status === 'bestaetigt'; });
+    var done = all.filter(function (b) { return b.status === 'zurueck'; });
+    var sum = function (l) { return l.reduce(function (a, b) { return a + b.payout; }, 0); };
+    $('stats').innerHTML =
+      '<div class="stat"><b>' + open + '</b><span>Offene Anfragen</span></div>' +
+      '<div class="stat"><b>' + conf.length + '</b><span>Bestätigte Buchungen</span></div>' +
+      '<div class="stat"><b>' + MM.eur0.format(sum(conf)) + '</b><span>Erwartete Auszahlung</span></div>' +
+      '<div class="stat"><b>' + MM.eur0.format(sum(done)) + '</b><span>Bereits ausgezahlt</span></div>';
+    $('reqBadge').hidden = !open; $('reqBadge').textContent = open;
+  }
+  function chips() {
+    $('chips').innerHTML = FILTERS.map(function (f) {
+      return '<button type="button" class="chip" data-f="' + f[0] + '" aria-pressed="' + (filter === f[0]) + '">' + f[1] + '</button>';
+    }).join('');
+  }
+  function renderReq() {
+    var list = incoming().filter(function (b) {
+      if (filter === 'alle') return true;
+      if (filter === 'abgelehnt') return b.status === 'abgelehnt' || b.status === 'storniert';
+      return b.status === filter;
+    });
+    $('reqEmpty').hidden = list.length > 0;
+    $('reqList').innerHTML = list.map(function (b) {
+      var it = MM.item(b.itemId), renter = MM.userById(b.renterId);
+      var conflict = b.status === 'angefragt' && MM.overlap(b.itemId, b.start, b.end, ['bestaetigt'], b.id).length;
+      var h = '<article class="bk"><div class="bk-head"><span>' + MM.esc(b.code) + '</span><span class="status st-' + b.status + '">' + MM.STATUS[b.status] + '</span></div>' +
+        '<div class="bk-body"><h3>' + MM.esc(it ? it.name : 'Gelöschtes Angebot') + '</h3>' +
+        '<div class="meta"><span>Von ' + MM.esc(renter ? renter.name : 'Unbekannt') + '</span>' + (function (r) { return r.n ? '<span>Mieter ★ ' + MM.num1(r.avg) + ' (' + r.n + ')</span>' : '<span>Neuer Mieter</span>'; })(MM.userRating(b.renterId, 'renter')) + '<span>' + MM.fmtDate(b.start) + ' bis ' + MM.fmtDate(b.end) + '</span><span>' + MM.plural(b.days, 'Tag', 'Tage') + '</span>' + (it ? '<span>📍 ' + MM.esc(MM.regionOf(it)) + '</span>' : '') + '</div>' +
+        (b.msg ? '<p class="quote">' + MM.esc(b.msg) + '</p>' : '') +
+        '<div class="line"><span>Deine Auszahlung (nach 10 % Provision)</span><b>' + MM.eur.format(b.payout) + '</b></div>' +
+        '<div class="line sub"><span>Kaution des Mieters</span><span>' + MM.eur.format(b.dep) + '</span></div>' +
+        (conflict ? '<p class="err">Achtung: Der Zeitraum überschneidet sich mit einer bestätigten Buchung. Du kannst nur ablehnen.</p>' : '') +
+        (b.status === 'bestaetigt' && renter && renter.email ? '<p class="note">Kontakt zum Mieter: <a href="mailto:' + MM.esc(renter.email) + '">' + MM.esc(renter.email) + '</a></p>' : '') +
+        (b.rating ? '<p class="quote">Bewertung vom Mieter: ★ ' + b.rating + (b.review ? ' – ' + MM.esc(b.review) : '') + '</p>' : '') +
+        (b.ownerRating ? '<p class="quote">Deine Bewertung des Mieters: ★ ' + b.ownerRating + (b.ownerReview ? ' – ' + MM.esc(b.ownerReview) : '') + '</p>' : '') +
+        '</div>';
+      var act = '';
+      if (b.status === 'angefragt') {
+        act = (conflict ? '' : '<button type="button" class="btn small" data-act="bestaetigt" data-id="' + MM.esc(b.id) + '">Annehmen</button>') +
+          '<button type="button" class="btn danger small" data-act="abgelehnt" data-id="' + MM.esc(b.id) + '">Ablehnen</button>';
+      } else if (b.status === 'bestaetigt') {
+        act = '<button type="button" class="btn small" data-act="zurueck" data-id="' + MM.esc(b.id) + '">Als zurückgegeben markieren</button>';
+      } else if (b.status === 'zurueck' && !b.ownerRating) {
+        act = '<span class="note">Wie war der Mieter? Deine Bewertung hilft anderen Vermietern.</span>' + MM.rateFormHtml(b.id, 'rateRenter', 'Mieter bewerten');
+      }
+      act = MM.msgButton(b) + act;
+      if (act) h += '<div class="bk-actions">' + act + '</div>';
+      return h + MM.threadHtml(b) + '</article>';
+    }).join('');
+    MM.hydrateThreads($('reqList'));
+  }
+  function renderItems() {
+    var mine = MM.items().filter(function (i) { return i.ownerId === me.id; });
+    $('itemEmpty').hidden = mine.length > 0;
+    $('itemList').innerHTML = mine.map(function (i) {
+      var r = MM.ratingOf(i);
+      return '<div class="item-row"><div><h3><a href="item.html?id=' + encodeURIComponent(i.id) + '" style="color:inherit">' + MM.esc(i.name) + '</a></h3>' +
+        '<div class="meta"><span>📍 ' + MM.esc(MM.regionOf(i)) + '</span><span>' + MM.esc(i.cat) + '</span><span>' + MM.eur0.format(i.price) + ' / Tag</span><span>Kaution ' + MM.eur0.format(i.dep) + '</span>' + (r.n ? '<span>★ ' + MM.num1(r.avg) + ' (' + r.n + ')</span>' : '') + '</div></div>' +
+        '<div style="display:flex;gap:8px"><button type="button" class="btn ghost small" data-iact="edit" data-id="' + MM.esc(i.id) + '">Bearbeiten</button>' +
+        '<button type="button" class="btn danger small" data-iact="del" data-id="' + MM.esc(i.id) + '">Löschen</button></div></div>';
+    }).join('');
+  }
+  function resetForm() {
+    $('itemForm').reset(); $('fId').value = ''; $('fPrice').value = 10; $('fDep').value = 50;
+    $('formTitle').textContent = 'Gegenstand einstellen'; $('fSubmit').textContent = 'Gegenstand einstellen'; $('fCancel').hidden = true; $('fErr').textContent = '';
+  }
+  function tab(which) {
+    var req = which !== 'items';
+    $('paneReq').hidden = !req; $('paneItems').hidden = req;
+    $('tabReq').setAttribute('aria-selected', String(req)); $('tabItems').setAttribute('aria-selected', String(!req));
+    history.replaceState(null, '', req ? '#anfragen' : '#gegenstaende');
+  }
+  function refresh() { stats(); renderReq(); renderItems(); MM.renderHeader('mine'); }
+
+  $('tabReq').addEventListener('click', function () { tab('req'); });
+  $('tabItems').addEventListener('click', function () { tab('items'); });
+  $('chips').addEventListener('click', function (e) {
+    var b = e.target.closest('.chip'); if (!b) return;
+    filter = b.getAttribute('data-f'); chips(); renderReq();
+  });
+
+  MM.bindThreads($('reqList'));
+  $('reqList').addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-act]'); if (!btn) return;
+    var st = btn.getAttribute('data-act');
+    if (st === 'rateRenter') {
+      var f = btn.closest('.rate-form');
+      btn.disabled = true;
+      MM.rateRenter(f.getAttribute('data-id'), f.querySelector('select').value, f.querySelector('input').value).then(function (rr) {
+        MM.toast(rr.ok ? 'Danke für deine Bewertung!' : rr.error);
+        if (rr.ok) refresh(); else btn.disabled = false;
+      });
+      return;
+    }
+    if (st === 'abgelehnt' && !confirm('Diese Anfrage wirklich ablehnen?')) return;
+    btn.disabled = true;
+    MM.setStatus(btn.getAttribute('data-id'), st).then(function (res) {
+    if (!res.ok) { btn.disabled = false; MM.toast(res.error); refresh(); return; }
+    MM.toast(st === 'bestaetigt' ? 'Anfrage angenommen.' + (res.declined ? ' ' + MM.plural(res.declined, 'überschneidende Anfrage wurde', 'überschneidende Anfragen wurden') + ' abgelehnt.' : '') : st === 'abgelehnt' ? 'Anfrage abgelehnt.' : 'Als zurückgegeben markiert. Kaution freigegeben.');
+    refresh();
+    });
+  });
+
+  $('itemList').addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-iact]'); if (!btn) return;
+    var id = btn.getAttribute('data-id');
+    if (btn.getAttribute('data-iact') === 'edit') {
+      var i = MM.item(id); if (!i) return;
+      $('fId').value = i.id; $('fName').value = i.name; $('fCat').value = i.cat; $('fPlz').value = i.plz || ''; $('fOrt').value = i.ort || ''; $('fStreet').value = i.street || '';
+      $('fPrice').value = i.price; $('fDep').value = i.dep; $('fDesc').value = i.desc || '';
+      $('formTitle').textContent = 'Gegenstand bearbeiten'; $('fSubmit').textContent = 'Änderungen speichern'; $('fCancel').hidden = false;
+      $('itemForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      if (!confirm('Dieses Angebot wirklich löschen?')) return;
+      btn.disabled = true;
+      MM.deleteItem(id).then(function (res) {
+        MM.toast(res.ok ? 'Angebot gelöscht.' : res.error);
+        if (res.ok) { resetForm(); refresh(); } else btn.disabled = false;
+      });
+    }
+  });
+
+  $('fCancel').addEventListener('click', resetForm);
+  $('itemForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var data = { name: $('fName').value, cat: $('fCat').value, plz: $('fPlz').value, ort: $('fOrt').value, street: $('fStreet').value, price: $('fPrice').value, dep: $('fDep').value, desc: $('fDesc').value };
+    var editing = $('fId').value;
+    var sbtn = $('fSubmit'); sbtn.disabled = true; $('fErr').textContent = '';
+    (editing ? MM.updateItem(editing, data) : MM.addItem(data)).then(function (res) {
+      sbtn.disabled = false;
+      if (!res.ok) { $('fErr').textContent = res.error; return; }
+      MM.toast(editing ? 'Änderungen gespeichert.' : '„' + res.item.name + '“ ist jetzt in den Angeboten sichtbar.' + (res.warn ? ' Die Straße konnte nicht gespeichert werden.' : ''));
+      resetForm(); refresh();
+    });
+  });
+
+  chips(); refresh(); tab(location.hash === '#gegenstaende' ? 'items' : 'req');
+});
+</script>
+</body>
+</html>

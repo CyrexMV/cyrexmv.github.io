@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Neues Passwort – Mietmeister</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top" id="siteHeader"></header>
+  <div class="page-title">
+    <span class="eyebrow">Konto</span>
+    <h1>Neues Passwort festlegen</h1>
+    <p>Wähle ein Passwort, das du sonst nirgends verwendest.</p>
+  </div>
+  <form class="panel" id="newForm" style="max-width:480px" hidden>
+    <label>Neues Passwort <small>mindestens 8 Zeichen</small><input class="field" type="password" id="nPw" required minlength="8" autocomplete="new-password"></label>
+    <label>Neues Passwort wiederholen<input class="field" type="password" id="nPw2" required minlength="8" autocomplete="new-password"></label>
+    <p class="err" id="nErr" role="alert"></p>
+    <button type="submit" class="btn">Passwort speichern</button>
+  </form>
+  <div class="panel" id="badLink" style="max-width:480px" hidden>
+    <h3>Link nicht mehr gültig</h3>
+    <p class="note" style="font-size:15px">Der Link zum Zurücksetzen ist abgelaufen oder wurde schon benutzt. Fordere auf der Anmeldeseite einen neuen an.</p>
+    <a class="btn" href="login.html">Zur Anmeldung</a>
+  </div>
+  <footer id="siteFooter"></footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+MM.ready.then(function () {
+  MM.renderHeader('');
+  var $ = function (id) { return document.getElementById(id); };
+  if (!MM.me()) { $('badLink').hidden = false; return; }
+  $('newForm').hidden = false;
+  $('newForm').addEventListener('submit', function (e) {
+    e.preventDefault(); $('nErr').textContent = '';
+    if ($('nPw').value !== $('nPw2').value) { $('nErr').textContent = 'Die beiden Passwörter stimmen nicht überein.'; return; }
+    MM.updatePassword($('nPw').value).then(function (r) {
+      if (!r.ok) { $('nErr').textContent = r.error; return; }
+      MM.toast('Passwort geändert.'); setTimeout(function () { location.href = 'index.html'; }, 900);
+    });
+  });
+});
+</script>
+</body>
+</html>

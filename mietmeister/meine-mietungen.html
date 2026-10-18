@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Meine Mietungen – Mietmeister</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top" id="siteHeader"></header>
+  <div class="page-title">
+    <span class="eyebrow">Als Mieter</span>
+    <h1>Meine Mietungen</h1>
+    <p>Alle Anfragen und Buchungen, die du bei anderen gestellt hast.</p>
+  </div>
+  <div class="chips" id="chips" role="group" aria-label="Status filtern" style="margin-block:14px 18px"></div>
+  <div class="list" id="list"></div>
+  <p class="empty" id="empty" hidden>Hier ist noch nichts. <a href="index.html">Finde ein Gerät zum Leihen</a>.</p>
+  <footer id="siteFooter"></footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+MM.ready.then(function () {
+  if (!MM.requireLogin()) return;
+  MM.renderHeader('trips');
+  var $ = function (id) { return document.getElementById(id); };
+  var filter = 'alle';
+  var FILTERS = [['alle', 'Alle'], ['angefragt', 'Angefragt'], ['bestaetigt', 'Bestätigt'], ['zurueck', 'Zurückgegeben'], ['storniert', 'Storniert / Abgelehnt']];
+
+  function mine() {
+    var u = MM.me();
+    return MM.bookings().filter(function (b) { return b.renterId === u.id; });
+  }
+  function chips() {
+    $('chips').innerHTML = FILTERS.map(function (f) {
+      return '<button type="button" class="chip" data-f="' + f[0] + '" aria-pressed="' + (filter === f[0]) + '">' + f[1] + '</button>';
+    }).join('');
+  }
+  function render() {
+    var list = mine().filter(function (b) {
+      if (filter === 'alle') return true;
+      if (filter === 'storniert') return b.status === 'storniert' || b.status === 'abgelehnt';
+      return b.status === filter;
+    });
+    $('empty').hidden = list.length > 0;
+    $('list').innerHTML = list.map(function (b) {
+      var it = MM.item(b.itemId), owner = MM.userById(b.ownerId);
+      var name = it ? it.name : 'Gelöschtes Angebot';
+      var h = '<article class="bk"><div class="bk-head"><span>' + MM.esc(b.code) + '</span><span class="status st-' + b.status + '">' + MM.STATUS[b.status] + '</span></div>' +
+        '<div class="bk-body"><h3>' + (it ? '<a href="item.html?id=' + encodeURIComponent(it.id) + '">' + MM.esc(name) + '</a>' : MM.esc(name)) + '</h3>' +
+        '<div class="meta"><span>' + MM.fmtDate(b.start) + ' bis ' + MM.fmtDate(b.end) + '</span><span>' + MM.plural(b.days, 'Tag', 'Tage') + '</span><span>Vermieter: ' + MM.esc(owner ? owner.name : 'Unbekannt') + '</span>' + (it ? '<span>📍 ' + MM.esc(MM.regionOf(it)) + '</span>' : '') + '</div>' +
+        ((b.status === 'bestaetigt' || b.status === 'zurueck') && it && it.street ? '<p class="quote">Abholadresse: <b>' + MM.esc(it.street) + ', ' + MM.esc(MM.regionOf(it)) + '</b></p>' : '') +
+        '<div class="line"><span>Gesamt' + (b.ins ? ' (inkl. Schutz)' : '') + '</span><b>' + MM.eur.format(b.total) + '</b></div>' +
+        '<div class="line sub"><span>Kaution (wird nach Rückgabe freigegeben)</span><span>' + MM.eur.format(b.dep) + '</span></div>' +
+        (b.msg ? '<p class="quote">Deine Nachricht: ' + MM.esc(b.msg) + '</p>' : '') +
+        (b.status === 'bestaetigt' && owner && owner.email ? '<p class="note">Kontakt zum Vermieter: <a href="mailto:' + MM.esc(owner.email) + '">' + MM.esc(owner.email) + '</a></p>' : '') +
+        (b.status === 'bestaetigt' && owner && !owner.email ? '<p class="note">Bestätigt. Die Übergabe stimmst du mit dem Vermieter ab.</p>' : '') +
+        (b.status === 'bestaetigt' ? '<p class="note">Nach der Rückgabe kannst du Gerät und Vermieter bewerten.</p>' : '') +
+        (b.ownerRating ? '<p class="quote">Der Vermieter hat dich bewertet: ★ ' + b.ownerRating + (b.ownerReview ? ' – ' + MM.esc(b.ownerReview) : '') + '</p>' : '') +
+        (b.rating ? '<p class="quote">Deine Bewertung: ★ ' + b.rating + (b.review ? ' – ' + MM.esc(b.review) : '') + '</p>' : '') +
+        '</div>';
+      var act = '';
+      if (b.status === 'angefragt' || b.status === 'bestaetigt') act += '<button type="button" class="btn danger small" data-act="cancel" data-id="' + MM.esc(b.id) + '">Stornieren</button>';
+      if (b.status === 'angefragt') act += '<span class="note">Wartet auf Antwort des Vermieters.</span>';
+      if (b.status === 'zurueck' && !b.rating) {
+        act += '<span class="note">Wie war die Mietung? Bewerte Gerät und Vermieter, das hilft anderen Mietern.</span>' + MM.rateFormHtml(b.id, 'rate', 'Bewerten');
+      }
+      act = MM.msgButton(b) + act;
+      if (act) h += '<div class="bk-actions">' + act + '</div>';
+      return h + MM.threadHtml(b) + '</article>';
+    }).join('');
+    MM.hydrateThreads($('list'));
+  }
+
+  MM.bindThreads($('list'));
+  $('chips').addEventListener('click', function (e) {
+    var b = e.target.closest('.chip'); if (!b) return;
+    filter = b.getAttribute('data-f'); chips(); render();
+  });
+  $('list').addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-act]'); if (!btn) return;
+    var p, okMsg;
+    if (btn.getAttribute('data-act') === 'cancel') {
+      if (!confirm('Möchtest du diese Buchung wirklich stornieren?')) return;
+      p = MM.setStatus(btn.getAttribute('data-id'), 'storniert'); okMsg = 'Buchung storniert.';
+    } else {
+      var f = btn.closest('.rate-form');
+      p = MM.rate(f.getAttribute('data-id'), f.querySelector('select').value, f.querySelector('input').value); okMsg = 'Danke für deine Bewertung!';
+    }
+    btn.disabled = true;
+    p.then(function (res) {
+      if (!res.ok) { btn.disabled = false; MM.toast(res.error); return; }
+      MM.toast(okMsg); render(); MM.renderHeader('trips');
+    });
+  });
+  chips(); render();
+});
+</script>
+</body>
+</html>

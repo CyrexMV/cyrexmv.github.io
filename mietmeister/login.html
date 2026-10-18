@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Anmelden – Mietmeister</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top" id="siteHeader"></header>
+  <main class="auth-split">
+    <div class="auth-art">
+      <span class="pill">Mietmeister</span>
+      <h2>Leihen, vermieten, Geld sparen.</h2>
+      <ul><li>✓ Anfragen und Buchungen an einem Ort</li><li>✓ Eigene Gegenstände mit Abholort einstellen</li><li>✓ Anfragen direkt annehmen oder ablehnen</li></ul>
+    </div>
+    <div class="auth-form">
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab" role="tab" id="tabLogin" aria-selected="true">Anmelden</button>
+        <button type="button" class="tab" role="tab" id="tabReg" aria-selected="false">Registrieren</button>
+      </div>
+
+      <p class="cfg" id="cfgWarn" role="alert" hidden></p>
+      <div class="ok-box" id="okBox" role="status" hidden></div>
+
+      <form id="loginForm" style="display:grid;gap:14px">
+        <h1>Willkommen zurück</h1>
+        <label>E-Mail <input class="field" type="email" id="lEmail" required autocomplete="email"></label>
+        <label>Passwort <input class="field" type="password" id="lPw" required autocomplete="current-password"></label>
+        <p class="err" id="lErr" role="alert"></p>
+        <button type="submit" class="btn">Anmelden</button>
+        <button type="button" class="linkbtn" id="forgotBtn">Passwort vergessen?</button>
+      </form>
+
+      <form id="pwForm" style="display:grid;gap:14px" hidden>
+        <h1>Passwort zurücksetzen</h1>
+        <p class="note">Wir schicken dir einen Link per E-Mail, über den du ein neues Passwort festlegst.</p>
+        <label>E-Mail <input class="field" type="email" id="pEmail" required autocomplete="email"></label>
+        <p class="err" id="pErr" role="alert"></p>
+        <button type="submit" class="btn">Link senden</button>
+        <button type="button" class="linkbtn" id="backBtn">Zurück zur Anmeldung</button>
+      </form>
+
+      <form id="regForm" style="display:grid;gap:14px" hidden>
+        <h1>Konto erstellen</h1>
+        <label>Name <input class="field" id="rName" required maxlength="40" autocomplete="name" placeholder="z. B. Anna M."></label>
+        <label>E-Mail <input class="field" type="email" id="rEmail" required autocomplete="email"></label>
+        <label>Passwort <small>mindestens 8 Zeichen</small><input class="field" type="password" id="rPw" required minlength="8" autocomplete="new-password"></label>
+        <label class="check"><input type="checkbox" id="rAgree" required><span>Ich habe die <a href="agb.html" target="_blank" rel="noopener">AGB</a> und die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme zu.</span></label>
+        <p class="err" id="rErr" role="alert"></p>
+        <button type="submit" class="btn accent">Konto erstellen</button>
+      </form>
+      <p class="note">Anmeldung und Registrierung laufen über Supabase. Dein Passwort wird dort verschlüsselt gespeichert und nie in dieser Seite abgelegt.</p>
+    </div>
+  </main>
+  <footer id="siteFooter"></footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+MM.ready.then(function () {
+  MM.renderHeader('');
+  var $ = function (id) { return document.getElementById(id); };
+  var next = MM.safeNext(new URLSearchParams(location.search).get('next'));
+  if (MM.me()) { location.replace(next); return; }
+  var problem = MM.authProblem();
+  if (problem) { $('cfgWarn').textContent = problem; $('cfgWarn').hidden = false; }
+
+  function show(which) {
+    var reg = which === 'reg';
+    $('loginForm').hidden = reg || which === 'pw'; $('regForm').hidden = !reg; $('pwForm').hidden = which !== 'pw';
+    $('tabLogin').setAttribute('aria-selected', String(!reg));
+    $('tabReg').setAttribute('aria-selected', String(reg));
+  }
+  $('tabLogin').addEventListener('click', function () { show('login'); });
+  $('tabReg').addEventListener('click', function () { show('reg'); });
+  $('forgotBtn').addEventListener('click', function () { $('pEmail').value = $('lEmail').value; show('pw'); });
+  $('backBtn').addEventListener('click', function () { show('login'); });
+  $('pwForm').addEventListener('submit', function (e) {
+    e.preventDefault(); $('pErr').textContent = '';
+    MM.resetPassword($('pEmail').value).then(function (r) {
+      if (!r.ok) { $('pErr').textContent = r.error; return; }
+      $('okBox').textContent = 'Wenn zu dieser E-Mail ein Konto existiert, ist ein Link zum Zurücksetzen unterwegs. Prüfe auch deinen Spam-Ordner.';
+      $('okBox').hidden = false; show('login');
+    });
+  });
+  if (location.hash === '#registrieren') show('reg');
+
+  $('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    $('lErr').textContent = '';
+    MM.login($('lEmail').value, $('lPw').value).then(function (r) { if (r.ok) location.href = next; else $('lErr').textContent = r.error; });
+  });
+  $('regForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    $('rErr').textContent = '';
+    if (!$('rAgree').checked) { $('rErr').textContent = 'Bitte stimme den AGB und der Datenschutzerklärung zu.'; return; }
+    MM.register($('rName').value, $('rEmail').value, $('rPw').value).then(function (r) {
+      if (!r.ok) { $('rErr').textContent = r.error; return; }
+      if (r.needsConfirm) {
+        $('okBox').textContent = 'Fast geschafft! Wir haben eine Bestätigungs-Mail an ' + r.email + ' geschickt. Klicke auf den Link darin, dann kannst du dich anmelden.';
+        $('okBox').hidden = false; $('lEmail').value = r.email; show('login'); return;
+      }
+      location.href = next;
+    });
+  });
+});
+</script>
+</body>
+</html>
