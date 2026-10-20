@@ -6,180 +6,46 @@
 <meta name="color-scheme" content="dark">
 <title>Diyar Kebab Haus Papenburg – Döner, Pide, Pizza & Rollo</title>
 <meta name="description" content="Diyar Kebab Haus in Papenburg: Döner, Pide, Pizza, Rollo und Grillspezialitäten. Speisekarte online, alles auch zum Mitnehmen. Splitting rechts 24, Tel. 04961 94 08 40.">
-<meta name="theme-color" content="#101214">
-<style>
-:root{
-  color-scheme:dark;
-  --bg:#101214; --bg2:#16191c; --text:#ece8e3; --muted:#9a9ea3; --dim:#6f7378;
-  --copper:#d08a52; --copper-hi:#e8ae80; --copper-lo:#8f5a31;
-  --glass:rgba(255,255,255,.055); --glass-hi:rgba(255,255,255,.09); --edge:rgba(255,255,255,.12);
-  --display:"SF Pro Display","Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
-  --body:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  --r:18px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:150px;background:var(--bg)}
-body{margin:0;color:var(--text);font:17px/1.55 var(--body);-webkit-font-smoothing:antialiased;
-  background:
-    radial-gradient(900px 520px at 85% -5%,rgba(208,138,82,.20),transparent 60%),
-    radial-gradient(700px 500px at -10% 38%,rgba(208,138,82,.07),transparent 60%),
-    var(--bg);
-  background-repeat:no-repeat}
-a{color:inherit}
-a,button{-webkit-tap-highlight-color:transparent}
-:focus-visible{outline:2px solid var(--copper-hi);outline-offset:3px;border-radius:8px}
-.wrap{max-width:1140px;margin:0 auto;padding:0 22px}
-h1,h2,h3,h4{font-family:var(--display);margin:0}
-
-.glass{background:var(--glass);border:1px solid var(--edge);border-radius:var(--r);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%)}
-
-/* Kopfzeile */
-.top{position:sticky;top:0;z-index:40;padding:12px 0}
-.top .bar{display:flex;align-items:center;gap:22px;padding:10px 12px 10px 20px;border-radius:999px;background:rgba(22,25,28,.72);border:1px solid var(--edge);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
-.brand{font-family:var(--display);font-weight:650;font-size:1.1rem;letter-spacing:-.01em;text-decoration:none;margin-right:auto}
-.top a.l{color:var(--muted);text-decoration:none;font-weight:550;font-size:.93rem}
-.top a.l:hover{color:var(--text)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;font:600 .95rem var(--body);text-decoration:none;padding:.65em 1.25em;border-radius:999px;border:1px solid transparent;cursor:pointer;color:#1a1008;background:linear-gradient(180deg,var(--copper-hi),var(--copper));transition:filter .15s,transform .15s}
-.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
-.btn.ghost{background:var(--glass);color:var(--text);border-color:var(--edge)}
-.btn.ghost:hover{background:var(--glass-hi)}
-@media (max-width:720px){.top a.l{display:none}}
-
-/* Hero */
-.hero{padding:70px 0 80px}
-.hero .wrap{display:grid;grid-template-columns:1.35fr .65fr;gap:44px;align-items:center}
-.status{display:inline-flex;align-items:center;gap:.6em;padding:.4em .95em;border-radius:999px;font-size:.9rem;font-weight:550;background:var(--glass);border:1px solid var(--edge)}
-.dot{width:.65em;height:.65em;border-radius:50%;background:var(--dim);flex:none}
-.status.open .dot{background:#4fd68a;box-shadow:0 0 0 4px rgba(79,214,138,.18)}
-.status.closed .dot{background:var(--copper)}
-.hero h1{font-size:clamp(2.6rem,8.4vw,6.6rem);font-weight:700;letter-spacing:-.04em;line-height:.98;margin:26px 0 22px}
-.hero h1 span{display:block;color:var(--muted);font-weight:500}
-.lead{font-size:1.2rem;color:#c9c5bf;max-width:31em;margin:0 0 30px}
-.actions{display:flex;flex-wrap:wrap;gap:12px}
-.sig{margin:34px 0 0;color:var(--dim);font-size:.95rem}
-.order{padding:30px 28px}
-.order small{display:block;color:var(--muted);font-weight:550;font-size:.9rem}
-.order .num{display:block;font-family:var(--display);font-weight:650;font-size:clamp(1.9rem,3.6vw,2.5rem);letter-spacing:-.02em;color:var(--copper-hi);margin:6px 0 18px;text-decoration:none;white-space:nowrap}
-.order hr{border:0;border-top:1px solid var(--edge);margin:22px 0 16px}
-.order .today{font-weight:600}
-.order .today span{display:block;color:var(--muted);font-weight:500;font-size:.9rem}
-@media (max-width:880px){.hero{padding:40px 0 56px}.hero .wrap{grid-template-columns:1fr;gap:30px}}
-
-/* Menü */
-.menu{padding:30px 0 10px}
-.sec-title{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:8px 30px;margin-bottom:20px}
-.sec-title h2{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:700;letter-spacing:-.03em}
-.sec-title p{margin:0;color:var(--muted);max-width:30em}
-.toolbar{position:sticky;top:74px;z-index:30;padding:10px;display:grid;grid-template-columns:1fr 280px;gap:10px;align-items:center;background:rgba(22,25,28,.78)}
-.tabs{grid-column:1;grid-row:1;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
-.tabs::-webkit-scrollbar{display:none}
-.tabs a{flex:none;text-decoration:none;color:var(--muted);font-weight:600;font-size:.92rem;padding:.5em 1em;border-radius:999px;border:1px solid transparent}
-.tabs a:hover{color:var(--text);background:var(--glass)}
-.tabs a.on{color:#1a1008;background:linear-gradient(180deg,var(--copper-hi),var(--copper))}
-.search{grid-column:2;grid-row:1}
-.search input{width:100%;font:500 16px var(--body);color:var(--text);padding:.65em 1em;border-radius:999px;border:1px solid var(--edge);background:rgba(0,0,0,.28)}
-.search input::placeholder{color:var(--dim)}
-
-.meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin:16px 4px 0;font-size:.92rem}
-.meta button,.meta a{background:none;border:0;padding:0;font:inherit;font-weight:600;color:var(--copper-hi);text-decoration:underline;text-decoration-color:rgba(232,174,128,.4);text-underline-offset:4px;cursor:pointer}
-.cat{padding-top:46px}
-.cat h3{font-size:1.9rem;font-weight:650;letter-spacing:-.02em;display:flex;align-items:center;gap:14px}
-.cat h3::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--edge),transparent)}
-.cat .note{margin:6px 0 0;color:var(--muted);font-size:.95rem}
-.dishes{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:14px}
-.dish{display:flex;flex-direction:column;padding:18px 20px;border-radius:16px;background:var(--glass);border:1px solid var(--edge);transition:background .15s,border-color .15s,transform .15s}
-.dish:hover{background:var(--glass-hi);border-color:rgba(208,138,82,.45);transform:translateY(-2px)}
-.dish .head{display:flex;gap:12px;align-items:flex-start}
-.dish .no{flex:none;min-width:2.3em;text-align:center;font-weight:700;font-size:.85rem;padding:.25em .5em;border-radius:8px;color:var(--copper-hi);background:rgba(208,138,82,.14);border:1px solid rgba(208,138,82,.3);font-variant-numeric:tabular-nums}
-.dish h4{font-size:1.08rem;font-weight:650;line-height:1.3;letter-spacing:-.005em}
-.dish .codes{font-weight:450;color:var(--dim);font-size:.74rem;margin-left:.4em}
-.dish p{margin:8px 0 0;color:var(--muted);font-size:.93rem;line-height:1.45}
-.price{margin-top:auto;padding-top:14px;display:flex;justify-content:flex-end;gap:8px;font-weight:700;font-size:1.15rem;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-.price .sz{display:flex;align-items:baseline;gap:.45em;padding:.2em .7em;border-radius:999px;background:rgba(0,0,0,.28);border:1px solid var(--edge);font-size:1rem}
-.price i{font-style:normal;font-weight:500;font-size:.74rem;color:var(--muted)}
-.price a{font-size:.85rem;font-weight:600;color:var(--muted)}
-.dish.drink{padding:14px 18px;flex-direction:row;align-items:center;justify-content:space-between;gap:14px}
-.dish.drink .price{margin:0;padding:0}
-.empty{display:none;padding:50px 0;color:var(--muted)}
-.fine{margin:40px 0 0;color:var(--dim);font-size:.9rem}
-
-/* Zeiten & Anfahrt */
-.info{padding:84px 0 20px}
-.info h2{font-size:clamp(1.9rem,4vw,2.6rem);font-weight:700;letter-spacing:-.03em;margin-bottom:18px}
-.cols{display:grid;grid-template-columns:1fr 1.25fr;gap:24px;align-items:start}
-@media (max-width:860px){.cols{grid-template-columns:1fr}}
-.card{padding:28px}
-.hours{width:100%;border-collapse:collapse}
-.hours td{padding:14px 12px;border-bottom:1px solid var(--edge)}
-.hours tr:last-child td{border-bottom:0}
-.hours td:last-child{text-align:right;font-weight:650;font-variant-numeric:tabular-nums}
-.hours tr.today td{color:var(--copper-hi)}
-.hours tr.today td:first-child::before{content:"";display:inline-block;width:.5em;height:.5em;border-radius:50%;background:var(--copper);margin-right:.7em}
-address{font-style:normal;font-size:1.15rem;line-height:1.5;margin:0 0 20px}
-.mapbox{margin-top:22px;border-radius:14px;overflow:hidden;min-height:250px;display:grid;place-items:center;text-align:center;padding:22px;background:rgba(0,0,0,.3);border:1px solid var(--edge)}
-.mapbox iframe{width:100%;height:300px;border:0;display:block;filter:invert(.9) hue-rotate(180deg) saturate(.7)}
-.mapbox p{max-width:30em;font-size:.88rem;color:var(--muted);margin:12px 0 0}
-
-/* Fuß */
-footer{margin-top:90px;border-top:1px solid var(--edge);padding:34px 0 48px;color:var(--muted);font-size:.95rem}
-footer .wrap{display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between}
-footer strong{color:var(--text);font-family:var(--display);font-weight:650}
-footer button,footer a{background:none;border:0;color:var(--text);font:inherit;cursor:pointer;padding:0;margin-right:20px;text-decoration:underline;text-decoration-color:var(--dim);text-underline-offset:4px}
-
-/* Dialoge */
-dialog{max-width:660px;width:calc(100% - 28px);padding:0;border:1px solid var(--edge);border-radius:22px;background:rgba(26,29,33,.94);color:var(--text);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
-dialog::backdrop{background:rgba(0,0,0,.65);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
-dialog .in{padding:28px 30px 32px;max-height:80vh;overflow:auto}
-dialog h2{font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:12px;padding-right:46px}
-dialog h3{font-size:1rem;font-weight:650;margin:22px 0 6px}
-dialog p,dialog li{font-size:.95rem;color:var(--muted);margin:0 0 8px}
-dialog .x{position:sticky;top:12px;display:block;float:none;margin:12px 12px -50px auto;z-index:2;width:38px;height:38px;border-radius:50%;border:1px solid var(--edge);background:var(--glass-hi);color:var(--text);font-size:1.2rem;cursor:pointer}
-.legend{display:grid;grid-template-columns:1fr 1fr;gap:0 26px}
-.legend ul{list-style:none;margin:0;padding:0}
-.legend b{display:inline-block;min-width:1.7em;color:var(--copper-hi)}
-@media (max-width:560px){.legend{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dish,.btn{transition:none}.dish:hover,.btn:hover{transform:none}}
-@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass{background:rgba(32,36,40,.95)}.toolbar{background:rgba(22,25,28,.97)}}
-/* ---- Handy-Anpassungen (bewusst am Ende) ---- */
-.dock{display:none;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;gap:8px;padding:8px;border-radius:999px;background:rgba(22,25,28,.86);border:1px solid var(--edge);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
-.dock .btn{flex:1}
-@media (hover:none){.dish:hover{transform:none;background:var(--glass);border-color:var(--edge)}}
-@media (max-width:820px){
-  html{scroll-padding-top:140px}
-  .toolbar{display:contents}
-  .search{display:block;margin:0 0 12px}
-  .tabs{position:sticky;top:72px;z-index:30;margin:0 -22px;padding:8px 22px;background:rgba(16,18,20,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--edge)}
-  .tabs a{padding:.72em 1.05em}
-  .hero{padding:26px 0 44px}
-  .order{padding:24px 20px}
-  .order .num{font-size:clamp(1.7rem,8vw,2.5rem)}
-  .card{padding:20px}
-  .hours td{padding:12px 4px}
-  .dish{padding:16px}
-  dialog .in{padding:22px 20px 26px}
-  .info{padding-top:60px}
-}
-@media (max-width:720px){
-  .top{padding:8px 0}
-  .top .bar{padding:6px 6px 6px 16px}
-  .btn{min-height:44px}
-  .actions .btn{flex:1 1 auto}
-  .dock{display:flex}
-  footer{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
-  footer button,footer a{padding:.5em 0}
-}
-</style>
+<meta name="theme-color" content="#0d0b0a">
+<link rel="canonical" href="https://cyrexmv.github.io/">
+<meta property="og:type" content="restaurant">
+<meta property="og:title" content="Diyar Kebab Haus Papenburg">
+<meta property="og:description" content="Döner, Pide, Pizza, Rollo und Grillteller. Alles auch zum Mitnehmen. Tel. 04961 94 08 40.">
+<meta property="og:url" content="https://cyrexmv.github.io/">
+<meta property="og:locale" content="de_DE">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ffb35c'/%3E%3Cstop offset='1' stop-color='%23e8541e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-weight='800' font-size='36' text-anchor='middle' fill='%231a0d05'%3ED%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Restaurant","name":"Diyar Kebab Haus","url":"https://cyrexmv.github.io/","telephone":"+49 4961 940840","email":"info@diyar-papenburg.de",
+ "address":{"@type":"PostalAddress","streetAddress":"Splitting rechts 24","postalCode":"26871","addressLocality":"Papenburg","addressCountry":"DE"},
+ "servesCuisine":["Türkisch","Döner","Pizza","Pide"],"priceRange":"€","hasMenu":"https://cyrexmv.github.io/#speisekarte","acceptsReservations":false,
+ "openingHoursSpecification":[
+  {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Sunday"],"opens":"12:00","closes":"23:00"},
+  {"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"12:00","closes":"23:59"}],
+ "sameAs":["https://www.facebook.com/Diyar-Kebabhaus-432869650399317/"]}
+</script>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="top">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></symbol>
+  <symbol id="i-fire" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3.3.3 1.3 1.3 2.3 2.5 2.8z"/></symbol>
+  <symbol id="i-pizza" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 2 2.5 20.5A22 22 0 0 1 12 18.5a22 22 0 0 1 9.5 2zM5 16a19 19 0 0 1 14 0"/><circle cx="12" cy="10" r="1.2" fill="currentColor"/><circle cx="10" cy="14" r="1.2" fill="currentColor"/><circle cx="14" cy="14" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+</svg>
+
+<header class="top" id="head">
   <div class="wrap">
     <div class="bar">
-      <a class="brand" href="#top">Diyar Kebab Haus</a>
+      <a class="brand" href="#top"><i>D</i>Diyar Kebab Haus</a>
       <a class="l" href="#speisekarte">Speisekarte</a>
+      <a class="l" href="#stimmen">Bewertungen</a>
       <a class="l" href="#zeiten">Öffnungszeiten</a>
       <a class="l" href="#anfahrt">Anfahrt</a>
-      <a class="btn" href="tel:+494961940840">Anrufen</a>
+      <a class="btn" href="tel:+494961940840"><svg><use href="#i-phone"/></svg>Anrufen</a>
     </div>
   </div>
 </header>
@@ -189,48 +55,121 @@ dialog .x{position:sticky;top:12px;display:block;float:none;margin:12px 12px -50
   <div class="wrap">
     <div>
       <span class="status" id="status" role="status"><span class="dot"></span><span id="statusText">Öffnungszeiten werden geprüft …</span></span>
-      <h1>Diyar Kebab Haus<span>Papenburg</span></h1>
-      <p class="lead">Internationale Spezialitäten: Döner und Hähnchen vom Drehspieß, Pide, Pizza ohne Blech, Rollo und Grillteller. Alles auch zum Mitnehmen.</p>
+      <h1><small>Diyar Kebab Haus · Papenburg</small>Döner. Pide.<br>Pizza. <span class="grad">Rollo.</span></h1>
+      <p class="lead">Döner und Hähnchen vom Drehspieß, Pide, Pizza ohne Blech, Rollo und Grillteller. Alles frisch gemacht und auch zum Mitnehmen.</p>
       <div class="actions">
         <a class="btn" href="#speisekarte">Speisekarte ansehen</a>
-        <a class="btn ghost" href="#anfahrt">So findest du uns</a>
+        <a class="btn ghost" href="#anfahrt"><svg><use href="#i-pin"/></svg>So findest du uns</a>
       </div>
-      <p class="sig">Wir freuen uns auf euren Besuch. Euer Nedim Canpolat und Team</p>
+      <p class="sig">Wir freuen uns auf euren Besuch. <b>Euer Nedim Canpolat und Team</b></p>
     </div>
     <aside class="glass order">
       <small>Telefonisch bestellen</small>
       <a class="num" href="tel:+494961940840">04961 94 08 40</a>
-      <a class="btn" href="tel:+494961940840" style="width:100%">Jetzt anrufen</a>
+      <a class="btn" href="tel:+494961940840" style="width:100%"><svg><use href="#i-phone"/></svg>Jetzt anrufen</a>
       <hr>
-      <div class="today"><span>Heute</span><b id="todayHours">12–23 Uhr</b></div>
+      <div class="facts">
+        <div><span>Heute geöffnet</span><b id="todayHours">12–23 Uhr</b></div>
+        <div><span>Google</span><b><span class="stars">★</span> 4,4 / 5</b></div>
+      </div>
     </aside>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div id="ticker"></div></div>
+
+<section class="why" id="highlights">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <h2>Warum <span class="grad">Diyar?</span></h2>
+      <p>Seit Jahren eine feste Adresse am Splitting, für die schnelle Mittagspause wie für den langen Abend.</p>
+    </div>
+    <div class="bento">
+      <article class="tile t-sig reveal">
+        <span class="skewer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="price-tag">17,00 €</span>
+        <span class="eyebrow">Spezialität des Hauses</span>
+        <h3 style="margin-top:10px">Grillteller Diyar</h3>
+        <p>Kebab- und Hähnchenfleisch vom Drehspieß, Köfte, Sucuk, Salat, Tzatziki oder scharfe Soße, Brot und wahlweise Pommes oder Reis.</p>
+        <a class="btn" href="#c-grill">Zu den Grillgerichten</a>
+      </article>
+      <article class="tile t-rate reveal">
+        <span class="eyebrow">Bewertet bei Google</span>
+        <div class="row">
+          <span class="big">4,4</span>
+          <div><div class="stars" aria-label="4,4 von 5 Sternen">★★★★<span style="opacity:.35">★</span></div><p style="margin:2px 0 0">über 900 Bewertungen</p></div>
+        </div>
+      </article>
+      <article class="tile reveal">
+        <span class="ico"><svg><use href="#i-pizza"/></svg></span>
+        <h3>Pizza ohne Blech</h3>
+        <p>Direkt im Ofen gebacken, auf Wunsch als Familienpizza.</p>
+      </article>
+      <article class="tile reveal">
+        <span class="ico"><svg><use href="#i-bag"/></svg></span>
+        <h3>Alles zum Mitnehmen</h3>
+        <p>Anrufen, Nummer nennen, abholen.</p>
+      </article>
+    </div>
   </div>
 </section>
 
 <section class="menu" id="speisekarte">
   <div class="wrap">
-    <div class="sec-title">
+    <div class="sec-title reveal">
       <h2>Speisekarte</h2>
-      <p>Alle Gerichte und Getränke gibt es auch zum Mitnehmen. Mit der Nummer bestellst du am Telefon am schnellsten.</p>
+      <p>Tippe auf <b style="color:var(--text)">+</b>, um Gerichte auf deinen Merkzettel zu setzen. Am Telefon nennst du dann einfach die Nummern.</p>
     </div>
     <div class="toolbar glass">
-      <label class="search"><input id="q" type="search" placeholder="Suchen: Käse, Hähnchen, 21 …" autocomplete="off" aria-label="Speisekarte durchsuchen"></label>
+      <label class="search"><svg><use href="#i-search"/></svg><input id="q" type="search" placeholder="Suchen: Käse, Hähnchen, 21 …" autocomplete="off" aria-label="Speisekarte durchsuchen"></label>
       <nav class="tabs" id="tabs" aria-label="Kategorien"></nav>
     </div>
     <div class="meta">
-      <button type="button" data-open="dlg-allergene">Allergene & Zusatzstoffe</button>
-      <a href="http://www.diyar-papenburg.de/images/DiyarSpeisekarte.pdf" target="_blank" rel="noopener">Speisekarte als PDF</a>
+      <div class="chips" role="group" aria-label="Filter">
+        <button class="chip" type="button" data-f="" aria-pressed="true">Alle</button>
+        <button class="chip" type="button" data-f="v" aria-pressed="false">Vegetarisch</button>
+        <button class="chip" type="button" data-f="s" aria-pressed="false">Diyar-Spezialitäten</button>
+      </div>
+      <button type="button" class="lnk" data-open="dlg-allergene">Allergene & Zusatzstoffe</button>
+      <a class="lnk" href="http://www.diyar-papenburg.de/images/DiyarSpeisekarte.pdf" target="_blank" rel="noopener">Speisekarte als PDF</a>
       <span id="hits" aria-live="polite" style="color:var(--muted)"></span>
     </div>
     <div id="menu"></div>
     <p class="empty" id="empty">Dazu gibt es keine Treffer. Versuche es mit „Käse“, „Hähnchen“ oder einer Nummer.</p>
-    <p class="fine">Änderungen, Druckfehler und Irrtümer vorbehalten.</p>
+    <p class="fine">Änderungen, Druckfehler und Irrtümer vorbehalten. Die Kennzeichnung „vegetarisch“ ist eine Orientierung, bitte frag bei Unverträglichkeiten nach.</p>
+  </div>
+</section>
+
+<section class="voices" id="stimmen">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <h2>Das sagen <span class="grad">unsere Gäste</span></h2>
+      <p>Echte Stimmen aus Bewertungsportalen.</p>
+    </div>
+    <div class="quotes">
+      <figure class="quote glass cta reveal">
+        <div>
+          <span class="eyebrow">Google-Bewertungen</span>
+          <div class="big" style="margin-top:14px">4,4<span style="font-size:.4em;color:var(--muted);letter-spacing:0"> / 5</span></div>
+          <p style="color:var(--muted);margin:8px 0 0">aus über 900 Bewertungen</p>
+        </div>
+        <a class="btn ghost" style="margin-top:24px;align-self:flex-start" href="https://www.google.com/maps/search/?api=1&query=Diyar+Kebab+Haus+Splitting+rechts+24+26871+Papenburg" target="_blank" rel="noopener">Bewertungen ansehen</a>
+      </figure>
+      <figure class="quote glass reveal">
+        <blockquote>Seit wir in diese Ecke gezogen sind, entwickelt sich Diyar zu einem meiner Lieblings-Dönerbüdchen. Das Essen schmeckt sehr gut, der Preis ist auch super …</blockquote>
+        <figcaption>BackBlues · ★★★★★ · golocal</figcaption>
+      </figure>
+      <figure class="quote glass reveal">
+        <blockquote>Best kebab in town. Very good to take away.</blockquote>
+        <figcaption>Daniel F. · ★★★★ · Tripadvisor</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
 <section class="info" id="zeiten">
   <div class="wrap cols">
-    <div>
+    <div class="reveal">
       <h2>Öffnungszeiten</h2>
       <div class="glass card">
         <table class="hours" id="hours">
@@ -238,18 +177,20 @@ dialog .x{position:sticky;top:12px;display:block;float:none;margin:12px 12px -50
           <tr data-d="5,6"><td>Freitag und Samstag</td><td>12–24 Uhr</td></tr>
           <tr data-d="0"><td>Sonntag</td><td>12–23 Uhr</td></tr>
         </table>
+        <p class="small">An Feiertagen können die Zeiten abweichen. Im Zweifel kurz anrufen.</p>
       </div>
     </div>
-    <div id="anfahrt">
+    <div id="anfahrt" class="reveal">
       <h2>So findest du uns</h2>
       <div class="glass card">
         <address>Diyar Kebab Haus<br>Splitting rechts 24<br>26871 Papenburg</address>
         <div class="actions">
-          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Diyar+Kebab+Haus+Splitting+rechts+24+26871+Papenburg" target="_blank" rel="noopener">Route planen</a>
-          <a class="btn ghost" href="tel:+494961940840">04961 94 08 40</a>
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Diyar+Kebab+Haus+Splitting+rechts+24+26871+Papenburg" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Route planen</a>
+          <a class="btn ghost" href="tel:+494961940840"><svg><use href="#i-phone"/></svg>04961 94 08 40</a>
         </div>
         <div class="mapbox" id="mapbox">
           <div>
+            <svg class="pin"><use href="#i-pin"/></svg>
             <button class="btn ghost" type="button" id="loadMap">Karte anzeigen</button>
             <p>Erst nach dem Klick wird die Karte von Google geladen und Daten werden an Google übertragen.</p>
           </div>
@@ -267,10 +208,24 @@ dialog .x{position:sticky;top:12px;display:block;float:none;margin:12px 12px -50
   </div>
 </footer>
 
-<nav class="dock" aria-label="Schnellzugriff">
-  <a class="btn" href="tel:+494961940840">Anrufen</a>
+<button class="fab" id="fab" type="button" data-open="dlg-cart"><svg width="20" height="20"><use href="#i-list"/></svg>Merkzettel <span class="count" id="fabCount">0</span><span id="fabSum"></span></button>
+
+<nav class="dock" id="dock" aria-label="Schnellzugriff">
+  <a class="btn" href="tel:+494961940840"><svg><use href="#i-phone"/></svg>Anrufen</a>
   <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Diyar+Kebab+Haus+Splitting+rechts+24+26871+Papenburg" target="_blank" rel="noopener">Route</a>
+  <button class="btn ghost cartbtn" type="button" data-open="dlg-cart" aria-label="Merkzettel öffnen"><svg><use href="#i-list"/></svg><span class="count" id="dockCount">0</span></button>
 </nav>
+
+<dialog id="dlg-cart"><button class="x" aria-label="Schließen" data-close>×</button><div class="in">
+  <h2>Dein Merkzettel</h2>
+  <p>Bestellt wird telefonisch. Nenn uns einfach die Nummern, der Merkzettel bleibt in diesem Browser gespeichert.</p>
+  <ul class="cart" id="cartList"></ul>
+  <div class="total"><span>Summe</span><span id="cartSum">0,00 €</span></div>
+  <div class="cart-actions">
+    <a class="btn" href="tel:+494961940840"><svg><use href="#i-phone"/></svg>Jetzt anrufen & bestellen</a>
+    <button class="btn ghost" type="button" id="cartClear">Leeren</button>
+  </div>
+</div></dialog>
 
 <dialog id="dlg-allergene"><button class="x" aria-label="Schließen" data-close>×</button><div class="in">
   <h2>Allergene & Zusatzstoffe</h2>
@@ -287,11 +242,10 @@ dialog .x{position:sticky;top:12px;display:block;float:none;margin:12px 12px -50
 
 <dialog id="dlg-impressum"><button class="x" aria-label="Schließen" data-close>×</button><div class="in">
   <h2>Impressum</h2>
-  <h3>Angaben gemäß § 5 TMG</h3>
+  <h3>Angaben gemäß § 5 DDG</h3>
   <p>Diyar Kebab Haus<br>Inh. Nedim Canpolat<br>Splitting rechts 24<br>26871 Papenburg</p>
   <h3>Kontakt</h3>
-  <p>Telefon: 04961 94 08 40</p>
-  <!-- TODO: E-Mail-Adresse des Betreibers hier ergänzen (auf der alten Seite war sie per Skript verborgen). -->
+  <p>Telefon: 04961 94 08 40<br>E-Mail: <a href="mailto:info@diyar-papenburg.de">info@diyar-papenburg.de</a></p>
   <h3>Umsatzsteuer-ID</h3>
   <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: 53/108/01219</p>
   <h3>Haftung für Inhalte</h3>
@@ -306,7 +260,9 @@ dialog .x{position:sticky;top:12px;display:block;float:none;margin:12px 12px -50
   <h2>Datenschutz</h2>
   <p>Der Schutz deiner persönlichen Daten ist uns wichtig. Wir behandeln personenbezogene Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften.</p>
   <h3>Keine Cookies, kein Tracking</h3>
-  <p>Diese Website setzt keine Cookies und verwendet keine Analyse- oder Werbedienste.</p>
+  <p>Diese Website setzt keine Cookies und verwendet keine Analyse- oder Werbedienste. Schriften und Symbole werden nicht von fremden Servern geladen.</p>
+  <h3>Merkzettel</h3>
+  <p>Wenn du Gerichte auf den Merkzettel setzt, wird diese Liste nur lokal in deinem Browser gespeichert. Sie wird nicht an uns oder Dritte übertragen.</p>
   <h3>Server-Logfiles</h3>
   <p>Der Hosting-Anbieter erhebt technisch notwendige Zugriffsdaten (z. B. IP-Adresse, Datum und Uhrzeit, aufgerufene Seite), um die Seite auszuliefern und abzusichern.</p>
   <h3>Karte (Google Maps)</h3>
@@ -426,56 +382,112 @@ const MENU=[
   d(0,'Espresso','','',2.5),
   d(0,'Latte Macchiato','','',2.8)]}
 ];
+/* Vegetarische Gerichte (nach Nummer); Spezialitäten = alles mit „Diyar“ im Namen */
+const VEG=new Set([1,20,30,40,42,60,61,69,70,73]);
 
 const PDF='http://www.diyar-papenburg.de/images/DiyarSpeisekarte.pdf';
 const eur=v=>v.toLocaleString('de-DE',{style:'currency',currency:'EUR'});
 const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/ß/g,'ss');
+const $=id=>document.getElementById(id);
 
-function priceHtml(it,cat){
-  if(Array.isArray(it.p)) return it.p.map((v,i)=>`<span class="sz"><i>${cat.sizes[i]}</i>${eur(v)}</span>`).join('');
+/* Merkzettel-Einträge: key -> {label, sub, price} */
+const ITEMS={};
+function priceHtml(it,cat,ci){
   if(it.p==null) return `<a href="${PDF}" target="_blank" rel="noopener">Preis im PDF</a>`;
-  return eur(it.p);
+  const ps=Array.isArray(it.p)?it.p:[it.p];
+  return ps.map((v,si)=>{
+    const key=`${cat.id}-${ci}-${si}`, size=cat.sizes?cat.sizes[si]:'';
+    ITEMS[key]={label:(it.no?it.no+' · ':'')+it.name,sub:size,price:v};
+    return `<button class="add" type="button" data-k="${key}" aria-label="${esc(it.name)}${size?' '+size:''} zum Merkzettel">${size?`<i>${size}</i>`:''}${eur(v)}<b>+</b></button>`;
+  }).join('');
 }
 function render(){
-  document.getElementById('menu').innerHTML=MENU.map(cat=>`
+  $('menu').innerHTML=MENU.map(cat=>`
     <div class="cat" id="c-${cat.id}">
-      <h3>${esc(cat.title)}</h3>${cat.note?`<p class="note">${esc(cat.note)}</p>`:''}
-      <ul class="dishes">${cat.items.map(it=>cat.drinks?`
-        <li class="dish drink" data-s="${esc(norm(it.name))}"><h4>${esc(it.name)}${it.codes?`<span class="codes">(${it.codes})</span>`:''}</h4><div class="price">${priceHtml(it,cat)}</div></li>`:`
-        <li class="dish" data-s="${esc(norm([it.no,it.name,it.desc].join(' ')))}">
-          <div class="head"><span class="no">${it.no}</span><h4>${esc(it.name)}${it.codes?`<span class="codes">(${it.codes})</span>`:''}</h4></div>
+      <h3>${esc(cat.title)}<span class="n">${cat.items.length}</span></h3>${cat.note?`<p class="note">${esc(cat.note)}</p>`:''}
+      <ul class="dishes">${cat.items.map((it,ci)=>{
+        const tags=[VEG.has(it.no)&&'v',/diyar/i.test(it.name)&&'s'].filter(Boolean);
+        const codes=it.codes?`<span class="codes">(${it.codes})</span>`:'';
+        if(cat.drinks) return `
+        <li class="dish drink" data-s="${esc(norm(it.name))}" data-t=""><h4>${esc(it.name)}${codes}</h4><div class="foot">${priceHtml(it,cat,ci)}</div></li>`;
+        return `
+        <li class="dish" data-s="${esc(norm([it.no,it.name,it.desc].join(' ')))}" data-t="${tags.join(' ')}">
+          <div class="head"><span class="no">${it.no}</span><div><h4>${esc(it.name)}${codes}</h4>${tags.length?`<div class="tags">${tags.map(t=>t==='v'?'<span class="tag v">Vegetarisch</span>':'<span class="tag s">Spezialität</span>').join('')}</div>`:''}</div></div>
           ${it.desc?`<p>${esc(it.desc)}</p>`:''}
-          <div class="price">${priceHtml(it,cat)}</div>
-        </li>`).join('')}</ul>
+          <div class="foot">${priceHtml(it,cat,ci)}</div>
+        </li>`;}).join('')}</ul>
     </div>`).join('');
-  document.getElementById('tabs').innerHTML=MENU.map(c=>`<a href="#c-${c.id}" data-for="c-${c.id}">${esc(c.title.split(',')[0])}</a>`).join('');
+  $('tabs').innerHTML=MENU.map(c=>`<a href="#c-${c.id}" data-for="c-${c.id}">${esc(c.title.split(',')[0])}</a>`).join('');
+  const words=['Döner','Dürüm','Pide','Pizza ohne Blech','Rollo','Lahmacun','Grillteller','Köfte','Sucuk','Rigatoni','Ayran'];
+  $('ticker').innerHTML=[...words,...words].map(w=>`<span>${w}</span>`).join('');
 }
 render();
 
-/* Suche */
-const q=document.getElementById('q'), hits=document.getElementById('hits');
-q.addEventListener('input',()=>{
+/* Suche & Filter */
+const q=$('q'), hits=$('hits'); let filter='';
+function apply(){
   const t=norm(q.value.trim()); let total=0;
   document.querySelectorAll('.cat').forEach(cat=>{
     let n=0;
-    cat.querySelectorAll('.dish').forEach(li=>{const ok=!t||li.dataset.s.includes(t);li.style.display=ok?'':'none';if(ok)n++;});
+    cat.querySelectorAll('.dish').forEach(li=>{
+      const ok=(!t||li.dataset.s.includes(t))&&(!filter||li.dataset.t.split(' ').includes(filter));
+      li.style.display=ok?'':'none'; if(ok)n++;
+    });
     cat.style.display=n?'':'none'; total+=n;
   });
-  document.getElementById('empty').style.display=total?'none':'block';
-  hits.textContent=t?`${total} Treffer`:'';
-});
+  $('empty').style.display=total?'none':'block';
+  hits.textContent=t||filter?`${total} Treffer`:'';
+}
+q.addEventListener('input',apply);
+document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
+  filter=c.dataset.f;
+  document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c));
+  apply();
+}));
 
 /* aktive Kategorie */
 const tabEls=[...document.querySelectorAll('#tabs a')];
 const io=new IntersectionObserver(es=>{
   es.forEach(e=>{ if(e.isIntersecting){
     tabEls.forEach(a=>a.classList.toggle('on',a.dataset.for===e.target.id));
-    const on=tabEls.find(a=>a.classList.contains('on')), box=document.getElementById('tabs');
+    const on=tabEls.find(a=>a.classList.contains('on')), box=$('tabs');
     if(on) box.scrollTo({left:on.offsetLeft-box.clientWidth/2+on.clientWidth/2,behavior:'smooth'});
   }});
 },{rootMargin:'-170px 0px -60% 0px'});
 document.querySelectorAll('.cat').forEach(c=>io.observe(c));
+
+/* Schatten an der Kopfzeile beim Scrollen */
+const head=$('head');
+addEventListener('scroll',()=>head.classList.toggle('scrolled',scrollY>10),{passive:true});
+
+/* Merkzettel (nur lokal im Browser) */
+let cart={};
+try{cart=JSON.parse(localStorage.getItem('diyar-cart')||'{}')}catch(e){cart={}}
+for(const k in cart) if(!ITEMS[k]) delete cart[k];
+function save(){try{localStorage.setItem('diyar-cart',JSON.stringify(cart))}catch(e){}}
+function renderCart(bump){
+  const keys=Object.keys(cart), count=keys.reduce((s,k)=>s+cart[k],0), sum=keys.reduce((s,k)=>s+cart[k]*ITEMS[k].price,0);
+  $('fabCount').textContent=$('dockCount').textContent=count;
+  $('fabSum').textContent=count?'· '+eur(sum):'';
+  $('fab').classList.toggle('show',count>0);
+  $('dock').classList.toggle('has-cart',count>0);
+  if(bump){const f=$('fab');f.classList.remove('bump');void f.offsetWidth;f.classList.add('bump');}
+  $('cartList').innerHTML=keys.length?keys.map(k=>`
+    <li><span class="nm">${esc(ITEMS[k].label)}${ITEMS[k].sub?`<small>${ITEMS[k].sub}</small>`:''}</span>
+      <span class="qty"><button type="button" data-q="${k}" data-d="-1" aria-label="weniger">−</button><span>${cart[k]}</span><button type="button" data-q="${k}" data-d="1" aria-label="mehr">+</button></span>
+      <span class="pr">${eur(cart[k]*ITEMS[k].price)}</span></li>`).join(''):'<li style="color:var(--muted)">Noch nichts gemerkt. Tippe in der Speisekarte auf +.</li>';
+  $('cartSum').textContent=eur(sum);
+}
+function change(k,dlt){cart[k]=(cart[k]||0)+dlt;if(cart[k]<=0)delete cart[k];save();renderCart(dlt>0);}
+$('menu').addEventListener('click',e=>{
+  const b=e.target.closest('.add'); if(!b)return;
+  change(b.dataset.k,1);
+  b.classList.add('ok'); setTimeout(()=>b.classList.remove('ok'),400);
+});
+$('cartList').addEventListener('click',e=>{const b=e.target.closest('[data-q]');if(b)change(b.dataset.q,+b.dataset.d);});
+$('cartClear').addEventListener('click',()=>{cart={};save();renderCart();});
+renderCart();
 
 /* Öffnungszeiten (Europe/Berlin) */
 const HOURS={0:[12,23],1:[12,23],2:[12,23],3:[12,23],4:[12,23],5:[12,24],6:[12,24]};
@@ -485,9 +497,9 @@ function berlin(){
   return {day:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(p.weekday),mins:(+p.hour)*60+(+p.minute)};
 }
 function updateStatus(){
-  const {day,mins}=berlin(), [o,c]=HOURS[day], el=document.getElementById('status'), tx=document.getElementById('statusText');
+  const {day,mins}=berlin(), [o,c]=HOURS[day], el=$('status'), tx=$('statusText');
   document.querySelectorAll('#hours tr').forEach(tr=>tr.classList.toggle('today',tr.dataset.d.split(',').includes(String(day))));
-  document.getElementById('todayHours').textContent=`${o}–${c} Uhr`;
+  $('todayHours').textContent=`${o}–${c} Uhr`;
   if(mins>=o*60&&mins<c*60){el.className='status open';tx.textContent=`Jetzt geöffnet, bis ${c} Uhr`;}
   else{
     el.className='status closed';
@@ -497,12 +509,13 @@ function updateStatus(){
 updateStatus(); setInterval(updateStatus,60000);
 
 /* Karte erst nach Klick laden */
-document.getElementById('loadMap').addEventListener('click',()=>{
-  document.getElementById('mapbox').innerHTML='<iframe title="Karte: Diyar Kebab Haus, Papenburg" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Diyar+Kebab+Haus,+Splitting+rechts+24,+26871+Papenburg&z=15&output=embed"></iframe>';
+$('loadMap').addEventListener('click',()=>{
+  const box=$('mapbox'); box.classList.add('loaded');
+  box.innerHTML='<iframe title="Karte: Diyar Kebab Haus, Papenburg" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Diyar+Kebab+Haus,+Splitting+rechts+24,+26871+Papenburg&z=15&output=embed"></iframe>';
 });
 
 /* Dialoge */
-document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.open).showModal()));
+document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>$(b.dataset.open).showModal()));
 document.querySelectorAll('dialog').forEach(dlg=>{
   dlg.addEventListener('click',e=>{if(e.target===dlg||e.target.hasAttribute('data-close'))dlg.close();});
 });
