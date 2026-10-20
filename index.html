@@ -40,11 +40,14 @@
 <header class="top" id="head">
   <div class="wrap">
     <div class="bar">
-      <a class="brand" href="#top"><i>D</i>Diyar Kebab Haus</a>
-      <a class="l" href="#speisekarte">Speisekarte</a>
-      <a class="l" href="#stimmen">Bewertungen</a>
-      <a class="l" href="#zeiten">Öffnungszeiten</a>
-      <a class="l" href="#anfahrt">Anfahrt</a>
+      <a class="brand" href="#top"><i>D</i><span>Diyar Kebab Haus<small>Papenburg</small></span></a>
+      <nav class="nav" id="nav" aria-label="Hauptmenü">
+        <span class="pill" aria-hidden="true"></span>
+        <a href="#speisekarte">Speisekarte</a>
+        <a href="#stimmen">Bewertungen</a>
+        <a href="#zeiten">Öffnungszeiten</a>
+        <a href="#anfahrt">Anfahrt</a>
+      </nav>
       <a class="btn" href="tel:+494961940840"><svg><use href="#i-phone"/></svg>Anrufen</a>
     </div>
   </div>
@@ -460,6 +463,27 @@ document.querySelectorAll('.cat').forEach(c=>io.observe(c));
 /* Schatten an der Kopfzeile beim Scrollen */
 const head=$('head');
 addEventListener('scroll',()=>head.classList.toggle('scrolled',scrollY>10),{passive:true});
+
+/* Hauptmenü: gleitende Markierung für Hover und aktiven Abschnitt */
+const nav=$('nav'), pill=nav.querySelector('.pill'), navLinks=[...nav.querySelectorAll('a')];
+function movePill(a){
+  if(!a){pill.style.opacity=0;return;}
+  pill.style.opacity=1; pill.style.width=a.offsetWidth+'px'; pill.style.transform=`translateX(${a.offsetLeft}px)`;
+}
+function spy(){
+  const line=innerHeight*.4; let cur=null, curTop=-Infinity;
+  navLinks.forEach(a=>{
+    const t=document.querySelector(a.hash).getBoundingClientRect().top;
+    if(t<=line&&t>curTop+1){cur=a;curTop=t;}
+  });
+  navLinks.forEach(a=>a.classList.toggle('on',a===cur));
+  if(!nav.matches(':hover')) movePill(cur);
+}
+navLinks.forEach(a=>a.addEventListener('mouseenter',()=>movePill(a)));
+nav.addEventListener('mouseleave',()=>movePill(nav.querySelector('a.on')));
+let spyTick=false;
+addEventListener('scroll',()=>{if(!spyTick){spyTick=true;requestAnimationFrame(()=>{spy();spyTick=false;});}},{passive:true});
+addEventListener('resize',spy); spy();
 
 /* Merkzettel (nur lokal im Browser) */
 let cart={};
